@@ -1,0 +1,27 @@
+<%- include ('../partials/header'); %>
+<div class="container conregistro">
+  <div class="col-md-12 d-flex justify-content-center">
+    <div class="card cardregistro">
+      <div class="card-body">
+
+        <p class="pregistro">INGRESAR</p>
+        <br>
+        <form action="/user/login" method="POST">
+
+          <div class="form-group">
+            <input class="form-input" id="rd-navbar-register-email" type="email" name="email" placeholder="Correo" />
+          </div>
+          <div class="form-group">
+            <input class="form-input" id="rd-navbar-register-password" type="password" name="password"
+              placeholder="Contraseña" />
+          </div>
+          <button class="button button-xs button-primary button-icon button-icon-left rd-navbar-popup-toggle"
+            data-rd-navbar-toggle="rd-navbar-login">
+            <span class="icon mdi mdi-import"></span>Ingresar</button>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<%- include('../partials/footer') %>

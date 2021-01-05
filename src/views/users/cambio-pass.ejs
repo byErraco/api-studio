@@ -1,0 +1,26 @@
+      <!-- Welcome to JobsFactory-->
+<%- include ('../partials/header'); %>
+      <section class="section section-md bg-gray-100 page">
+        <div class="container">
+          <h3 class="text-center">Cambio de contraseña</h3>
+          <div class="row row-30 row-xl-70">
+            <div class="col-md-12">
+                <form>
+                    <input class="form-input" type="password" id='new-pass' placeholder="nueva contraseña" name="newpass"/>
+                    <hr>
+                    <br>
+                    <input class="form-input" type="text" id='token' placeholder="token de seguridad" name="newpass"/>
+                    <hr>
+                    <br>
+                    <h4 id='msj-cambio'></h4>
+                    <div class="form-wrap">
+                        <button class="button button-block button-primary" id='btn-cambio-contraseña'>Cambiar contraseña</button>
+                    </div>
+                </form>
+            </div>
+ 
+
+          </div>
+        </div>
+      </section>
+<%- include('../partials/footer') %>

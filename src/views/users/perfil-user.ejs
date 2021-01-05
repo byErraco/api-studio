@@ -1,0 +1,179 @@
+      <!-- FScreen-->
+<%- include ('../partials/header'); %>
+      <section class="section section-sm bg-primary">
+      <% if (user) { %>
+        <div class="container">
+          <div class="layout-2">
+            <div class="layout-2-item layout-2-item-main">
+              <!-- Profile Light-->
+              <article class="profile-light"><img class="profile-light-image" src="/images/resume-page-1-169x169.jpg" alt="" width="169" height="169"/>
+                <div class="profile-light-main">
+                  <h4 class="profile-light-name"><%= user.username %></h4>
+                  <h6 class="profile-light-position">Marketing Director</h6>
+                  <div class="profile-light-divider"></div>
+                  <ul class="profile-light-list">
+                    <li><span class="icon icon-sm mdi mdi-map-marker"></span><span>Los Angeles, California</span></li>
+                    <li><span class="icon icon-sm mdi mdi-cash"></span><span>$50000 p.a minimum</span></li>
+                  </ul>
+                </div>
+              </article>
+            </div>
+            <div class="layout-2-item text-center text-lg-left">
+              <div>
+                <div class="group group-xl group-middle">
+                  <div>
+                    <ul class="list-inline list-inline-xs">
+                      <li><a class="icon icon-xxs icon-filled icon-filled-brand icon-circle fa fa-facebook" href="#"></a></li>
+                      <li><a class="icon icon-xxs icon-filled icon-filled-brand icon-circle fa fa-google-plus" href="#"></a></li>
+                      <li><a class="icon icon-xxs icon-filled icon-filled-brand icon-circle fa fa-twitter" href="#"></a></li>
+                      <li><a class="icon icon-xxs icon-filled icon-filled-brand icon-circle fa fa-pinterest-p" href="#"></a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="section section-md">
+        <div class="container">
+          <div class="row row-50">
+            <div class="col-lg-8">
+              <div class="row row-50">
+                <div class="col-12">
+                  <p class="heading-9">Sobre mí</p>
+                  <hr>
+                  <p class="text-style-1">Mi nombre es Amanda Cook y soy directora de marketing de Los Ángeles. Anteriormente he trabajado en varias agencias de marketing internacionales durante más de 10 años. Me eduqué en la Escuela de Publicidad y Marketing después de graduarme de la universidad en 2010. Aquí hay una breve descripción de mis habilidades y experiencia.</p>
+                </div>
+                <div class="col-12">
+                  <p class="heading-9">EXPERIENCIA LABORAL</p>
+                  <hr>
+                  <div class="timeline-classic">
+                    <div class="timeline-classic-item">
+                      <div class="timeline-classic-period"><span>2010–2012</span></div>
+                      <div class="timeline-classic-main">
+                        <h5 class="timeline-classic-title">Comercializador junior</h5>
+                        <p>Responsabilidades: Recopilar informes de calificación de los consumidores mediante la compilación, consolidación, formateo y resumen de información, gráficos y presentaciones; Actualiza la base de datos de la competencia.</p>
+                      </div>
+                    </div>
+                    <div class="timeline-classic-item">
+                      <div class="timeline-classic-period"><span>2012–2015</span></div>
+                      <div class="timeline-classic-main">
+                        <h5 class="timeline-classic-title">Comercializador</h5>
+                        <p>Responsabilidades: analizar e investigar precio, demanda y competencia, idear y presentar ideas y estrategias, actividades promocionales, recopilación de información financiera.</p>
+                      </div>
+                    </div>
+                    <div class="timeline-classic-item">
+                      <div class="timeline-classic-period"><span>2015–2017</span></div>
+                      <div class="timeline-classic-main">
+                        <h5 class="timeline-classic-title">Director de marketing</h5>
+                        <p>Responsabilidades: desarrollo e implementación de la estrategia de Marca, desarrollo de la estrategia de marketing para productos nuevos y existentes, supervisando la implementación de la estrategia de Marketing.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <p class="heading-9">EDUCACIÓN</p>
+                  <hr>
+                  <div class="timeline-classic">
+                    <div class="timeline-classic-item">
+                      <div class="timeline-classic-period"><span>2010–2012</span></div>
+                      <div class="timeline-classic-main">
+                        <h5 class="timeline-classic-title">Advertising School at Stanford University</h5>
+                        <p>Graduated from Stanford University Advertising School in 2012 after receiving a degree in Digital Design and Online Marketing. Basic skills included concepting, design, execution and presentation.</p>
+                      </div>
+                    </div>
+                    <div class="timeline-classic-item">
+                      <div class="timeline-classic-period"><span>2012–2015</span></div>
+                      <div class="timeline-classic-main">
+                        <h5 class="timeline-classic-title">School of Marketing at University of Pennsylvania</h5>
+                        <p>Finished a 3-year course, which developed in-depth knowledge of the concepts, tools, and practice of modern marketing including traditional and modern design and promotion techniques.</p>
+                      </div>
+                    </div>
+                    <div class="timeline-classic-item">
+                      <div class="timeline-classic-period"><span>2015–2017</span></div>
+                      <div class="timeline-classic-main">
+                        <h5 class="timeline-classic-title">Massachusetts Institute of Technology</h5>
+                        <p>Developed acquired skills and practiced new online marketing methods at special course for American marketers provided by MIT during the last 2 years.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <p class="heading-9">My Projects</p>
+                  <hr>
+                  <div class="row row-30 offset-top-30px">
+                    <div class="col-sm-6">
+                      <!-- Thumbnail Classic--><a class="thumbnail-classic" href="#">
+                        <figure class="thumbnail-classic-figure"><img class="thumbnail-classic-image" src="/images/resume-page-2-368x265.jpg" alt="" width="368" height="265"/>
+                        </figure>
+                        <div class="thumbnail-classic-caption">
+                          <p class="heading-9 thumbnail-classic-title">Project #1</p>
+                        </div>
+                        <div class="thumbnail-classic-dummy"></div></a>
+                    </div>
+                    <div class="col-sm-6">
+                      <!-- Thumbnail Classic--><a class="thumbnail-classic" href="#">
+                        <figure class="thumbnail-classic-figure"><img class="thumbnail-classic-image" src="/images/resume-page-3-368x265.jpg" alt="" width="368" height="265"/>
+                        </figure>
+                        <div class="thumbnail-classic-caption">
+                          <p class="heading-9 thumbnail-classic-title">Project #2</p>
+                        </div>
+                        <div class="thumbnail-classic-dummy"></div></a>
+                    </div>
+                    <div class="col-sm-6">
+                      <!-- Thumbnail Classic--><a class="thumbnail-classic" href="#">
+                        <figure class="thumbnail-classic-figure"><img class="thumbnail-classic-image" src="/images/resume-page-4-368x265.jpg" alt="" width="368" height="265"/>
+                        </figure>
+                        <div class="thumbnail-classic-caption">
+                          <p class="heading-9 thumbnail-classic-title">Project #3</p>
+                        </div>
+                        <div class="thumbnail-classic-dummy"></div></a>
+                    </div>
+                    <div class="col-sm-6">
+                      <!-- Thumbnail Classic--><a class="thumbnail-classic" href="#">
+                        <figure class="thumbnail-classic-figure"><img class="thumbnail-classic-image" src="/images/resume-page-5-368x265.jpg" alt="" width="368" height="265"/>
+                        </figure>
+                        <div class="thumbnail-classic-caption">
+                          <p class="heading-9 thumbnail-classic-title">Project #4</p>
+                        </div>
+                        <div class="thumbnail-classic-dummy"></div></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <div class="row row-30 row-lg-50">
+                <div class="col-md-6 col-lg-12">
+                  <!-- RD Mailform-->
+                  <form class="rd-mailform form-corporate form-spacing-small form-corporate_sm" data-form-output="form-output-global" data-form-type="contact" method="post" action="bat/rd-mailform.php">
+                    <h4>Contactar</h4>
+                    <div class="form-wrap">
+                      <label class="form-label" for="contact-name">Nombre y Apellido</label>
+                      <input class="form-input" id="contact-name" type="text" name="name" data-constraints="@Required">
+                    </div>
+                    <div class="form-wrap">
+                      <label class="form-label" for="contact-email">E-mail</label>
+                      <input class="form-input" id="contact-email" type="email" name="email" data-constraints="@Required @Email">
+                    </div>
+                    <div class="form-wrap">
+                      <label class="form-label" for="contact-phone">Teléfono</label>
+                      <input class="form-input" id="contact-phone" type="text" name="phone" data-constraints="@PhoneNumber">
+                    </div>
+                    <div class="form-wrap">
+                      <label class="form-label" for="contact-message">Asunto</label>
+                      <textarea class="form-input" id="contact-message" name="message" data-constraints="@Required"></textarea>
+                    </div>
+                    <div class="form-wrap">
+                      <button class="button button-block button-primary" type="submit">Enviar mensaje</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <% } %>
+      </section>
+<%- include('../partials/footer') %>

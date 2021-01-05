@@ -1,0 +1,123 @@
+<%- include ('partials/header'); %>
+<section class="section breadcrumbs-custom">
+    <div class="breadcrumbs-custom-main bg-image bg-primary">
+      <div class="container">
+        <h3 class="breadcrumbs-custom-title">Contacto</h3>
+      </div>
+    </div>
+    <div class="breadcrumbs-custom-aside">
+      <div class="container">
+        <ul class="breadcrumbs-custom-path">
+          <li><a href="/">Inicio</a></li>
+          <li class="active">Contacto</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+  <!-- Contacts-->
+  <section class="section section-md">
+    <div class="container">
+      <div class="row row-50">
+        <div class="col-md-10 col-lg-8 col-xl-6">
+          <h4>Detalles de contacto</h4>
+          <p style="letter-spacing: .05em;">
+
+Puede contactarnos de la forma que le resulte más conveniente. Estamos disponibles 24/7 por fax, correo electrónico o teléfono. También puede visitar nuestra oficina personalmente.
+
+          </p>
+        </div>
+      </div>
+      <div class="layout-bordered">
+        <div class="layout-bordered-item">
+          <div class="layout-bordered-item-inner">
+            <div class="unit unit-spacing-sm flex-md-column">
+              <div class="unit-left icon icon-xl fl-bigmug-line-cellphone55 text-primary"></div>
+              <div class="unit-body">
+                <p class="heading-7">TELEFONOS</p>
+                <ul class="list-0">
+                  <li>
+                    <dl class="list-terms-inline">
+                      <dt>Phone 01</dt>
+                      <dd><a href="tel:#">+1 (409) 987–5874</a></dd>
+                    </dl>
+                  </li>
+                  <li>
+                    <dl class="list-terms-inline">
+                      <dt>Phone 02</dt>
+                      <dd><a href="tel:#">+1 (409) 987–5874</a></dd>
+                    </dl>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="layout-bordered-item">
+          <div class="layout-bordered-item-inner">
+            <div class="unit unit-spacing-sm flex-md-column">
+              <div class="unit-left icon icon-xl fl-bigmug-line-big104 text-primary"></div>
+              <div class="unit-body">
+                <p class="heading-7">Dirección</p>
+                <ul class="list-0">
+                  <li><a class="list-default" href="#">USA, 6036 Richmond hwy., <br> Alexandria,  VA, 2230</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="layout-bordered-item">
+          <div class="layout-bordered-item-inner">
+            <div class="unit unit-spacing-sm flex-md-column">
+              <div class="unit-left icon icon-xlg fl-bigmug-line-email64 text-primary"></div>
+              <div class="unit-body">
+                <p class="heading-7">Correos</p>
+                <ul class="list-0">
+                  <li><a href="mailto:#">Office@demolink.org</a></li>
+                  <li><a href="mailto:#">Support@demolink.org</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <h4>Póngase en contacto con nosotros</h4>
+          <p>No dude en utilizar el formulario de contacto a continuación para contactarnos directamente.</p>
+          <!-- RD Mailform-->
+          <form class="rd-mailform form-lg" data-form-output="form-output-global" data-form-type="contact" method="post" action="bat/rd-mailform.php">
+            <div class="row row-30">
+              <div class="col-lg-4">
+                <div class="form-wrap">
+                  <label class="form-label" for="contact-name">Nombre y Apellido</label>
+                  <input class="form-input" id="contact-name" type="text" name="name" data-constraints="@Required">
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div class="form-wrap">
+                  <label class="form-label" for="contact-email">E-mail</label>
+                  <input class="form-input" id="contact-email" type="email" name="email" data-constraints="@Required @Email">
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div class="form-wrap">
+                  <label class="form-label" for="contact-phone">Teléfonos</label>
+                  <input class="form-input" id="contact-phone" type="text" name="phone" data-constraints="@PhoneNumber">
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="form-wrap">
+                  <label class="form-label" for="contact-message">Asunto</label>
+                  <textarea class="form-input" id="contact-message" name="message" data-constraints="@Required"></textarea>
+                </div>
+              </div>
+              <div class="col-12">
+                <button class="button button-primary" type="submit">Enviar mensaje</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+<%- include('partials/footer') %>
