@@ -885,6 +885,7 @@ p .link-press {
 	transition: .2s ease-in-out;
 	transform: translate3d(0, 0, 0);
 	margin-bottom: 30px;
+	border-radius: 150px;
 }
 
 .box-creative, .box-creative:active, .box-creative:focus, .box-creative:hover {
@@ -7660,7 +7661,7 @@ p.profile-minimal-position {
 	}
 	.jumbotron-creative-main {
 		max-width: 580px;
-		padding: 50px 0 180px;
+		padding: 130px 0 180px;
 	}
 	.jumbotron-creative-main .form-layout-search {
 		max-width: inherit;
@@ -9602,26 +9603,28 @@ html.tablet .ui-to-top {
 	color: #72b527;
 }
 
-.rd-navbar-static .rd-nav-item.focus > .rd-navbar-submenu-toggle::before,
-.rd-navbar-static .rd-nav-item.opened > .rd-navbar-submenu-toggle::before,
-.rd-navbar-static .rd-nav-item .rd-nav-link:hover + .rd-navbar-submenu-toggle::before {
+.rd-navbar-static .rd-nav-item.focus > i,
+.rd-navbar-static .rd-nav-item.opened > i,
+.rd-navbar-static .rd-nav-item .rd-nav-link:hover > i {
 	transform: rotate(180deg);
 }
 
-.rd-navbar-static .rd-nav-item > .rd-navbar-submenu-toggle {
-	font-family: "Material Design Icons";
-	font-size: 18px;
-	cursor: pointer;
-	color: #151515;
+.rd-navbar-static .rd-nav-item .rd-nav-link > i {
+	/* font-family: "Material Design Icons"; */
+	/* font-size: 18px; */
+	/* cursor: pointer; */
+	/* color: #151515; */
+	transition: .3s all ease;
+	transition-delay: 1s;
 }
 
-.rd-navbar-static .rd-nav-item > .rd-navbar-submenu-toggle::before {
+/* .rd-navbar-static .rd-nav-item > .rd-navbar-submenu-toggle::before {
 	content: '\f236';
 	position: relative;
 	top: 2px;
 	display: inline-block;
 	transition: .22s;
-}
+} */
 
 .rd-navbar-static .rd-nav-item > .rd-navbar-submenu {
 	margin-top: 20px;
