@@ -12,6 +12,7 @@ const { renderPerfilUser,
         renderListaCandidatos,
         renderLoginForm,
         login,
+        renderChooseSignupOption,
         renderSignupForm,
         signup,
         logout } = require('../controllers/user.controller');
@@ -33,6 +34,9 @@ router.post('/user/expe_estudios', expeEstudios );
 //Ruta de inicio de sesion
 router.get('/user/login', renderLoginForm);
 router.post('/user/login', login);
+
+//Ruta de elección de registro de usuario
+router.get('/user/choose-signup-option', renderChooseSignupOption);
 
 //Ruta de creacion de usuario
 router.get('/user/signup', renderSignupForm);

@@ -8,6 +8,11 @@ const User = require('../models/Users')
 const passport = require('passport');
 const { application } = require('express');
 
+//Vista de sección de elección
+userCtrl.renderChooseSignupOption = (req, res) => {
+    res.render('users/choose-signup-option')
+}
+
 //Vista de formulario de Signup 
 userCtrl.renderSignupForm = (req, res) => {
     res.render('users/signup')
