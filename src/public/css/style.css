@@ -106,6 +106,7 @@ body {
 	background-color: #ffffff;
 	-webkit-text-size-adjust: none;
 	-webkit-font-smoothing: subpixel-antialiased;
+	overflow-x: hidden; /* Hide horizontal scrollbar */
 }
 
 h1, h2, h3, h4, h5, h6, [class*='heading-'] {
@@ -883,6 +884,7 @@ p .link-press {
 	border: 1px solid #d6d6d6;
 	transition: .2s ease-in-out;
 	transform: translate3d(0, 0, 0);
+	margin-bottom: 30px;
 }
 
 .box-creative, .box-creative:active, .box-creative:focus, .box-creative:hover {
@@ -1751,8 +1753,8 @@ html .list-inline-md > * {
 		top: 100px;
 	}
 	.ll-item-icon {
-		width: 160px;
-		height: 160px;
+		width: 250px;
+		height: 250px;
 		font-size: 66px;
 	}
 	.ll-item-icon::after {
@@ -1885,7 +1887,6 @@ html .list-inline-md > * {
 */
 img {
 	display: inline-block;
-	max-width: 100%;
 	height: auto;
 }
 
@@ -7538,7 +7539,6 @@ p.profile-minimal-position {
 
 .jumbotron-creative-inner {
 	display: flex;
-	flex-direction: column;
 	justify-content: center;
 	width: 100%;
 }
@@ -7593,6 +7593,7 @@ p.profile-minimal-position {
 		min-width: 100%;
 		min-height: 100%;
 		padding-bottom: 67.0816%;
+		top: -10%;
 	}
 	.jc-decoration-item svg {
 		position: absolute;
@@ -7649,10 +7650,10 @@ p.profile-minimal-position {
 
 @media (min-width: 1200px) {
 	.jumbotron-creative-inner {
-		min-height: 42.1875vw;
+		min-height: 40vw;
 	}
 	.jc-decoration {
-		width: calc(100% - 120px);
+		width: 100%;
 	}
 	.jc-decoration-image {
 		left: 50%;
@@ -7676,7 +7677,7 @@ p.profile-minimal-position {
 		max-width: 750px;
 	}
 	.jc-decoration {
-		width: calc(50% + 500px);
+		width: 100%;
 	}
 	.jumbotron-creative-title {
 		padding-right: 60px;
@@ -8667,7 +8668,7 @@ html [class*='section-'].section-bottom-0 {
 * Accent Backgrounds
 */
 .bg-primary {
-	background: #72b527;
+	background-color: #72b527!important;
 }
 
 .bg-primary + .bg-primary {
@@ -10821,7 +10822,7 @@ html.rd-navbar-fixed-linked .page {
 }
 
 .rd-navbar-classic.rd-navbar-static .rd-navbar-brand img {
-	width: 200px;
+	width: 20rem;
 
 }
 
@@ -10839,7 +10840,7 @@ html.rd-navbar-fixed-linked .page {
 @media (min-width: 1200px) {
 	.rd-navbar-classic.rd-navbar-static .rd-navbar-main {
 		min-height: 110px;
-		max-width: 1170px;
+		max-width: 1250px;
 	}
 	.rd-navbar-classic.rd-navbar-static .rd-navbar-main-element {
 		padding-left: 50px;
@@ -10981,7 +10982,7 @@ html.rd-navbar-fixed-linked .page {
 
 .jumbotron-creative .rd-navbar-static.rd-navbar-classic:not(.rd-navbar--is-stuck) .rd-nav-link,
 .jumbotron-creative .rd-navbar-static.rd-navbar-classic:not(.rd-navbar--is-stuck) .rd-navbar-submenu-toggle {
-	color: #ffffff;
+	color: black;
 }
 
 .jumbotron-creative .rd-navbar-static.rd-navbar-classic:not(.rd-navbar--is-stuck) .rd-nav-link:hover ~ .rd-navbar-submenu-toggle,
