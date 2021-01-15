@@ -4958,18 +4958,6 @@ html:not(.tablet):not(.mobile) .thumbnail-classic:hover .thumbnail-classic-capti
 	background-size: cover;
 }
 
-.breadcrumbs-custom-main[style*='background-image']::before {
-	content: '';
-	position: absolute;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
-	pointer-events: none;
-	z-index: 1;
-	background: rgba(54, 67, 82, 0.45);
-}
-
 .breadcrumbs-custom-main > * {
 	position: relative;
 	z-index: 2;
