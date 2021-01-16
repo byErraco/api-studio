@@ -2495,20 +2495,20 @@ hr {
 
 .button-default:hover, .button-default:active {
 	color: #ffffff;
-	background-color: #72b527;
-	border-color: #72b527;
+	background-color: orange;
+	border-color: orange;
 }
 
 .button-primary, .button-primary:focus {
 	color: #ffffff;
-	background-color: #72b527;
-	border-color: #72b527;
+	background-color: orange;
+	border-color: orange;
 }
 
 .button-primary:hover, .button-primary:active {
 	color: #ffffff;
-	background-color: #ca5217;
-	border-color: #ca5217;
+	background-color: rgb(224, 155, 26);
+	border-color: rgb(224, 155, 26);
 }
 
 .bg-primary .button-primary, .bg-primary .button-primary:focus {
@@ -2519,8 +2519,8 @@ hr {
 
 .bg-primary .button-primary:hover, .bg-primary .button-primary:active {
 	color: #ffffff;
-	background-color: #ca5217;
-	border-color: #ca5217;
+	background-color: rgb(224, 155, 26);
+	border-color: rgb(224, 155, 26);
 }
 
 .button-gray-100, .button-gray-100:focus {
