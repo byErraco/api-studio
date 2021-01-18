@@ -7519,7 +7519,7 @@ p.profile-minimal-position {
 	width: 100%;
 	border-radius: 50%;
 	z-index: -1;
-	background: #72b527;
+	/* background: #72b527; */
 }
 
 .jc-decoration-item {
@@ -7527,7 +7527,7 @@ p.profile-minimal-position {
 }
 
 .jumbotron-creative-inner {
-	display: flex;
+	/* display: flex; */
 	justify-content: center;
 	width: 100%;
 }

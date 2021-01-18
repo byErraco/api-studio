@@ -7,6 +7,7 @@ const User = require('../models/Users')
 //Importando modulo de autenticacon
 const passport = require('passport');
 const { application } = require('express');
+const flash = require('connect-flash')
 
 //Vista de sección de elección
 userCtrl.renderChooseSignupOption = (req, res) => {
@@ -21,31 +22,53 @@ userCtrl.renderSignupForm = (req, res) => {
 //Creacion de Usuarios
 userCtrl.signup = async (req, res) => {
     let errors = [];
+    
+    failureFlash: true;
     const { username, email, password, password_confirm, tipo_cuenta } = req.body;
     if (password != password_confirm) {
+       // req.flash('message','las contrasenas no coinciden');
+       // res.redirect('/user/signup');
+        console.log('ERROR CONTRASENA NO ES IGUAL')
         errors.push({ text: "Las Contraseñas no coinciden." });
     }
     if (password.length < 4) {
         errors.push({ text: "La Contraseña debe tener al menos 4 digitos." });
     }
     if (errors.length > 0) {
-        res.redirect('/');
+        //  res.redirect('/user/signup');
+        //const alert = errors.array()
+         console.log(errors);
+         ///console.log(alert)
+         console.log('errores')
+         res.render('users/signup', {
+           errors
+        });
     }
     else {
         // Si el correo ya existe
         const emailUser = await User.findOne({ email: email });
-        if (emailUser) {
-            req.flash("error_msg", "El Email se encuentra en uso.");
-            res.redirect('/');
+        if (emailUser || errors.length>0) {
+            //req.flash("error_msg", "El Email se encuentra en uso.");
+            //res.redirect('/');
+            errors.push({ text: "El email ya se encuentra en uso." });
+            console.log(errors);
+            console.log("ERROR EMAIL EN USO")
+            res.render('users/signup', {
+                errors
+             });
         } else {
             // Guardo el usuario
             const newUser = new User({ username, email, password, tipo_cuenta });
             newUser.password = await newUser.encryptPassword(password);
             await newUser.save();
             req.flash('success_msg', 'Usuario registrado.')
-            res.redirect('/');
+            res.redirect('/user/login');
+            console.log("USUARIO REGISTRADO")
         }
     }
+    console.log(req.body);
+    res.send('received');
+    console.log('prueba')
 };
 
 //Vista de formulario de Login
