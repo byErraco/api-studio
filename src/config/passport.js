@@ -14,7 +14,9 @@ passport.use(new LocalStrategy({
         console.log('ya busque el usuario')
         if (!user) {
             console.log('estoy en el primer if')
+            console.log('usuario no encontrado')
             return done(null, false, {message: 'Usuario no encontrado'});
+            
         } else {
             console.log('estoy en el primer else')
             // Match password user
@@ -24,6 +26,7 @@ passport.use(new LocalStrategy({
                 return done(null, user)
             } else {
                 console.log('estoy el el segundo else')
+                console.log('contrasena incorrecta')
                 return done(null, false, {message: 'Contraseña Incorrecta'});
             }
         }
