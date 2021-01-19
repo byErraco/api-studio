@@ -84,7 +84,7 @@ userCtrl.renderLoginForm =  (req, res) => {
 
 //Inicio de Sesion    
 userCtrl.login = passport.authenticate('local', {
-    failureRedirect: '/user/signin',
+    failureRedirect: '/user/login',
     successRedirect: '/',
     failureFlash: true
 });
