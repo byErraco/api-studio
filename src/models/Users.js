@@ -8,6 +8,8 @@ const UserSchema = new Schema({
     email: {type: String, required: true, unique: true},
     password: {type: String, required: true},
     tipo_cuenta: {type: String, required: true},
+    ciudad: {type: String, required: true},
+    pais: {type: String, required: true},
     acerca: {type: String},
     cargo: {type: String},
     direccion: {type: String},

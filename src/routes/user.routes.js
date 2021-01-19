@@ -42,6 +42,10 @@ router.get('/user/choose-signup-option', renderChooseSignupOption);
 router.get('/user/signup', renderSignupForm);
 router.post('/user/signup', signup);
 
+//Ruta de creacion usuario-empresa
+router.get('/user/signup-enterprise', renderSignupForm);
+router.post('/user/signup-enterprise', signup);
+
 //Ruta de cerrar sesion
 router.get('/user/logout', logout);
 

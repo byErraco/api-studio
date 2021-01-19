@@ -24,7 +24,9 @@ userCtrl.signup = async (req, res) => {
     let errors = [];
     
     failureFlash: true;
-    const { username, email, password, password_confirm, tipo_cuenta } = req.body;
+    const { username, email, password, password_confirm, tipo_cuenta,ciudad,pais } = req.body;
+    //tipo_cuenta='Empresa';
+    //console.log(tipo_cuenta)
     if (password != password_confirm) {
        // req.flash('message','las contrasenas no coinciden');
        // res.redirect('/user/signup');
@@ -44,6 +46,7 @@ userCtrl.signup = async (req, res) => {
            errors
         });
     }
+
     else {
         // Si el correo ya existe
         const emailUser = await User.findOne({ email: email });
@@ -58,12 +61,15 @@ userCtrl.signup = async (req, res) => {
              });
         } else {
             // Guardo el usuario
-            const newUser = new User({ username, email, password, tipo_cuenta });
+            const newUser = new User({ username, email, password, tipo_cuenta,ciudad,pais });
+            
             newUser.password = await newUser.encryptPassword(password);
             await newUser.save();
-            req.flash('success_msg', 'Usuario registrado.')
+            
+            req.flash('success_msg', 'Usuario registrado exitosamente.')
             res.redirect('/user/login');
-            console.log("USUARIO REGISTRADO")
+            
+            console.log(exitoso)
         }
     }
     console.log(req.body);
