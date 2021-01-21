@@ -6,6 +6,7 @@ const User = require('../models/Users')
 
 //Importando modulo de autenticacon
 const passport = require('passport');
+const custompass = require('passport-custom')
 const { application } = require('express');
 const flash = require('connect-flash')
 
@@ -17,6 +18,9 @@ userCtrl.renderChooseSignupOption = (req, res) => {
 //Vista de formulario de Signup 
 userCtrl.renderSignupForm = (req, res) => {
     res.render('users/signup')
+}
+userCtrl.renderSignupFormE = (req, res) => {
+    res.render('users/signup-enterprise')
 }
 
 //Creacion de Usuarios
@@ -81,13 +85,29 @@ userCtrl.signup = async (req, res) => {
 userCtrl.renderLoginForm =  (req, res) => {
     res.render('users/signin')
 }
+var sum = 1;
+//Inicio de Sesion  
 
-//Inicio de Sesion    
-userCtrl.login = passport.authenticate('local', {
-    failureRedirect: '/user/login',
-    successRedirect: '/',
-    failureFlash: true
-});
+    userCtrl.login = passport.authenticate('local', {
+        failureRedirect: '/user/login',
+       // successRedirect: '/',
+        successRedirect: '/user/edit-perfil',
+        failureFlash: true
+    });
+
+      
+
+// userCtrl.get('/', function(req, res, next){
+//     passport.authenticate('local',function(err,user,info){
+//         if(err) {return next(err);}
+
+//         if(!user) {return res.redirect('user/login');}
+//         req.logIn(user, function(err){
+//             if(err){ return next(err);}
+//             return res.redirect('/')
+//         })
+//     }) (req,res,next);
+// })
 
 //Vista de Cerrar sesion
 userCtrl.logout = (req, res) => {

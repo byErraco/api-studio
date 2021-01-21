@@ -34,12 +34,19 @@
 <body>
 
 
-  {{> navegacion }}
+  <!-- {{> navegacion }} -->
 
   <main class="container p-5">
-    {{> messages }}
+    <!-- {{> messages }}
     {{> errors }}
-    {{{body}}}
+    {{{body}}} -->
+      
+    
+      <%- messages %>
+      <%- errors %>
+      <%- body %>
+
+
   </main>
 
   <!-- Page Footer-->

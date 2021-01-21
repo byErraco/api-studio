@@ -14,6 +14,7 @@ const { renderPerfilUser,
         login,
         renderChooseSignupOption,
         renderSignupForm,
+        renderSignupFormE,
         signup,
         logout } = require('../controllers/user.controller');
 const { isAuthenticated } = require('../helpers/auth');
@@ -43,7 +44,7 @@ router.get('/user/signup', renderSignupForm);
 router.post('/user/signup', signup);
 
 //Ruta de creacion usuario-empresa
-router.get('/user/signup-enterprise', renderSignupForm);
+router.get('/user/signup-enterprise', renderSignupFormE);
 router.post('/user/signup-enterprise', signup);
 
 //Ruta de cerrar sesion

@@ -13792,19 +13792,45 @@ yx-axis
 
 /*--------------------------------AGREGADO PARA REGISTRO--------------------------------------*/
 .cardregistro{
-	width: 33%;
+	width: auto;
 	background: #72b527;
+	
 }
 .conregistro{
+	margin-top: 8rem;
+	margin-bottom: 0rem;	
+}
 
-	margin-top: 54px;
-	margin-bottom: 54px;
-	min-height: 100vh;
+.conreg{
+	/* min-height: 100vh; */
+	/* background-image: url("../images/bg-registro.svg"); */
+	background-repeat: no-repeat;
+	background-size: cover;
+	min-width: 100%;
+	background-position: bottom;
+}
+
+.conregE{
+	/* min-height: 100vh; */
+	/* background-image: url("../images/registro-bg2.svg"); */
+	background-repeat: no-repeat;
+	background-size: cover;
+	min-width: 100%;
+	background-position: bottom;
+}
+
+.conlogin{
+	/* min-height: auto; */
+	background-image: url("../images/bg-loginN.svg");
+	background-repeat: no-repeat;
+	background-position: right;
+	
 }
 
 .menuregistro{
 	background: #72b527;
 }
+
 .pregistro{
 color: #ffffff;
 font: 500 13px/20px "Ubuntu", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -13813,7 +13839,28 @@ font: 500 13px/20px "Ubuntu", -apple-system, BlinkMacSystemFont, "Segoe UI", Rob
     text-align: center;
 }
 
+.bg-login{
+	bottom: 100px;
+
+}
+
+.reg-sticky{
+	top: -9.5rem;
+    position: absolute;
+    display: block;
+    min-width: 100%;
+}
+.reg-sticky2{
+	top: -5.5rem;
+    position: absolute;
+    display: block;
+    min-width: 100%;
+}
+/* 
+.registrate-bg{
+position: absolute;
 
 
+} */
 
 
