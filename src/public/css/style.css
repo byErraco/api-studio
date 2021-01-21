@@ -13796,9 +13796,13 @@ yx-axis
 	background: #72b527;
 	
 }
+.conregistroE{
+	margin-top: 4rem;
+	margin-bottom: 4rem;	
+}
 .conregistro{
 	margin-top: 8rem;
-	margin-bottom: 0rem;	
+	margin-bottom: 8rem;	
 }
 
 .conreg{
