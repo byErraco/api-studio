@@ -13807,7 +13807,7 @@ yx-axis
 
 .conreg{
 	/* min-height: 100vh; */
-	/* background-image: url("../images/bg-registro.svg"); */
+	background-image: url("../images/rebg2.svg");
 	background-repeat: no-repeat;
 	background-size: cover;
 	min-width: 100%;
@@ -13816,7 +13816,7 @@ yx-axis
 
 .conregE{
 	/* min-height: 100vh; */
-	/* background-image: url("../images/registro-bg2.svg"); */
+	background-image: url("../images/rebg1.svg");
 	background-repeat: no-repeat;
 	background-size: cover;
 	min-width: 100%;
