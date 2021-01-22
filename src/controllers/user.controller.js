@@ -6,7 +6,7 @@ const User = require('../models/Users')
 
 //Importando modulo de autenticacon
 const passport = require('passport');
-const custompass = require('passport-custom')
+
 const { application } = require('express');
 const flash = require('connect-flash')
 
