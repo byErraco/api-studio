@@ -13619,6 +13619,7 @@ yx-axis
 		padding-top: 30px;
 		padding-bottom: 30px;
 	}
+	
 }
 
 /*
@@ -13814,6 +13815,16 @@ yx-axis
 	background-position: bottom;
 }
 
+.conindex{
+	background-image: url("../images/bgindex2.svg");
+	background-repeat: no-repeat;
+	background-size: cover;
+	min-width: 100%;
+	
+	background-position: center;
+}
+
+
 .conregE{
 	/* min-height: 100vh; */
 	background-image: url("../images/rebg1.svg");
@@ -13867,5 +13878,23 @@ position: absolute;
 
 
 } */
+
+@media only screen and (max-width: 767px) {
+	.conindexj{
+		
+		min-height: 100vh;
+	}
+	.conmainj{
+		min-height: 100vh;
+		margin-top: 10vh;
+	}
+	.conindex{
+		background-image: url('../images/logo-pantone-1.png');
+		background-repeat: no-repeat;
+		background-size: contain;
+		min-width: 100%;
+		
+	}
+}
 
 
