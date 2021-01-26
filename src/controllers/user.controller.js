@@ -73,7 +73,7 @@ userCtrl.signup = async (req, res) => {
             req.flash('success_msg', 'Usuario registrado exitosamente.')
             res.redirect('/user/login');
             
-            console.log(exitoso)
+            console.log(newUser)
         }
     }
     console.log(req.body);
@@ -86,16 +86,73 @@ userCtrl.renderLoginForm =  (req, res) => {
     res.render('users/signin')
 }
 var sum = 1;
-//Inicio de Sesion  
+//Inicio de Sesion 
 
-    userCtrl.login = passport.authenticate('local', {
-        failureRedirect: '/user/login',
-       // successRedirect: '/',
-        successRedirect: '/user/edit-perfil',
-        failureFlash: true
-    });
+//    userCtrl.login = passport.authenticate('local', {
+   
+//     failureRedirect: '/user/login',
+//      successRedirect: '/user/edit-perfil',
+//       failureFlash: true
+//    }
+//  );
+userCtrl.login = (req,res,next) => {
+    passport.authenticate("local",(err,user,info)=>{
+        if (err) throw err;
+        if (!user) res.send("No existe usuario")
+        else {
+            req.logIn(user, (err) => {
+                
+                if (err) throw err;
+                console.log(user)
+                User.findOne({'email': user.email},(err,user)=>{
+                    console.log(user+" AAAAAAAAAA")
+                    
+                    if (user.isNewUser){
+                        res.redirect('/user/edit-perfil')
+                        console.log("FUNCIONA")
+                    } else {
+                        res.redirect('/')
+                    }
+                })
 
-      
+            })
+        }
+    })(req,res,next)
+}
+
+
+// userCtrl.login = passport.authenticate('local', {
+//     if()
+// })
+
+// userCtrl.login = passport.authenticate('local', {
+        
+//          failureRedirect: '/user/login'
+//         // successRedirect: '/',
+//         // successRedirect: '/user/edit-perfil',
+//         // failureFlash: true
+//           }),(req,res) => {
+//               if (req.User.email === true) {
+//                   res.redirect('/')
+//               }
+//           };
+
+
+// userCtrl.login= passport.authenticate('local',{
+//     failureRedirect:'/',
+    
+// }),(req,res)=>{
+//     //const cargoUser = await User.findOne(cargo = ''));
+//     if (req.User.tipo_cuenta === 'Empresa') {
+//         console.log("Redirect")
+//         res.redirect('/');
+//     }
+//     if (req.User.tipo_cuenta === 'Freelancer') {
+//         console.log("Redirect2")
+//         res.redirect('user/edit-perfil');
+//     }
+// }
+
 
 // userCtrl.get('/', function(req, res, next){
 //     passport.authenticate('local',function(err,user,info){
