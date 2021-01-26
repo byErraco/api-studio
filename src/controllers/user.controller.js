@@ -105,7 +105,7 @@ userCtrl.login = (req,res,next) => {
                 if (err) throw err;
                 console.log(user)
                 User.findOne({'email': user.email},(err,user)=>{
-                    console.log(user+" AAAAAAAAAA")
+                    
                     
                     if (user.isNewUser){
                         res.redirect('/user/edit-perfil')
