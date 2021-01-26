@@ -13902,8 +13902,9 @@ position: absolute;
 		margin-top: 10vh;
 	}
 	.conindex{
-		background-image: url('../images/logo-pantone-1.png');
+		background-image: url('../images/bgindexmovil.svg');
 		background-repeat: no-repeat;
+		background-position: 0px 60vh;
 		background-size: contain;
 		min-width: 100%;
 		
