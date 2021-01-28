@@ -1,286 +1,393 @@
 <%- include ('../partials/header'); %>
 <% if (user.tipo_cuenta == 'Freelancer'){ %>
-  <form action="/edit-perfil" method="POST">
-    <div class="container editp">
-      <div class="row">
-        <!-- Sidebar -->
-        <div class="col-md-3">
-          <div class="side-bar">
-            <div class="layout-2">
-              <div class="layout-2-item layout-2-item-main">
-                <!-- Profile Light-->
-                <article class="profile-light">
-                  <label class="btn-file perfil"> <i class="fa fa-camera"></i> Agregar foto de perfil
-                    <input type="file" style="display: none;">
-                  </label>
-
-                  <div class="profile-light-main">
-                    <label> Nombre y Apellido
-                      <input type="text" class="form-control" placeholder="" value="<%= user.username%>"
-                        name="username">
-                    </label>
-                    <label> Cargo
-                      <input type="text" class="form-control" placeholder="" name="cargo">
-                    </label>
-                    <label> Dirección
-                      <input type="text" class="form-control" placeholder="" name="direccion">
-                    </label>
-                    <label> Pretencion salarial
-                      <input type="text" class="form-control" placeholder="" name="pre_salario">
+  <div class="contedit">
+    <form action="/edit-perfil" method="POST">
+      <div class="container editp">
+        <div class="row">
+          <!-- Sidebar -->
+          <div class="col-md-3" style="max-height: 100vh;">
+            <div class="side-bar">
+              <div class="layout-2">
+                <div class="layout-2-item layout-2-item-main">
+                  <!-- Profile Light-->
+                
+                  <article class="profile-light" action="/user/edit-perfil" method="POST" name="editPerfil">
+                    <label class="btn-file perfil"> <i class="fa fa-camera"></i> Agregar foto de perfil
+                      <input type="file" style="display: none;" value="<%= user.userpic %>" name="userpic">
                     </label>
 
+                    <div class="profile-light-main">
+                      <label> Nombre y Apellido
+                        <input type="text" class="form-control" placeholder="" value="<%= user.username %>"
+                          name="username">
+                      </label>
+                      <label> Cargo
+                        <input type="text" class="form-control" placeholder="" value="<%= user.cargo %>"
+                          name="cargo">
+                      </label>
+                      <label> Direccion
+                        <input type="text" class="form-control" placeholder="" value="<%= user.direccion %>"
+                          name="direccion">
+                      </label>
+                      <label> Pretencion Salarial
+                        <input type="text" class="form-control" placeholder="" value="<%= user.salario %>"
+                          name="salario">
+                      </label>
+                      <button class="button button-block button-primary" id='btn'
+                                            type="submit">Guardar
+                                            </button>
+                    </div>
+                  </article>
+                  
+
+                  <br>
+                  <article class="" action="/user/edit-perfil" method="POST" name="editPerfil">
+                  <p class="heading-9" style="color: red;">Redes Sociales</p>
+                  <br>
+                  <div class="social-icon bor-btm padding-25">
+                    <ul>
+
+                      <li>
+                        <div class="input-group mb-3">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1"><i class="fa fa-facebook"></i></span>
+                          </div>
+                          <input type="text" class="form-control" placeholder="Username" aria-label="Username"
+                            aria-describedby="basic-addon1" value="<%= user.userfacebook %>" name="userfacebook">
+                        </div>
+                      </li>
+                      <li>
+                        <div class="input-group mb-3">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1"><i class="fa fa-twitter"></i></span>
+                          </div>
+                          <input type="text" class="form-control" placeholder="Username" aria-label="Username"
+                            aria-describedby="basic-addon1" value="<%= user.usertwitter %>" name="usertwitter">
+                        </div>
+                      </li>
+                      <li>
+                        <div class="input-group mb-3">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1"><i class="fa fa-google-plus"></i></span>
+                          </div>
+                          <input type="text" class="form-control" placeholder="Username" aria-label="Username"
+                            aria-describedby="basic-addon1" value="<%= user.usergoogle %>" name="usergoogle">
+                        </div>
+                      </li>
+                      <li>
+                        <div class="input-group mb-3">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1"><i class="fa fa-linkedin"></i></span>
+                          </div>
+                          <input type="text" class="form-control" placeholder="Username" aria-label="Username"
+                            aria-describedby="basic-addon1" value="<%= user.userlinkedin %>" name="userlinkedin">
+                        </div>
+                      </li>
+
+                    </ul>
+                    <button class="button button-block button-primary profile-light-main" id='btn'
+                                            type="submit">Guardar
+                                            </button>
                   </div>
+                  
                 </article>
 
-                <br>
-                <p class="heading-9" style="color: red;">Redes Sociales</p>
-                <br>
-                <div class="social-icon bor-btm padding-25">
-                  <ul>
-
-                    <li>
-                      <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text" id="basic-addon1"><i class="fa fa-facebook"></i></span>
-                        </div>
-                        <input type="text" class="form-control" placeholder="Username" aria-label="Username"
-                          aria-describedby="basic-addon1" name="userfacebook">
-                      </div>
-                    </li>
-                    <li>
-                      <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text" id="basic-addon1"><i class="fa fa-twitter"></i></span>
-                        </div>
-                        <input type="text" class="form-control" placeholder="Username" aria-label="Username"
-                          aria-describedby="basic-addon1" name="usertwitter">
-                      </div>
-                    </li>
-                    <li>
-                      <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text" id="basic-addon1"><i class="fa fa-google-plus"></i></span>
-                        </div>
-                        <input type="text" class="form-control" placeholder="Username" aria-label="Username"
-                          aria-describedby="basic-addon1" name="usergoogle">
-                      </div>
-                    </li>
-                    <li>
-                      <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text" id="basic-addon1"><i class="fa fa-linkedin"></i></span>
-                        </div>
-                        <input type="text" class="form-control" placeholder="Username" aria-label="Username"
-                          aria-describedby="basic-addon1" name="userlinkedin">
-                      </div>
-                    </li>
-
-                  </ul>
                 </div>
+              </div>
+            </div>
+          </div>
+    </form>
+    <div class="col-md-9">
 
+
+      <div class="container datos">
+        <div class="row row-50">
+          <div class="col-lg-8">
+            <div class="row row-50">
+              <div class="col-12" action="/user/edit-perfil" method="POST" name="editPerfil">
+                <p class="heading-9">Acerca de mí</p>
+                <br>
+                <!-- placeholder="Escribe tu descripción aquí" -->
+                <textarea class="form-control"  placeholder="Escribe tu descripción aquí" name="acerca"  > <%= user.acerca %> </textarea>
+                <button class="button button-block button-primary profile-light-main" id='btn'
+                                            type="submit">Guardar
+                                            </button>
+              </div>
+              
+              <div class="col-12">
+
+                <p class="heading-9">EXPERIENCIA LABORAL</p>
+
+                <br>
+                <% if(user.trabajos) { user.trabajos.forEach(function(trabajos){ %>
+                  <div class="padding-30 exp-history">
+                    <!-- ADD Professional -->
+                    <div class="exp">
+                      <div class="row">
+                        <div class="col-md-12">
+                          <label class="laboral"> Periodo
+                            <input type="text" class="form-control" value="<%= trabajos.periodo%>" disabled="disable">
+                          </label>
+                          
+                          <br>
+                          <label class="laboral"> Titulo de trabajo
+                            <input type="text" class="form-control" value="<%= trabajos.titulo_trabajo%>"
+                              disabled="disable">
+                          </label>
+                          <br>
+                          <label class="laboral"> Nombre de la compañia
+                            <input type="text" class="form-control" value="<%= trabajos.nom_empresa%>" disabled="disable">
+                          </label>
+                          <br>
+                          <label class="laboral"> Dirección
+                            <input type="text" class="form-control" value="<%= trabajos.desc_trabajo%>"
+                              disabled="disable">
+                          </label>
+                        </div>
+                        <!-- ADD DETAILS -->
+                        <div class="col-sm-12">
+                          <label class="laboral"> Detalles
+                            <textarea class="form-control" 
+                              disabled="disable"> <%= trabajos.deta_trabajo%></textarea>
+                          </label>
+                          <br>
+                          <% })} %>
+                            <!-- Professional Experience -->
+                            <div class="inside-sec margin-top-30">
+                              <!-- Professional Experience -->
+                              <div>
+                                <form action="/user/expe_trabajos" method="POST" name="expeTrabajo">
+                                  <div class="padding-30 exp-history">
+                                    <!-- ADD Professional -->
+                                    <div class="exp">
+                                      <div class="row">
+                                        <div class="col-md-12">
+                                          <label class="laboral"> Periodo
+                                            <input type="text" class="form-control" placeholder="AAAA - AAAA"
+                                              name="periodo_laboral">
+                                          </label>
+                                          <br>
+                                          <label class="laboral"> Titulo de trabajo
+                                            <input type="text" class="form-control" placeholder="" name="titulo_trabajo">
+                                          </label>
+                                          <br>
+                                          <label class="laboral"> Nombre de la compañia
+                                            <input type="text" class="form-control" placeholder="" name="nom_empresa">
+                                          </label>
+                                          <br>
+                                          <label class="laboral"> Dirección
+                                            <input type="text" class="form-control" placeholder=""
+                                              name="descripcion_trabajo">
+                                          </label>
+                                        </div>
+                                        <!-- ADD DETAILS -->
+                                        <div class="col-sm-12">
+                                          <label class="laboral"> Detalles
+                                            <textarea class="form-control" placeholder=""
+                                              name="detalles_trabajo"> </textarea>
+                                          </label>
+                                          <br>
+                                          <!-- ADD MORE-->
+                                          <button class="button button-block button-primary" id='btn'
+                                            type="submit">Agregar
+                                            Experiencia</button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </form>
+                              </div>
+                              <br>
+                              <div class="inside-sec margin-top-30">
+                                <!-- Academic Background -->
+                                <p class="heading-9">ESTUDIOS</p>
+                                <hr>
+                                <% if(user.estudios){ user.estudios.forEach(function(estudios){ %>
+                                  <div class="padding-30 exp-history">
+                                    <div class="exp">
+                                      <div class="row">
+                                        <div class="col-md-12">
+                                          <label class="laboral"> Periodo
+                                            <input type="text" class="form-control" value="<%= estudios.periodo%>"
+                                              disabled="disable">
+                                          </label>
+                                          <label class="laboral"> Instituto / Universidad nombre
+                                            <input type="text" class="form-control" value="<%= estudios.nom_academia%>"
+                                              disabled="disable">
+                                          </label>
+                                        </div>
+                                        <div class="col-sm-12">
+                                          <label class="laboral"> Detalles
+                                            <textarea class="form-control" 
+                                              disabled="disable"><%= estudios.deta_estudio%></textarea>
+                                          </label>
+                                          <% })} %>
+                                            <br>
+                                            <br>
+                                            <form action="/user/expe_estudios" method="POST">
+                                              <div class="padding-30 exp-history">
+                                                <!-- ADD EXP -->
+                                                <div class="exp">
+                                                  <div class="row">
+                                                    <div class="col-md-12">
+                                                      <label class="laboral"> Periodo
+                                                        <input type="text" class="form-control" placeholder="YYYY - YYYY"
+                                                          name="periodo_estudio">
+                                                      </label>
+
+                                                      <label class="laboral"> Instituto / Universidad nombre
+                                                        <input type="text" class="form-control" placeholder=""
+                                                          name="nom_estudio">
+                                                      </label>
+
+                                                    </div>
+                                                    <!-- ADD DETAIL -->
+                                                    <div class="col-sm-12">
+                                                      <label class="laboral"> Detalles
+                                                        <textarea class="form-control" placeholder=""
+                                                          name="detalles_estudio"></textarea>
+                                                      </label>
+                                                      <!-- ADD MORE -->
+                                                      <br>
+                                                      <button class="button button-block button-primary" id='btn'
+                                                        type="submit">Agregar
+                                                        Estudios</button>
+                                            </form>
+
+
+                                            <div class="guardar">
+                                              <div class="row">
+                                                <div class="col-sm-6">
+                                                  <button class="button button-block button-primary salcan" id='btn'
+                                                    type="reset">Limpiar
+                                                    Formulario</button>
+                                                </div>
+                                                <div class="col-sm-6">
+
+                                                  <button class="button button-block button-primary salcan" id='btn'
+                                                    type="submit">Salvar</button>
+                                                </div>
+                                              </div>
+                                            </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                              </div>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
               </div>
             </div>
           </div>
         </div>
-  </form>
-  <div class="col-md-9">
-
-
-    <div class="container datos">
-      <div class="row row-50">
-        <div class="col-lg-8">
-          <div class="row row-50">
-            <div class="col-12">
-              <p class="heading-9">Acerca de mí</p>
-              <br>
-              <textarea class="form-control" placeholder="Escribe tu descripción aquí" name="acerca"></textarea>
-            </div>
-            <div class="col-12">
-
-              <p class="heading-9">EXPERIENCIA LABORAL</p>
-
-              <br>
-              <% if(user.trabajos) { user.trabajos.forEach(function(trabajos){ %>
-                <div class="padding-30 exp-history">
-
-                  <!-- ADD Professional -->
-                  <div class="exp">
-                    <div class="row">
-                      <div class="col-md-12">
-                        <label class="laboral"> Periodo
-                          <input type="text" class="form-control" value="<%= trabajos.periodo%>" disabled="disable">
-                        </label>
-                        <br>
-                        <label class="laboral"> Titulo de trabajo
-                          <input type="text" class="form-control" value="<%= trabajos.titulo_trabajo%>"
-                            disabled="disable">
-                        </label>
-                        <br>
-                        <label class="laboral"> Nombre de la compañia
-                          <input type="text" class="form-control" value="<%= trabajos.nom_empresa%>" disabled="disable">
-                        </label>
-                        <br>
-                        <label class="laboral"> Dirección
-                          <input type="text" class="form-control" value="<%= trabajos.desc_trabajo%>"
-                            disabled="disable">
-                        </label>
-                      </div>
-                      <!-- ADD DETAILS -->
-                      <div class="col-sm-12">
-                        <label class="laboral"> Detalles
-                          <textarea class="form-control" value="<%= trabajos.deta_trabajo%>"
-                            disabled="disable"></textarea>
-                        </label>
-                        <br>
-                        <% })} %>
-                          <!-- Professional Experience -->
-                          <div class="inside-sec margin-top-30">
-                            <!-- Professional Experience -->
-                            <div>
-                              <form action="/user/expe_trabajos" method="POST" name="expeTrabajo">
-                                <div class="padding-30 exp-history">
-
-                                  <!-- ADD Professional -->
-                                  <div class="exp">
-                                    <div class="row">
-                                      <div class="col-md-12">
-                                        <label class="laboral"> Periodo
-                                          <input type="text" class="form-control" placeholder="AAAA - AAAA"
-                                            name="periodo_laboral">
-                                        </label>
-                                        <br>
-                                        <label class="laboral"> Titulo de trabajo
-                                          <input type="text" class="form-control" placeholder="" name="titulo_trabajo">
-                                        </label>
-                                        <br>
-                                        <label class="laboral"> Nombre de la compañia
-                                          <input type="text" class="form-control" placeholder="" name="nom_empresa">
-                                        </label>
-                                        <br>
-                                        <label class="laboral"> Dirección
-                                          <input type="text" class="form-control" placeholder=""
-                                            name="descripcion_trabajo">
-                                        </label>
-                                      </div>
-
-
-
-                                      <!-- ADD DETAILS -->
-                                      <div class="col-sm-12">
-                                        <label class="laboral"> Detalles
-                                          <textarea class="form-control" placeholder=""
-                                            name="detalles_trabajo"></textarea>
-                                        </label>
-                                        <br>
-                                        <!-- ADD MORE-->
-                                        <button class="button button-block button-primary" id='btn'
-                                          type="submit">Agregar
-                                          Experiencia</button>
-
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </form>
-                            </div>
-                            <br>
-                            <div class="inside-sec margin-top-30">
-                              <!-- Academic Background -->
-                              <p class="heading-9">ESTUDIOS</p>
-                              <hr>
-                              <% if(user.estudios){ user.estudios.forEach(function(estudios){ %>
-                                <div class="padding-30 exp-history">
-                                  <div class="exp">
-                                    <div class="row">
-                                      <div class="col-md-12">
-                                        <label class="laboral"> Periodo
-                                          <input type="text" class="form-control" value="<%= estudios.periodo%>"
-                                            disabled="disable">
-                                        </label>
-                                        <label class="laboral"> Instituto / Universidad nombre
-                                          <input type="text" class="form-control" value="<%= estudios.nom_academia%>"
-                                            disabled="disable">
-                                        </label>
-                                      </div>
-                                      <div class="col-sm-12">
-                                        <label class="laboral"> Detalles
-                                          <textarea class="form-control" value="<%= estudios.deta_estudio%>"
-                                            disabled="disable"></textarea>
-                                        </label>
-                                        <% })} %>
-                                          <br>
-                                          <br>
-                                          <form action="/user/expe_estudios" method="POST">
-                                            <div class="padding-30 exp-history">
-
-                                              <!-- ADD EXP -->
-                                              <div class="exp">
-                                                <div class="row">
-                                                  <div class="col-md-12">
-                                                    <label class="laboral"> Periodo
-                                                      <input type="text" class="form-control" placeholder="YYYY - YYYY"
-                                                        name="periodo_estudio">
-                                                    </label>
-
-                                                    <label class="laboral"> Instituto / Universidad nombre
-                                                      <input type="text" class="form-control" placeholder=""
-                                                        name="nom_estudio">
-                                                    </label>
-
-                                                  </div>
-
-
-
-
-                                                  <!-- ADD DETAIL -->
-                                                  <div class="col-sm-12">
-                                                    <label class="laboral"> Detalles
-                                                      <textarea class="form-control" placeholder=""
-                                                        name="detalles_estudio"></textarea>
-                                                    </label>
-                                                    <!-- ADD MORE -->
-                                                    <br>
-                                                    <button class="button button-block button-primary" id='btn'
-                                                      type="submit">Agregar
-                                                      Estudios</button>
-                                          </form>
-
-
-                                          <div class="guardar">
-                                            <div class="row">
-                                              <div class="col-sm-6">
-                                                <button class="button button-block button-primary salcan" id='btn'
-                                                  type="reset">Limpiar
-                                                  Formulario</button>
-                                              </div>
-                                              <div class="col-sm-6">
-
-                                                <button class="button button-block button-primary salcan" id='btn'
-                                                  type="submit">Salvar</button>
-                                              </div>
-                                            </div>
-                                          </div>
-                                      </div>
-
-                                    </div>
-                                  </div>
-                                </div>
-                            </div>
-                          </div>
-                      </div>
-
-                    </div>
-                  </div>
-                </div>
-            </div>
-          </div>
-
-        </div>
-
       </div>
     </div>
+    </form>
+
   </div>
-  </form>
+    
+    
   <% } else { %>
+    <form action="/edit-perfil" method="POST" class="form-edit">
+    <div class="container-editempresa"> 
+      <div class="container-empresa">
+        <article class="profile-empresa" action="/user/edit-perfil" method="POST" name="editPerfil">
+          <label class="btn-file perfil"> <i class="fa fa-camera"></i> Agregar foto de perfil
+            <input type="file" style="display: none;" value="<%= user.userpic %>" name="userpic">
+          </label>
+  
+          <div class="profile-light-main">
+            <label> Nombre y Apellido
+              <input type="text" class="form-control" placeholder="" value="<%= user.username %>"
+                name="username">
+            </label>
+            <label> Tipo de industria
+              <input type="text" class="form-control" placeholder="" value="<%= user.tipoempresa %>"
+                name="tipoempresa">
+            </label>
+            <label> Direccion
+              <input type="text" class="form-control" placeholder="" value="<%= user.direccion %>"
+                name="direccion">
+            </label>
+            <label> Pais origen
+              <input type="text" class="form-control" placeholder="" value="<%= user.pais %>"
+                name="pais">
+            </label>
+            <button class="button button-block button-primary" id='btn'
+                                  type="submit">Guardar
+                                  </button>
+          </div>
+        </article>
+      </div>
+      <div class="container-empresaS">
+        <article class="" action="/user/edit-perfil" method="POST" name="editPerfil">
+          <p class="heading-9" style="color: red;">Redes Sociales</p>
+          <br>
+          <div class="social-icon bor-btm padding-25">
+            <ul >
+
+              <li>
+                <div class="input-group  lista-redes">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1"><i class="fa fa-facebook"></i></span>
+                  </div>
+                  <input type="text" class="form-control" placeholder="Username" aria-label="Username"
+                    aria-describedby="basic-addon1" value="<%= user.userfacebook %>" name="userfacebook">
+                </div>
+              </li>
+              <li>
+                <div class="input-group lista-redes">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1"><i class="fa fa-twitter"></i></span>
+                  </div>
+                  <input type="text" class="form-control" placeholder="Username" aria-label="Username"
+                    aria-describedby="basic-addon1" value="<%= user.usertwitter %>" name="usertwitter">
+                </div>
+              </li>
+              <li>
+                <div class="input-group lista-redes">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1"><i class="fa fa-google-plus"></i></span>
+                  </div>
+                  <input type="text" class="form-control" placeholder="Username" aria-label="Username"
+                    aria-describedby="basic-addon1" value="<%= user.usergoogle %>" name="usergoogle">
+                </div>
+              </li>
+              <li>
+                <div class="input-group lista-redes">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1"><i class="fa fa-linkedin"></i></span>
+                  </div>
+                  <input type="text" class="form-control" placeholder="Username" aria-label="Username"
+                    aria-describedby="basic-addon1" value="<%= user.userlinkedin %>" name="userlinkedin">
+                </div>
+              </li>
+
+            </ul>
+            <button class="button button-block button-primary profile-light-main" id='btn'
+                                    type="submit">Guardar
+                                    </button>
+          </div>
+          
+        </article>
+      </div>
+      <div class="container-acercaE">
+        <div class="col-12" action="/user/edit-perfil" method="POST" name="editPerfil" >
+          <p class="heading-9">Acerca de <%= user.username %> </p>
+          <br>
+          <!-- placeholder="Escribe tu descripción aquí" -->
+          <textarea class="form-control"  placeholder="Escribe tu descripción aquí" name="acerca"  > <%= user.acerca %> </textarea>
+          <button class="button button-block button-primary profile-light-main" id='btn'
+                                      type="submit" >Guardar
+                                      </button>
+        </div>
+      </div>
+      
+    </div>
+  </form>
   <% }  %>
+
   <%- include('../partials/footer') %>

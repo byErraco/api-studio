@@ -13909,6 +13909,66 @@ position: absolute;
 		min-width: 100%;
 		
 	}
+
 }
 
 
+
+.contedit{
+	min-width: 100vh;
+	min-height: 100vh;
+}
+
+.form-edit{background-image: url("../images/rebg1.svg");
+	background-repeat: no-repeat;
+	background-size: cover;
+	
+	background-position: bottom;
+
+}
+.container-editempresa{
+	min-height: 100vh; 
+	position: relative;
+	display: inline-block;
+	
+}
+
+.profile-empresa {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: -15px;
+	margin-left: -25px;
+	text-align: left;
+}
+.container-empresa{
+	margin: 2em 2em 2em 2em;
+    float: left;
+    display: block;
+}
+.container-empresaS{
+	float: left;
+    margin: 2em 2em 2em 2em;
+    position: relative;
+    display: block;
+}
+
+.lista-redes{
+	margin-bottom: 10px;
+	width: auto;
+}
+.container-acercaE {
+	margin: 2em 2em 2em 2em;
+    position: relative;
+    display: block;
+    float: left;
+}
+.contedite{
+	display: inline-flex;
+}
+@media only screen and (max-width: 991px) {
+	.form-edit{
+		margin-top: 10vh;
+	}
+}
