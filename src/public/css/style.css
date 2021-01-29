@@ -13912,19 +13912,22 @@ position: absolute;
 
 }
 
-
-
 .contedit{
 	min-width: 100vh;
 	min-height: 100vh;
+
+	background-image: url("../images/rebg2.svg");
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: bottom;
+	
 }
+
 
 .form-edit{background-image: url("../images/rebg1.svg");
 	background-repeat: no-repeat;
 	background-size: cover;
-	
 	background-position: bottom;
-
 }
 .container-editempresa{
 	min-height: 100vh; 
@@ -13971,4 +13974,109 @@ position: absolute;
 	.form-edit{
 		margin-top: 10vh;
 	}
+}
+
+
+.bg-modal, .bg-modal2{
+	width: 100%;
+	height: 49%;
+	background-color : rgba(0,0,0,0.7);
+	position: absolute;
+	top: 0;
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	display:none;
+  }
+  
+  .modal-content{
+	width: auto;
+	height: auto;
+	bottom: 10vh;
+	background-color:white;
+	text-align: center;
+	position: relative;
+	
+  }
+
+  .modal-content2{
+	width: auto;
+	height: auto;
+	background-color:white;
+	text-align: center;
+	position: relative;
+	
+  }
+
+  .container-modal{
+
+
+	position: absolute;
+	
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	display:flex;
+  }
+  
+  .container-modal2{
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	display:flex;
+  }
+
+
+  .container-modal-content{
+	width: auto;
+	height: auto;
+	background-color:white;
+	text-align: center;
+	position: relative; 
+  }
+
+  .input-modal{
+	width: 50%;
+	display: block;
+	margin: 0px auto;
+  }
+  
+  .close,.close2{
+	position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 49px;
+    transform: rotate(45deg);
+    cursor: pointer;
+  }
+  
+
+  .container-perfil{
+	  min-width: 100vh;
+	  min-height: 100vh;
+  }
+
+  .hero {
+	height: 100vh;
+	width: 100%;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.hero2 {
+	height: 50vh;
+	width: 100%;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+
+.profile-user{
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	text-align: center;
 }

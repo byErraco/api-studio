@@ -1,15 +1,15 @@
 <%- include ('../partials/header'); %>
 <% if (user.tipo_cuenta == 'Freelancer'){ %>
-  <div class="contedit">
+  <!-- <div class="contedit">
     <form action="/edit-perfil" method="POST">
       <div class="container editp">
         <div class="row">
-          <!-- Sidebar -->
+         
           <div class="col-md-3" style="max-height: 100vh;">
             <div class="side-bar">
               <div class="layout-2">
                 <div class="layout-2-item layout-2-item-main">
-                  <!-- Profile Light-->
+                 
                 
                   <article class="profile-light" action="/user/edit-perfil" method="POST" name="editPerfil">
                     <label class="btn-file perfil"> <i class="fa fa-camera"></i> Agregar foto de perfil
@@ -97,9 +97,9 @@
             </div>
           </div>
     </form>
-    <div class="col-md-9">
+    <div class="col-md-9"> -->
 
-
+<!-- 
       <div class="container datos">
         <div class="row row-50">
           <div class="col-lg-8">
@@ -107,7 +107,7 @@
               <div class="col-12" action="/user/edit-perfil" method="POST" name="editPerfil">
                 <p class="heading-9">Acerca de mí</p>
                 <br>
-                <!-- placeholder="Escribe tu descripción aquí" -->
+               
                 <textarea class="form-control"  placeholder="Escribe tu descripción aquí" name="acerca"  > <%= user.acerca %> </textarea>
                 <button class="button button-block button-primary profile-light-main" id='btn'
                                             type="submit">Guardar
@@ -118,10 +118,10 @@
 
                 <p class="heading-9">EXPERIENCIA LABORAL</p>
 
-                <br>
-                <% if(user.trabajos) { user.trabajos.forEach(function(trabajos){ %>
+                <br> -->
+                <!-- <% if(user.trabajos) { user.trabajos.forEach(function(trabajos){ %>
                   <div class="padding-30 exp-history">
-                    <!-- ADD Professional -->
+                    
                     <div class="exp">
                       <div class="row">
                         <div class="col-md-12">
@@ -144,21 +144,299 @@
                               disabled="disable">
                           </label>
                         </div>
-                        <!-- ADD DETAILS -->
+                        
+
+                        
+
                         <div class="col-sm-12">
                           <label class="laboral"> Detalles
                             <textarea class="form-control" 
                               disabled="disable"> <%= trabajos.deta_trabajo%></textarea>
                           </label>
                           <br>
-                          <% })} %>
-                            <!-- Professional Experience -->
+                          <% })} %> -->
+                          <form action="/edit-perfil" method="POST" >
+                          <section class="hero">
+                            <article class="profile-user" action="/user/edit-perfil" method="POST" name="editPerfil">
+                              <label class="btn-file perfil"> <i class="fa fa-camera"></i> Agregar foto de perfil
+                                <input type="file" style="display: none;" value="<%= user.userpic %>" name="userpic">
+                              </label>
+                      
+                              <div class="profile-light-main">
+                                <label> Nombre y Apellido
+                                  <input type="text" class="form-control" placeholder="" value="<%= user.username %>"
+                                    name="username">
+                                </label>
+                                <label> Cargo
+                                  <input type="text" class="form-control" placeholder="" value="<%= user.cargo %>"
+                                    name="cargo">
+                                </label>
+                                <label> Direccion
+                                  <input type="text" class="form-control" placeholder="" value="<%= user.direccion %>"
+                                    name="direccion">
+                                </label>
+                                <label> Pretención Salarial
+                                  <input type="text" class="form-control" placeholder="" value="<%= user.salario %>"
+                                    name="salario">
+                                </label>
+                                <button class="button button-block button-primary" id='btn'
+                                                      type="submit">Guardar
+                                                      </button>
+                              </div>
+                            </article>
+                          </form>
+
+                          
+                            <div class="hero-content">
+                              <h2>Información</h2>
+                              <div class="container-acercaE">
+                                <div class="col-12" action="/user/edit-perfil" method="POST" name="editPerfil" >
+                                  <p class="heading-9">Acerca de <%= user.username %> </p>
+                                  <br>
+                                  <!-- placeholder="Escribe tu descripción aquí" -->
+                                  <textarea class="form-control"  placeholder="Escribe tu descripción aquí" name="acerca"  > <%= user.acerca %> </textarea>
+                                  <button class="button button-block button-primary profile-light-main" id='btn'
+                                                              type="submit" >Guardar
+                                                              </button>
+                                </div>
+                              </div>
+                              <h3>Agrega tu experiencia</h3>
+                              <a href="#" id="button" class="button">LABORAL</a>
+                              
+                              <a href="#" id="button2" class="button">ESTUDIO</a>
+                            </div>
+                         
+                            
+                              
+                             
+                            
+                            <div class="bg-modal" >
+                              <div class="modal-content">
+                                <div class="close">+</div>
+                                <form action="/user/expe_trabajos" method="POST" name="expeTrabajo" onsubmit="return validateForm()">
+                                  <label class="laboral"> Periodo
+                                    <input type="text" class="input-modal" placeholder="AAAA - AAAA"
+                                      name="periodo_laboral" data-constraints="@Required" id="check">
+                                  </label>
+                                  <br>
+                                  <label class="laboral"> Titulo de trabajo
+                                    <input type="text" class="input-modal" placeholder="" name="titulo_trabajo"
+                                    data-constraints="@Required" id="check">
+                                  </label>
+                                  <br>
+                                  <label class="laboral"> Nombre de la compañia
+                                    <input type="text" class="input-modal" placeholder="" name="nom_empresa"
+                                    data-constraints="@Required" id="check">
+                                  </label>
+                                  <br>
+                                  <label class="laboral"> Dirección
+                                    <input type="text" class="input-modal" placeholder=""
+                                      name="descripcion_trabajo" data-constraints="@Required" id="check">
+                                  </label>
+                                  <label class="laboral "> Detalles
+                                    <textarea class=" input-modal" placeholder=""
+                                      name="detalles_trabajo" data-constraints="@Required" id="check"> </textarea>
+                                  </label>
+                                  <button class="button button-block button-primary" id='btn_'
+                                            type="submit">Agregar
+                                            Experiencia</button>
+                                </form> 
+                              </div>                            
+                            </div>
+                            <div class="bg-modal2" >
+                              <div class="modal-content2">
+                                <div class="close2">+</div>
+                                <form action="/user/expe_estudios" method="POST" name="formestudios" onsubmit="return validateForm2()">
+                                  <label class="laboral"> Periodo
+                                    <input type="text" class="input-modal" placeholder="AAAA - AAAA"
+                                      name="periodo_estudio" data-constraints="@Required" id="check">
+                                  </label>
+                                  <br>
+                                  <label class="laboral"> Instituto/Universidad
+                                    <input type="text" class="input-modal" placeholder=""
+                                     name="nom_estudio" data-constraints="@Required" id="check">
+                                  </label>
+                                  <br>                                                                
+                                  <label class="laboral "> Detalles
+                                    <textarea class=" input-modal" placeholder=""
+                                      name="detalles_estudio" data-constraints="@Required" id="check"> </textarea>
+                                  </label>
+                                  <button class="button button-block button-primary" id='btn_'
+                                            type="submit">Agregar
+                                            Estudios</button>
+                                </form> 
+                              </div>                            
+                            </div>
+                          </section>
+                         
+                          
+                              
+  <% if(user.trabajos) { user.trabajos.forEach(function(trabajos){ %>
+    <section class="hero2">
+       <div class="hero-content">
+        <h3>EXPERIENCIA LABORAL</h3>
+         <div class="container-modal2">
+           <div class="container-modal-content">
+            <label class="laboral"> Periodo
+              <input type="text" class="input-modal" placeholder="AAAA - AAAA"
+                name="periodo_laboral" value="<%= trabajos.periodo%>" disabled="disable">
+            </label>
+            <br>
+            <label class="laboral"> Titulo de trabajo
+              <input type="text" class="input-modal" placeholder="" name="titulo_trabajo" 
+              value="<%= trabajos.titulo_trabajo%>"disabled="disable">
+            </label>
+            <br>
+            <label class="laboral"> Nombre de la compañia
+              <input type="text" class="input-modal" placeholder="" name="nom_empresa"
+               value="<%= trabajos.nom_empresa%>" disabled="disable">
+            </label>
+            <br>
+            <label class="laboral"> Dirección
+              <input type="text" class="input-modal" placeholder="" name="descripcion_trabajo" 
+              value="<%= trabajos.desc_trabajo%>" disabled="disable">
+            </label>
+            <label class="laboral "> Detalles
+              <textarea class=" input-modal" placeholder=""
+                name="detalles_trabajo" disabled="disable"> <%= trabajos.deta_trabajo%> </textarea>
+            </label>
+            
+           </div>
+        </div>                              
+     </div>
+  </section>
+                         
+   <% })} %> 
+
+   <% if(user.estudios){ user.estudios.forEach(function(estudios){ %>
+    
+    <section class="hero2">
+      <div class="hero-content">
+       <h3>ESTUDIOS</h3>
+        <div class="container-modal2">
+          <div class="container-modal-content">
+            <label class="laboral"> Periodo
+              <input type="text" class="input-modal" value="<%= estudios.periodo%>"
+                disabled="disable">
+            </label>
+            <label class="laboral"> Instituto / Universidad nombre
+              <input type="text" class="input-modal" value="<%= estudios.nom_academia%>"
+                disabled="disable">
+            </label>
+            <label class="laboral"> Detalles
+              <textarea class="input-modal" 
+                disabled="disable"><%= estudios.deta_estudio%></textarea>
+            </label>
+          </div>
+        </div>                              
+     </div>
+  </section>
+
+            <% })} %>
+              
+
+         <script>
+   function validateForm() {
+  var x = document.forms["expeTrabajo"]["periodo_laboral"].value
+  var x1 = document.forms["expeTrabajo"]["titulo_trabajo"].value
+  var x2= document.forms["expeTrabajo"]["nom_empresa"].value
+  var x3 = document.forms["expeTrabajo"]["descripcion_trabajo"].value
+  var x4 = document.forms["expeTrabajo"]["detalles_trabajo"].value;
+  if (x == "") {
+    alert("Debe llenar todos los campos");
+    return false;
+  }
+  if (x1 == "") {
+    alert("Debe llenar todos los campos");
+    return false;
+  }
+  if (x2 == "") {
+    alert("Debe llenar todos los campos");
+    return false;
+  }
+  if (x3 == "") {
+    alert("Debe llenar todos los campos");
+    return false;
+  }
+  if (x4 == "") {
+    alert("Debe llenar todos los campos");
+    return false;
+  }
+}
+function validateForm2(){
+  var y = document.forms["formestudios"]["periodo_estudio"].value
+          var y1 = document.forms["formestudios"]["nom_estudio"].value
+          var y4 = document.forms["formestudios"]["detalles_estudio"].value;
+           if (y == "") {
+             alert("Debe llenar todos los campos");
+             return false;
+           }
+           if (y1 == "") {
+             alert("Debe llenar todos los campos");
+             return false;
+           }
+           if (y4 == "") {
+             alert("Debe llenar todos los campos");
+             return false;
+           }
+}
+
+  </script>
+
+               
+
+ <script>
+  var el = document.getElementById('button')
+ if(el){
+      el.addEventListener("click", function() {
+        document.querySelector('.bg-modal').style.display = "flex";
+        console.log('si')
+      });
+       }
+ 
+     
+  var cl = document.querySelector('.close')
+    if(cl){
+        cl.addEventListener("click", function() {
+        document.querySelector('.bg-modal').style.display = "none";
+        
+      });
+      console.log('si')
+        }
+
+        var el2 = document.getElementById('button2')
+  if(el2){
+        el2.addEventListener("click", function() {
+        document.querySelector('.bg-modal2').style.display = "flex";
+        console.log('sii')
+      });
+      }
+      var cl2 = document.querySelector('.close2')
+    if(cl2){
+        cl2.addEventListener("click", function() {
+        document.querySelector('.bg-modal2').style.display = "none";
+        
+      });
+      console.log('si')
+        }
+
+   
+    
+   </script>
+                            
+                        
+                          
+                          
+
+
+<!-- 
+                           
                             <div class="inside-sec margin-top-30">
-                              <!-- Professional Experience -->
+                              
                               <div>
                                 <form action="/user/expe_trabajos" method="POST" name="expeTrabajo">
                                   <div class="padding-30 exp-history">
-                                    <!-- ADD Professional -->
+                                    
                                     <div class="exp">
                                       <div class="row">
                                         <div class="col-md-12">
@@ -180,14 +458,14 @@
                                               name="descripcion_trabajo">
                                           </label>
                                         </div>
-                                        <!-- ADD DETAILS -->
+                                        
                                         <div class="col-sm-12">
                                           <label class="laboral"> Detalles
                                             <textarea class="form-control" placeholder=""
                                               name="detalles_trabajo"> </textarea>
                                           </label>
                                           <br>
-                                          <!-- ADD MORE-->
+                                        
                                           <button class="button button-block button-primary" id='btn'
                                             type="submit">Agregar
                                             Experiencia</button>
@@ -199,7 +477,8 @@
                               </div>
                               <br>
                               <div class="inside-sec margin-top-30">
-                                <!-- Academic Background -->
+
+                                
                                 <p class="heading-9">ESTUDIOS</p>
                                 <hr>
                                 <% if(user.estudios){ user.estudios.forEach(function(estudios){ %>
@@ -226,7 +505,7 @@
                                             <br>
                                             <form action="/user/expe_estudios" method="POST">
                                               <div class="padding-30 exp-history">
-                                                <!-- ADD EXP -->
+                                                
                                                 <div class="exp">
                                                   <div class="row">
                                                     <div class="col-md-12">
@@ -241,13 +520,13 @@
                                                       </label>
 
                                                     </div>
-                                                    <!-- ADD DETAIL -->
+                                                    
                                                     <div class="col-sm-12">
                                                       <label class="laboral"> Detalles
                                                         <textarea class="form-control" placeholder=""
                                                           name="detalles_estudio"></textarea>
                                                       </label>
-                                                      <!-- ADD MORE -->
+                                                      
                                                       <br>
                                                       <button class="button button-block button-primary" id='btn'
                                                         type="submit">Agregar
@@ -274,8 +553,9 @@
                                     </div>
                                   </div>
                               </div>
-                            </div>
-                        </div>
+                            </div> -->
+
+                        <!-- </div>
                       </div>
                     </div>
                   </div>
@@ -287,7 +567,7 @@
     </div>
     </form>
 
-  </div>
+  </div> -->
     
     
   <% } else { %>
