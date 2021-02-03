@@ -99,9 +99,21 @@
                     data-placeholder="Choose a Category" name="cat_trabajo" data-minimum-results-for-search="Infinity"
                     data-constraints="@Selected" data-constraints="@Required">
                     <option label="Elije una Categoría"></option>
-                     <% categorias.forEach(function(categoria){ %>
+                    <option value="Tiempo Completo">Diseño Gráfico</option>
+                    <option value="Medio Tiempo">Traducciones</option>
+                    <option value="Freelancer">Edición de Imágenes</option>
+                    <option value="Tiempo Completo">Desarrollador Web</option>
+                    <option value="Medio Tiempo">Desarrollador Movil</option>
+                    <option value="Freelancer">Desarrollador de Software</option>
+                    <option value="Tiempo Completo">Soporte Administrativo</option>
+                    <option value="Medio Tiempo">Consultoría y Contabilidad</option>
+                    <option value="Freelancer">Marketing Online</option>
+                    <option value="Freelancer">Otros</option>                    
+                     <!-- <% categorias.forEach(function(categoria){ %>
                     <option value="<%=categoria.nombre%>"><%=categoria.nombre%></option>
-                    <% }) %>
+                    <% }) %>  -->
+               
+                  
                   </select>
                 </div>
               </div>

@@ -8464,6 +8464,7 @@ html [class*='section-'].section-bottom-0 {
 @media (min-width: 1200px) {
 	.container-fullwidth {
 		max-width: 100%;
+		min-height: 100vh;
 	}
 }
 
@@ -13892,7 +13893,15 @@ position: absolute;
 
 } */
 
+.logo-mobile{
+	display: none;
+}
+
 @media only screen and (max-width: 767px) {
+	.logo-mobile{
+		display: inline-block;
+		margin-top: 20px;
+	}
 	.conindexj{
 		
 		min-height: 100vh;
@@ -14081,3 +14090,4 @@ position: absolute;
 	justify-content: center;
 	text-align: center;
 }
+
