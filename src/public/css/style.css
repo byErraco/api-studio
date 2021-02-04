@@ -1755,8 +1755,8 @@ html .list-inline-md > * {
 		top: 100px;
 	}
 	.ll-item-icon {
-		width: 250px;
-		height: 250px;
+		width: 125px;
+		height: 125px;
 		font-size: 66px;
 	}
 	.ll-item-icon::after {
@@ -6096,6 +6096,7 @@ p.footer-creative-title {
 	}
 	.pt-creative-group .pt.pt-creative {
 		margin-top: 10px;
+		margin-left: 10%;
 	}
 	.pt-creative-group .pt.pt-creative_preferred {
 		width: 34%;
