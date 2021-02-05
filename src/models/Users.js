@@ -2,7 +2,6 @@ const {Schema, model} = require('mongoose');
 const bcryptj = require('bcryptjs');
 const mongoosePaginate = require('mongoose-paginate-v2');
 const { path } = require('../server');
-const { object } = require('mongoose/lib/utils');
 
 const UserSchema = new Schema({
     username: {type: String, required: true},
@@ -26,7 +25,7 @@ const UserSchema = new Schema({
     usertwitter: {type: String},
     usergoogle: {type: String},
     userlinkedin: {type: String},
-    filename:{type: Object},
+    filename:{type:String},
 
 },
     {

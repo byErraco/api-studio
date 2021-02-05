@@ -115,10 +115,14 @@ userCtrl.login = (req,res,next) => {
                 User.findOne({'email': user.email},(err,user)=>{
                     
                     
-                    if (user.isNewUser){
+                    if (user.isNewUser && user.tipo_cuenta == 'Freelancer'){
                         res.redirect('/user/membresia')
                         console.log("FUNCIONA")
                     } else {
+                        if (user.isNewUser && user.tipo_cuenta == 'Empresa'){
+                            res.redirect('/user/edit-perfil')
+                            console.log("FUNCIONA")
+                        }
                         res.redirect('/')
                     }
                 })
@@ -299,8 +303,10 @@ userCtrl.editPic = async (req, res) => {
             filename: imgUrl + ext
         }
         console.log('aca')
-        const imageSaved = await User.findByIdAndUpdate(req.user.id,{$set:{filename:newImg}})
-        
+        const userpic = JSON.stringify(newImg);
+        const imageSaved = await User.findByIdAndUpdate(req.user.id,{$set:{filename:userpic}})
+        console.log(userpic)
+        console.log('tipo ')
         // await User.findByIdAndUpdate(req.user.id,{$addToSet:{ filename:newImg}})
         console.log(newImg)
     } else {
