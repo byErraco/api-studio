@@ -2,11 +2,13 @@
 const { Router } = require('express');
 const app = require('../server')
 const router = Router();
-
+const multer = require('multer');
+const passport = require('passport');
 //Controladores
 const { renderPerfilUser,
         renderEditPerfil,
         editPerfil,
+        editPic,
         expeEstudios,
         expeTrabajo,
         renderListaCandidatos,
@@ -15,6 +17,7 @@ const { renderPerfilUser,
         renderChooseSignupOption,
         renderSignupForm,
         renderSignupFormE,
+        renderMembership,
         signup,
         logout } = require('../controllers/user.controller');
 const { isAuthenticated } = require('../helpers/auth');
@@ -27,7 +30,11 @@ router.get('/perfil-user/:id', renderPerfilUser);
 
 //Ruta de Editar Perfil
 router.get('/user/edit-perfil', isAuthenticated, renderEditPerfil);
+
 router.post('/edit-perfil', editPerfil);
+router.post('/user/edit_pic', editPic);
+
+
 router.post('/user/expe_trabajos', expeTrabajo );
 router.post('/user/expe_estudios', expeEstudios );
 
@@ -36,8 +43,38 @@ router.post('/user/expe_estudios', expeEstudios );
 router.get('/user/login', renderLoginForm);
 router.post('/user/login', login);
 
+// router.post('/user/login',(req,res,next) =>{
+//     passport.authenticate("local",(err,user,info) =>{
+//         if (err) throw err;
+//         if(!user) res.send("No existe usuario")
+//         else{
+//             req.logIn(user, err => {
+//                 if(err) throw err;
+//                 res.send('sucess')
+//             })
+//         }
+//     })(req,res,next)
+// })
+
+// router.post(
+//     'user/login',
+// passport.authenticate('local',{
+//     failureRedirect:'/',
+// }),(req,res)=>{
+//     //const cargoUser = await User.findOne(cargo = ''));
+//     if (req.User.tipo_cuenta === 'Empresa') {
+//         console.log("Redirect")
+//         res.redirect('/');
+//     }
+//     if (req.User.tipo_cuenta === 'Freelancer') {
+//         console.log("Redirect2")
+//         res.redirect('user/edit-perfil');
+//     }
+// })
+
 //Ruta de elección de registro de usuario
 router.get('/user/choose-signup-option', renderChooseSignupOption);
+router.get('/user/membresia', renderMembership);
 
 //Ruta de creacion de usuario
 router.get('/user/signup', renderSignupForm);

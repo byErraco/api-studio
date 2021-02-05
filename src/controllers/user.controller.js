@@ -1,5 +1,8 @@
 //Creacion del controlador
 const userCtrl = {};
+const {randomNumber} = require('../helpers/libs');
+
+const path = require('path');
 
 //Importando modelo de Usuarios
 const User = require('../models/Users')
@@ -9,6 +12,9 @@ const passport = require('passport');
 
 const { application } = require('express');
 const flash = require('connect-flash')
+const multer = require('multer');
+const  fs  = require('fs-extra');
+
 
 //Vista de sección de elección
 userCtrl.renderChooseSignupOption = (req, res) => {
@@ -22,7 +28,9 @@ userCtrl.renderSignupForm = (req, res) => {
 userCtrl.renderSignupFormE = (req, res) => {
     res.render('users/signup-enterprise')
 }
-
+userCtrl.renderMembership = (req, res) => {
+    res.render('users/membresia')
+}
 //Creacion de Usuarios
 userCtrl.signup = async (req, res) => {
     let errors = [];
@@ -108,7 +116,7 @@ userCtrl.login = (req,res,next) => {
                     
                     
                     if (user.isNewUser){
-                        res.redirect('/user/edit-perfil')
+                        res.redirect('/user/membresia')
                         console.log("FUNCIONA")
                     } else {
                         res.redirect('/')
@@ -269,14 +277,46 @@ userCtrl.renderEditPerfil = async (req, res) => {
 //Actualizar Perfil de Usuario
 userCtrl.editPerfil = async (req, res) => {
     console.log(req.body)
-    const  {cargo,direccion,salario,acerca,userpic,pais,tipoempresa,userfacebook,usertwitter,usergoogle,userlinkedin} = req.body
+    const  {cargo,direccion,salario,acerca,pais,tipoempresa,userfacebook,usertwitter,usergoogle,userlinkedin} = req.body
 
-    await User.findByIdAndUpdate(req.user.id,{$set:{cargo:cargo,direccion:direccion,salario:salario,acerca:acerca,userpic:userpic,pais:pais,tipoempresa:tipoempresa,userfacebook:userfacebook,usertwitter:usertwitter,usergoogle:usergoogle,userlinkedin:userlinkedin}})
+    await User.findByIdAndUpdate(req.user.id,{$set:{cargo:cargo,direccion:direccion,salario:salario,acerca:acerca,pais:pais,tipoempresa:tipoempresa,userfacebook:userfacebook,usertwitter:usertwitter,usergoogle:usergoogle,userlinkedin:userlinkedin}})
     const user = await User.findById(req.user.id)
     res.render('./users/perfil-user-edit', {user})
      
     
 }
+userCtrl.editPic = async (req, res) => {
+    const imgUrl = randomNumber();
+    const imageTempPath = req.file.path;
+    const ext = path.extname(req.file.originalname).toLowerCase();
+    const targetPath = path.resolve(`src/public/uploads/${imgUrl}${ext}`)
+
+
+
+    if (ext === '.png' || ext === '.jpeg' ||ext === '.jpg' || ext === '.gif' ){
+        await fs.rename(imageTempPath, targetPath);
+        const newImg = {
+            filename: imgUrl + ext
+        }
+        console.log('aca')
+        const imageSaved = await User.findByIdAndUpdate(req.user.id,{$set:{filename:newImg}})
+        
+        // await User.findByIdAndUpdate(req.user.id,{$addToSet:{ filename:newImg}})
+        console.log(newImg)
+    } else {
+        await fs.unlink(imageTempPath);
+        res.status(500).json({error: 'Solo imagenes son admitidas'});
+    }
+    
+
+    console.log(imgUrl)
+
+    const user = await User.findById(req.user.id)
+    res.render('./users/perfil-user-edit', {user})
+     
+    
+}
+
 
 userCtrl.expeTrabajo = async (req, res) => {
     const expe_traba = {periodo: req.body.periodo_laboral, 

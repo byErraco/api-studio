@@ -1,6 +1,8 @@
 const {Schema, model} = require('mongoose');
 const bcryptj = require('bcryptjs');
-const mongoosePaginate = require('mongoose-paginate-v2')
+const mongoosePaginate = require('mongoose-paginate-v2');
+const { path } = require('../server');
+const { object } = require('mongoose/lib/utils');
 
 const UserSchema = new Schema({
     username: {type: String, required: true},
@@ -24,12 +26,14 @@ const UserSchema = new Schema({
     usertwitter: {type: String},
     usergoogle: {type: String},
     userlinkedin: {type: String},
-    userpic:{data:Buffer, type:String},
+    filename:{type: Object},
 
 },
     {
         timestamps: true
-    });
+    },
+    { typeKey: '$type' }
+    );
 
 UserSchema.methods.encryptPassword = async password => {
     const salt = await bcryptj.genSalt(10);
@@ -39,6 +43,11 @@ UserSchema.methods.encryptPassword = async password => {
 UserSchema.methods.matchPassword = async function(password) {
     return await bcryptj.compare(password, this.password)
 }
+
+UserSchema.virtual('uniqueId')
+    .get(function () {
+        return this.filename.replace(path.extname(this.filename), '')
+    })
 
 UserSchema.plugin(mongoosePaginate);
 
