@@ -289,40 +289,40 @@ userCtrl.editPerfil = async (req, res) => {
      
     
 }
-userCtrl.editPic = async (req, res) => {
-    const imgUrl = randomNumber();
-    const imageTempPath = req.file.path;
-    const ext = path.extname(req.file.originalname).toLowerCase();
-    const targetPath = path.resolve(`src/public/uploads/${imgUrl}${ext}`)
+// userCtrl.editPic = async (req, res) => {
+//     const imgUrl = randomNumber();
+//     const imageTempPath = req.file.path;
+//     const ext = path.extname(req.file.originalname).toLowerCase();
+//     const targetPath = path.resolve(`src/public/uploads/${imgUrl}${ext}`)
 
 
 
-    if (ext === '.png' || ext === '.jpeg' ||ext === '.jpg' || ext === '.gif' ){
-        await fs.rename(imageTempPath, targetPath);
-        // const newImg = {
-        //     filename: imgUrl + ext
-        // }
-        const newImg = imgUrl+ext
-        console.log('aca')
-        const userpic = JSON.stringify(newImg);
-        const imageSaved = await User.findByIdAndUpdate(req.user.id,{$set:{filename:userpic}})
-        console.log(userpic)
-        console.log('tipo ')
-        // await User.findByIdAndUpdate(req.user.id,{$addToSet:{ filename:newImg}})
-        console.log(newImg)
-    } else {
-        await fs.unlink(imageTempPath);
-        res.status(500).json({error: 'Solo imagenes son admitidas'});
-    }
+//     if (ext === '.png' || ext === '.jpeg' ||ext === '.jpg' || ext === '.gif' ){
+//         await fs.rename(imageTempPath, targetPath);
+//         // const newImg = {
+//         //     filename: imgUrl + ext
+//         // }
+//         const newImg = imgUrl+ext
+//         console.log('aca')
+//         const userpic = JSON.stringify(newImg);
+//         const imageSaved = await User.findByIdAndUpdate(req.user.id,{$set:{filename:userpic}})
+//         console.log(userpic)
+//         console.log('tipo ')
+//         // await User.findByIdAndUpdate(req.user.id,{$addToSet:{ filename:newImg}})
+//         console.log(newImg)
+//     } else {
+//         await fs.unlink(imageTempPath);
+//         res.status(500).json({error: 'Solo imagenes son admitidas'});
+//     }
     
 
-    console.log(imgUrl)
+//     console.log(imgUrl)
 
-    const user = await User.findById(req.user.id)
-    res.render('./users/perfil-user-edit', {user})
+//     const user = await User.findById(req.user.id)
+//     res.render('./users/perfil-user-edit', {user})
      
     
-}
+// }
 
 
 userCtrl.expeTrabajo = async (req, res) => {
