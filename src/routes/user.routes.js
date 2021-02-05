@@ -2,7 +2,7 @@
 const { Router } = require('express');
 const app = require('../server')
 const router = Router();
-const multer = require('multer');
+// const multer = require('multer');
 const passport = require('passport');
 //Controladores
 const { renderPerfilUser,

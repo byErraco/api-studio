@@ -12,7 +12,7 @@ const passport = require('passport');
 
 const { application } = require('express');
 const flash = require('connect-flash')
-const multer = require('multer');
+// const multer = require('multer');
 const  fs  = require('fs-extra');
 
 
@@ -299,9 +299,10 @@ userCtrl.editPic = async (req, res) => {
 
     if (ext === '.png' || ext === '.jpeg' ||ext === '.jpg' || ext === '.gif' ){
         await fs.rename(imageTempPath, targetPath);
-        const newImg = {
-            filename: imgUrl + ext
-        }
+        // const newImg = {
+        //     filename: imgUrl + ext
+        // }
+        const newImg = imgUrl+ext
         console.log('aca')
         const userpic = JSON.stringify(newImg);
         const imageSaved = await User.findByIdAndUpdate(req.user.id,{$set:{filename:userpic}})
