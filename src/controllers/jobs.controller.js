@@ -116,9 +116,10 @@ jobsCtrl.renderAnunciarTrabajo = async (req, res) => {
 
 //Vista de Creacion de formulario de anuncio de trabajo
 jobsCtrl.crearAnuncioTrabajo = async (req, res) => {
-    const { titulo_trabajo, tipo_trabajo, ubicacion, salario, cat_trabajo, etiqueta, url, descripcion } = req.body;
-    const { id, email } = req.user;
-    const newJobs = new Jobs({ id_user: id, titulo_trabajo, email, tipo_trabajo, ubicacion, salario, cat_trabajo, etiqueta, url, descripcion });
+    const { titulo_trabajo, tipo_trabajo, ubicacion, salario, cat_trabajo, etiqueta, url, descripcion,resp_,resp_1,resp_2,resp_3 } = req.body;
+    const { id, email, filename,skill_,skill_1,skill_2,skill_3 } = req.user;
+    const newJobs = new Jobs({ id_user: id, titulo_trabajo, email, tipo_trabajo, ubicacion, salario, cat_trabajo, etiqueta, url, descripcion,
+        perfil_img:filename,resp_,resp_1,resp_2,resp_3,skill_:skill_,skill_1:skill_1,skill_2:skill_2,skill_3:skill_3 });
     newJobs.id_user = req.user.id;
     await newJobs.save();
     req.flash('success_msg', 'Anuncio Publicado Correctamente')
@@ -132,6 +133,7 @@ jobsCtrl.renderEditarAnuncio = async (req, res) => {
         if (detailsJobs.id_user === req.user.id) {
             const empresa = req.user.tipo_cuenta;
             const id_usuario = detailsJobs.id_user;
+            const img_profile = detailsJobs.profile_img
             const userCreador = await Users.findById(id_usuario);
             res.render('./jobs/detalles-trabajo', { detailsJobs, empresa, userCreador })
         }

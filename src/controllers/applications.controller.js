@@ -17,9 +17,13 @@ applicationsCtrl.newApplicantions = async (req, res) => {
                 console.log(appliJobs)
                 req.flash('error_msg', 'Ya te has postulado para este anuncio')
                 res.redirect('/lista-trabajos');
+                console.log(3)
             } else {
                 const { id_jobs, id_applicant, name_applicant, email_applicant, phone_applicant, message } = req.body;
-                const newApplicant = new Applications({ id_jobs, id_applicant, name_applicant, email_applicant, phone_applicant, message });
+                const profile_img = await User.findOne({profile_img: req.user.filename});
+                console.log(profile_img)
+                console.log('fotofoto')
+                const newApplicant = new Applications({ id_jobs, id_applicant, name_applicant, email_applicant, phone_applicant, message,profile_img:req.user.filename });
                 await newApplicant.save();
                 //req.flash('success_msg', 'Solicitud Enviada')
                 res.redirect('/')

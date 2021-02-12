@@ -10,7 +10,12 @@ const JobsSchema = new Schema({
     cat_trabajo: {type: String, required: true},
     etiqueta: { type: String },
     url: {type: String},
-    descripcion: {type: String, required: true}
+    descripcion: {type: String, required: true},
+    perfil_img: {type: String},
+    resp_: {type: String},
+    resp_1: {type: String},
+    resp_2: {type: String},
+    resp_3: {type: String},
 },
     {
         timestamps: true

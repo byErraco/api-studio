@@ -6,7 +6,8 @@ const ApplicationsSchema = new Schema({
     name_applicant: {type: String, required: true},
     email_applicant: {type: String, required: true},
     phone_applicant: {type: String, required: true},
-    message: {type: String, required: true}
+    message: {type: String, required: true},
+    profile_img:{type: String}
     },
     {
         timestamps: true

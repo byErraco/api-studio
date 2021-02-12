@@ -21,7 +21,7 @@ const { isAuthenticated } = require('../helpers/auth')
 
 //Creacion de Anuncio
 router.get('/anunciar-trabajo', isAuthenticated, renderAnunciarTrabajo);
-router.post('/anuncio-trabajo/nuevo', isAuthenticated, crearAnuncioTrabajo)
+router.post('/anuncio-trabajo/nuevo', isAuthenticated, crearAnuncioTrabajo);
 
 //Editar Anuncio
 router.get('/anunciar-trabajo/:id', isAuthenticated, renderEditarAnuncio);
@@ -34,7 +34,7 @@ router.put('/anunciar-trabajo/edit/:id', isAuthenticated, actualizarAnuncio);
 //Lista de Trabajos
 router.get('/lista-trabajos/:page', renderListaTrabajos);
 //Lista de Trabajos con filtros
-router.post('/lista-trabajos/:page', filtrosTrabajos)
+router.post('/lista-trabajos/:page', filtrosTrabajos);
 
 //Lista de Trabajos por Categoria
 router.get('/lista-trabajos/categoria/:id', renderListaTrabajosCategorias);

@@ -12,8 +12,8 @@ const passport = require('passport');
 
 const { application } = require('express');
 const flash = require('connect-flash')
-// const multer = require('multer');
-// const  fs  = require('fs-extra');
+const multer = require('multer');
+const  fs  = require('fs-extra');
 
 
 //Vista de sección de elección
@@ -120,11 +120,13 @@ userCtrl.login = (req,res,next) => {
                         console.log("FUNCIONA")
                     } else {
                         if (user.isNewUser && user.tipo_cuenta == 'Empresa'){
-                            res.redirect('/user/edit-perfil')
+                            res.redirect('/user/membresia')
                             console.log("FUNCIONA")
                         }
-                        res.redirect('/')
+                       
                     }
+                    
+
                 })
 
             })
@@ -281,48 +283,58 @@ userCtrl.renderEditPerfil = async (req, res) => {
 //Actualizar Perfil de Usuario
 userCtrl.editPerfil = async (req, res) => {
     console.log(req.body)
-    const  {cargo,direccion,salario,acerca,pais,tipoempresa,userfacebook,usertwitter,usergoogle,userlinkedin} = req.body
+    const  {cargo,direccion,salario,acerca,pais,tipoempresa,userfacebook,usertwitter,usergoogle,userlinkedin,skill_,skill_1,skill_2,skill_3} = req.body
 
-    await User.findByIdAndUpdate(req.user.id,{$set:{cargo:cargo,direccion:direccion,salario:salario,acerca:acerca,pais:pais,tipoempresa:tipoempresa,userfacebook:userfacebook,usertwitter:usertwitter,usergoogle:usergoogle,userlinkedin:userlinkedin}})
+    await User.findByIdAndUpdate(req.user.id,{$set:{cargo:cargo,direccion:direccion,salario:salario,acerca:acerca,pais:pais,
+        tipoempresa:tipoempresa,userfacebook:userfacebook,usertwitter:usertwitter,usergoogle:usergoogle,userlinkedin:userlinkedin,
+        skill_:skill_,skill_1:skill_1,skill_2:skill_2,skill_3:skill_3}})
     const user = await User.findById(req.user.id)
     res.render('./users/perfil-user-edit', {user})
      
     
 }
-// userCtrl.editPic = async (req, res) => {
-//     const imgUrl = randomNumber();
-//     const imageTempPath = req.file.path;
-//     const ext = path.extname(req.file.originalname).toLowerCase();
-//     const targetPath = path.resolve(`src/public/uploads/${imgUrl}${ext}`)
+userCtrl.editPic = async (req, res) => {
+    const imgUrl = randomNumber();
+    const imageTempPath = req.file.path;
+    const ext = path.extname(req.file.originalname).toLowerCase();
+    const targetPath = path.resolve(`src/public/uploads/${imgUrl}${ext}`)
 
 
 
-//     if (ext === '.png' || ext === '.jpeg' ||ext === '.jpg' || ext === '.gif' ){
-//         await fs.rename(imageTempPath, targetPath);
-//         // const newImg = {
-//         //     filename: imgUrl + ext
-//         // }
-//         const newImg = imgUrl+ext
-//         console.log('aca')
-//         const userpic = JSON.stringify(newImg);
-//         const imageSaved = await User.findByIdAndUpdate(req.user.id,{$set:{filename:userpic}})
-//         console.log(userpic)
-//         console.log('tipo ')
-//         // await User.findByIdAndUpdate(req.user.id,{$addToSet:{ filename:newImg}})
-//         console.log(newImg)
-//     } else {
-//         await fs.unlink(imageTempPath);
-//         res.status(500).json({error: 'Solo imagenes son admitidas'});
-//     }
+    if (ext === '.png' || ext === '.jpeg' ||ext === '.jpg' || ext === '.gif' ){
+        await fs.rename(imageTempPath, targetPath);
+        // const newImg = {
+        //     filename: imgUrl + ext
+        // }
+        const newImg = imgUrl+ext
+        console.log(typeof(newImg))
+        console.log(newImg +'ohshit')
+
+        //const userpic = JSON.stringify(newImg);
+        console.log(typeof(userpic))
+        //console.log(userpic)
+        
+        const imageSaved = await User.findByIdAndUpdate(req.user.id,{$set:{filename:newImg}})
+       // console.log(typeof(userpic))
+    
+        // await User.findByIdAndUpdate(req.user.id,{$addToSet:{ filename:newImg}})
+        console.log(typeof(newImg))
+        console.log(newImg +'ohshit')
+        console.log(imageSaved+'ohshit2')
+        console.log(typeof(imageSaved))
+    } else {
+        await fs.unlink(imageTempPath);
+        res.status(500).json({error: 'Solo imagenes son admitidas'});
+    }
     
 
-//     console.log(imgUrl)
+    console.log(imgUrl)
 
-//     const user = await User.findById(req.user.id)
-//     res.render('./users/perfil-user-edit', {user})
+    const user = await User.findById(req.user.id)
+    res.render('./users/perfil-user-edit', {user})
      
     
-// }
+}
 
 
 userCtrl.expeTrabajo = async (req, res) => {

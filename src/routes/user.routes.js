@@ -32,7 +32,7 @@ router.get('/perfil-user/:id', renderPerfilUser);
 router.get('/user/edit-perfil', isAuthenticated, renderEditPerfil);
 
 router.post('/edit-perfil', editPerfil);
-// router.post('/user/edit_pic', editPic);
+router.post('/user/edit_pic', editPic);
 
 
 router.post('/user/expe_trabajos', expeTrabajo );

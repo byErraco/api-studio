@@ -22,22 +22,24 @@
         <div class="col-lg-8">
           <div class="layout-details">
             <article class="company-light company-light_1">
-              <figure class="company-light-logo"><img class="company-light-logo-image" src="images/company-1-45x45.png"
-                  alt="" width="45" height="45" />
-              </figure>
+              
               <div class="company-light-main">
                 <% if (userCreador.nombre_empresa){ %>
+                  
                   <h5 class="company-light-title">
                     <%= userCreador.nombre_empresa %>
                   </h5>
                   <% } else { %>
                     <h5 class="company-light-title">
-                      <%= userCreador.username %>
+                      <%= userCreador.username %>  
                     </h5>
                     <% } %>
                       <div class="company-light-info">
                         <% if (detailsJobs){ %>
                           <div class="row row-15 row-bordered">
+                            <figure class="company-light-logo"><img class="company-light-logo-image" src="/uploads/<%= detailsJobs.perfil_img %>"
+                              alt="#" width="250" height="250" />
+                            </figure>
                             <div class="col-sm-6">
                               <ul class="list list-xs">
                                 <li>
@@ -82,15 +84,33 @@
           <% } %>
             <div class="row row-30">
               <div class="col-md-6">
-                <h4>Job Responsibilities</h4>
+                <h4> Responsabilidades del trabajo </h4>
                 <ul class="list-marked-3">
-                  <li>Increasing our social media following to 1M+ within the next 18 months</li>
-                  <li>Coming up with new, impactful SMM ideas</li>
-                  <li>Snapping beautiful photos for Instagram, Facebook and Snapchat</li>
-                  <li>Travelling to events, running demos and stands</li>
+                  <li><%= detailsJobs.resp_ %></li>
+                  <li><%= detailsJobs.resp_1 %></li>
+                  <li><%= detailsJobs.resp_2 %></li>
+                  <li><%= detailsJobs.resp_3 %></li>
                 </ul>
               </div>
-              <div class="col-md-6">
+              <% if (userCreador.nombre_empresa){ %>
+                  
+                <h5 class="company-light-title">
+                  <%= userCreador.nombre_empresa %>
+                </h5>
+                <% } else { %>
+                  <div class="col-md-6">
+                <h4>¿Por qué trabajar con nosotros?</h4>
+                <ul class="list-marked-3">
+                  <li><%= userCreador.skill_ %></li>
+                  <li><%= userCreador.skill_1 %></li>
+                  <li><%= userCreador.skill_2 %></li>
+                  <li><%= userCreador.skill_3 %></li>
+                </ul>
+              </div>
+                  <% } %>
+
+
+              <!-- <div class="col-md-6">
                 <h4>Why Work With us</h4>
                 <ul class="list-marked-3">
                   <li>Growth opportunity in one of the USA’s and Europe's fastest growing marketing agencies</li>
@@ -98,7 +118,8 @@
                   <li>You’ll have a chance to work with industry leaders and renowned advertising experts</li>
                   <li>Free healthcare and entertainment options</li>
                 </ul>
-              </div>
+              </div> -->
+
             </div>
             <div class="layout-1">
               <div class="layout-1-inner">
@@ -127,10 +148,12 @@
                   <table class="table-job-listing table-responsive">
                     <tr>
                       <td class="table-job-listing-main">
+                        
                         <!-- Company Minimal-->
                         <article class="company-minimal">
-                          <figure class="company-minimal-figure"><img class="company-minimal-image"
-                              src="images/company-2-38x49.png" alt="" width="38" height="49" />
+                          <figure class="company-minimal-figure">
+                            <img class="company-minimal-image"
+                              src="/uploads/<%= applications.profile_img %>" alt="" width="250" height="250" />
                           </figure>
                           <div class="company-minimal-main">
                             <h5 class="company-minimal-name"><a href="/perfil-user/<%= applications.id_applicant %>">
@@ -140,6 +163,7 @@
                             </p> || Phone:<p>
                               <%= applications.phone_applicant %>
                             </p>
+                            
                             <hr>
                             <p>
                               <%= applications.message %>

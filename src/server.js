@@ -3,14 +3,14 @@ const express = require('express');
 // const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access')
 // const exphbs = require('express-handlebars');
 const path = require('path');
-// const fs = require('fs-extra');
+const fs = require('fs-extra');
 const methodOverride = require('method-override')
 const morgan = require('morgan')
 const flash = require('connect-flash')
 const session = require('express-session')
 const passport = require('passport')
 const moment = require('moment')
-// const multer = require('multer');
+const multer = require('multer');
 
 //Inicializacion
 const app = express();
@@ -36,11 +36,10 @@ app.use(session ({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
-// app.use(multer({
-//   dest: path.join(__dirname,'./public/uploads/temp')
-// }).single('userpic'))
+app.use(multer({
+  dest: path.join(__dirname,'./public/uploads/temp')
+}).single('userpic'))
 
-app.use( express.static( "public" ) );
 
 
 //Variablles Globales
