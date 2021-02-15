@@ -13939,6 +13939,13 @@ position: absolute;
 	background-size: cover;
 	background-position: bottom;
 }
+.sucess-pay{background-image: url("../images/rebg1.svg");
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: bottom;
+	min-height: 100vh;
+	z-index: -1;
+}
 .container-editempresa{
 	min-height: 100vh; 
 	position: relative;

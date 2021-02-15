@@ -14,6 +14,7 @@ const { application } = require('express');
 const flash = require('connect-flash')
 const multer = require('multer');
 const  fs  = require('fs-extra');
+const paypal = require('paypal-rest-sdk')
 
 
 //Vista de sección de elección
@@ -31,6 +32,12 @@ userCtrl.renderSignupFormE = (req, res) => {
 userCtrl.renderMembership = (req, res) => {
     res.render('users/membresia')
 }
+userCtrl.renderMembershipSucess = (req, res) => {
+    res.render('users/sucess')
+}
+
+
+
 //Creacion de Usuarios
 userCtrl.signup = async (req, res) => {
     let errors = [];
@@ -299,6 +306,11 @@ userCtrl.editPic = async (req, res) => {
     const ext = path.extname(req.file.originalname).toLowerCase();
     const targetPath = path.resolve(`src/public/uploads/${imgUrl}${ext}`)
 
+    const cvUrl = randomNumber();
+    const cvTempPath = req.file.path;
+    const extt = path.extname(req.file.originalname).toLowerCase();
+    const targetPath_ = path.resolve(`src/public/uploads/${cvUrl}${extt}`)
+
 
 
     if (ext === '.png' || ext === '.jpeg' ||ext === '.jpg' || ext === '.gif' ){
@@ -322,18 +334,31 @@ userCtrl.editPic = async (req, res) => {
         console.log(newImg +'ohshit')
         console.log(imageSaved+'ohshit2')
         console.log(typeof(imageSaved))
+    } else if(extt === '.pdf') {
+        // await fs.unlink(imageTempPath);
+        // res.status(500).json({error: 'Solo imagenes son admitidas'});
+
+            await fs.rename(cvTempPath, targetPath_);
+           
+            const newCv = cvUrl+extt
+         
+    
+          
+            
+            const cvSaved = await User.findByIdAndUpdate(req.user.id,{$set:{cvfilename:newCv}})
+         
+            console.log(typeof(newCv))
+            console.log(newCv )
+            console.log(cvSaved)
+            console.log(typeof(cvSaved))
+            console.log('aaaaaaa')
+       
     } else {
-        await fs.unlink(imageTempPath);
+         await fs.unlink(imageTempPath);
         res.status(500).json({error: 'Solo imagenes son admitidas'});
     }
-    
-
-    console.log(imgUrl)
-
     const user = await User.findById(req.user.id)
-    res.render('./users/perfil-user-edit', {user})
-     
-    
+    res.render('./users/perfil-user-edit', {user})   
 }
 
 
@@ -358,5 +383,56 @@ userCtrl.expeEstudios = async  (req, res) => {
     res.render('./users/perfil-user-edit', {user})
 }
 
+
+userCtrl.descargarCv = async (req,res) => {
+    const  idUser = await User.findByIdAndUpdate(req.user.id)
+    console.log(idUser)
+}
+
+
+userCtrl.paymentMembership = async(req, res) => {
+    const create_payment_json = {
+        "intent": "sale",
+        "payer": {
+            "payment_method": "paypal"
+        },
+        "redirect_urls": {
+            "return_url": "http://localhost:4000/user/sucess",
+            "cancel_url": "http://localhost:4000/cancel"
+        },
+        "transactions": [{
+            "item_list": {
+                "items": [{
+                    "name": "Red Sox Hat",
+                    "sku": "001",
+                    "price": "25.00",
+                    "currency": "USD",
+                    "quantity": 1
+                }]
+            },
+            "amount": {
+                "currency": "USD",
+                "total": "25.00"
+            },
+            "description": "Hat for the best team ever"
+        }]
+    };
+    
+    paypal.payment.create(create_payment_json, function (error, payment) {
+      if (error) {
+          throw error;
+      } else {
+          for(let i = 0;i < payment.links.length;i++){
+            if(payment.links[i].rel === 'approval_url'){
+              res.redirect(payment.links[i].href);
+            }
+          }
+      }
+    });
+}
+
+
 //Exportando Modulo
 module.exports = userCtrl;
+
+

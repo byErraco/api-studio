@@ -40,13 +40,14 @@
                 <div class="profile-minimal-inner">
                   <div class="profile-minimal-main-outer">
                     <div class="profile-minimal-main"><img class="profile-minimal-image"
-                        src="images/candidates-1-101x96.jpg" alt="" width="101" height="96" />
+                        src="/uploads/<%= applicant.filename %>" alt="" width="101" height="96" />
                       <div class="profile-minimal-main-info">
                         <h5 class="profile-minimal-name"><a href="/perfil-user/<%= applicant.id%>">
                             <%= applicant.username%>
+                            
                           </a></h5>
-                        <p>$50000 p.a. minimum</p>
-                        <p class="profile-minimal-position">Junior Web Designer</p>
+                        <p><%= applicant.salario%> $</p>
+                        <p class="profile-minimal-position"><%= applicant.cargo%></p>
                       </div>
                     </div>
                   </div>

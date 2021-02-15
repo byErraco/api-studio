@@ -30,6 +30,7 @@ const UserSchema = new Schema({
     usergoogle: {type: String},
     userlinkedin: {type: String},
     filename:{type:String},
+    cvfilename:{type:String},
 
 },
     {

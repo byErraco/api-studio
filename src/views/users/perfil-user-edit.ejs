@@ -171,6 +171,8 @@
                                   
                                 </label>
                                 <a href="#" id="button" class="button">Cambiar foto</a>
+                                <a href="#" id="button_" class="button">Subir CV</a>
+                                <!-- <a class="button button-lg button-primary-outline" id="button" class="button" href="#">Subir CV</a> -->
                                 <label> Nombre y Apellido
                                   <input type="text" class="form-control" placeholder="" value="<%= user.cargo %>"
                                     name="username">
@@ -232,7 +234,43 @@
                                 </form> 
                               </div>                            
                             </div>
-                              
+
+                             <div class="bg-modal" >
+                              <div class="modal-content">
+                                <div class="close">+</div>
+                                <form action="/user/edit_pic" method="POST" enctype="multipart/form-data" >
+                                  <article class="profile-user">
+                                    <label class="btn-file perfil"> <i class="fa fa-camera"></i> Agregar foto de perfil
+                                      <input type="file" style="display: none;" value="" name="userpic">
+                                    </label>  
+                                  
+                                    <button class="button button-block button-primary" id='btn'
+                                                            type="submit">Guardar
+                                                            </button>
+                                    </article>
+                                
+                                  
+                                </form> 
+                              </div>                            
+                            </div>
+                            <div class="bg-modal" >
+                              <div class="modal-content">
+                                <div class="close">+</div>
+                                <form action="/user/edit_pic" method="POST" enctype="multipart/form-data" >
+                                  <article class="profile-user">
+                                    <label class="btn-file perfil"> <i class="fa fa-camera"></i> Agregar CV
+                                      <input type="file" style="display: none;" value="" name="userpic">
+                                    </label>  
+                                  
+                                    <button class="button button-block button-primary" id='btn'
+                                                            type="submit">Guardar
+                                                            </button>
+                                    </article>
+                                
+                                  
+                                </form> 
+                              </div>                            
+                            </div>
                              
                             
                             <div class="bg-modal" >
@@ -740,7 +778,14 @@ function validateForm2(){
         var el2 = document.getElementById('button2')
   if(el2){
         el2.addEventListener("click", function() {
-        document.querySelector('.bg-modal2').style.display = "flex";
+        document.querySelector('.bg-modal').style.display = "flex";
+        console.log('sii')
+      });
+      }
+      var el3 = document.getElementById('button_')
+  if(el3){
+        el3para.addEventListener("click", function() {
+        document.querySelector('.bg-modal').style.display = "flex";
         console.log('sii')
       });
       }
