@@ -6,7 +6,8 @@ const path = require('path');
 
 //Importando modelo de Usuarios
 const User = require('../models/Users')
-
+const Admin = require('../models/Admins')
+const Jobs = require('../models/Jobs')
 //Importando modulo de autenticacon
 const passport = require('passport');
 
@@ -14,7 +15,18 @@ const { application } = require('express');
 const flash = require('connect-flash')
 const multer = require('multer');
 const  fs  = require('fs-extra');
-const paypal = require('paypal-rest-sdk')
+const paypal = require('paypal-rest-sdk');
+const Users = require('../models/Users');
+const cloudinary = require('cloudinary')
+
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET
+})
+
+
+
 
 
 //Vista de sección de elección
@@ -34,6 +46,9 @@ userCtrl.renderMembership = (req, res) => {
 }
 userCtrl.renderMembershipSucess = (req, res) => {
     res.render('users/sucess')
+}
+userCtrl.renderSignupFormAdmin = (req, res) => {
+    res.render('signup-admin')
 }
 
 
@@ -92,13 +107,83 @@ userCtrl.signup = async (req, res) => {
         }
     }
     console.log(req.body);
-    res.send('received');
+    
     console.log('prueba')
+};
+
+
+
+
+
+
+userCtrl.signupAdmin = async (req, res) => {
+    let errors = [];
+    
+    failureFlash: true;
+    const { username, email, password, password_confirm } = req.body;
+    //tipo_cuenta='Empresa';
+    const tipo_cuenta='Admin';
+    const pais='Admin'
+    const ciudad='Admin'
+
+    console.log(username)
+    //console.log(tipo_cuenta)
+    if (password != password_confirm) {
+       // req.flash('message','las contrasenas no coinciden');
+       // res.redirect('/user/signup');
+        console.log('ERROR CONTRASENA NO ES IGUAL')
+        errors.push({ text: "Las Contraseñas no coinciden!!!." });
+    }
+    if (password.length < 4) {
+        errors.push({ text: "La Contraseña debe tener al menos 4 digitos !!!!!!!!." });
+    }
+    if (errors.length > 0) {
+        //  res.redirect('/user/signup');
+        //const alert = errors.array()
+         console.log(errors);
+         ///console.log(alert)
+         console.log('errores')
+         res.render('/administracion/signup_', {
+           errors
+        });
+    }
+
+    else {
+        // Si el correo ya existe
+        const emailAdmin = await Users.findOne({ email: email });
+        if (emailAdmin || errors.length>0) {
+            //req.flash("error_msg", "El Email se encuentra en uso.");
+            //res.redirect('/');
+            errors.push({ text: "El email ya se encuentra en uso." });
+            console.log(errors);
+            console.log("ERROR EMAIL EN USO")
+            res.render('signup-admin', {
+                errors
+             });
+        } else {
+            // Guardo el usuario
+            const newAdmin = new Users({ username, email, password, tipo_cuenta,pais, ciudad});
+            
+            newAdmin.password = await newAdmin.encryptPassword(password);
+            await newAdmin.save();
+            
+            req.flash('success_msg', 'Usuario registrado exitosamente.')
+            res.redirect('/administracion/login');
+            
+            console.log(newAdmin)
+        }
+    }
+    console.log(req.body);
+  
+    console.log('TEST')
 };
 
 //Vista de formulario de Login
 userCtrl.renderLoginForm =  (req, res) => {
     res.render('users/signin')
+}
+userCtrl.renderLoginFormAdmin =  (req, res) => {
+    res.render('signin-admin')
 }
 var sum = 1;
 //Inicio de Sesion 
@@ -125,13 +210,37 @@ userCtrl.login = (req,res,next) => {
                     if (user.isNewUser && user.tipo_cuenta == 'Freelancer'){
                         res.redirect('/user/membresia')
                         console.log("FUNCIONA")
-                    } else {
-                        if (user.isNewUser && user.tipo_cuenta == 'Empresa'){
+                    } else if (user.isNewUser && user.tipo_cuenta == 'Empresa') {
+                       
                             res.redirect('/user/membresia')
                             console.log("FUNCIONA")
-                        }
+                        
                        
+                    } else {
+                        res.redirect('/administracion/panel')
+                        console.log('admin')
                     }
+                    
+
+                })
+
+            })
+        }
+    })(req,res,next)
+}
+userCtrl.loginAdmin = (req,res,next) => {
+    passport.authenticate("local",(err,user,info)=>{
+        if (err) throw err;
+        if (!user) res.send("No existe usuario")
+        else {
+            req.logIn(user, (err) => {
+                
+                if (err) throw err;
+                console.log(user)
+                Admin.findOne({'email': user.email},async(err,user)=>{
+                    const users = await User.findById(req.params.id)
+                    
+                    res.redirect('administracion/panel' ,{ users })
                     
 
                 })
@@ -284,6 +393,9 @@ userCtrl.renderPerfilUser = async (req, res) => {
 //Vista de Formulario de editar perfil
 userCtrl.renderEditPerfil = async (req, res) => {
     const user = req.user;
+
+
+    
     res.render('./users/perfil-user-edit', {user})
 }
 
@@ -300,6 +412,43 @@ userCtrl.editPerfil = async (req, res) => {
      
     
 }
+
+userCtrl.renderEditJob = async (req, res) => {
+    const user = req.user;
+    const jobs = await Jobs.find({id_user: user._id});
+    //const userCreador = await Users.findById(detailsJobs.id_user);
+
+ console.log('trabajos')
+    console.log(user._id)
+    console.log(jobs)
+   
+   
+
+
+
+    res.render('./users/edit-jobs', {user,jobs})
+}
+
+userCtrl.eliminarTrabajo = async (req,res)=> {
+    const {id} =req.params;
+    console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
+    console.log(id);
+
+    try {
+        const userDelete = await Jobs.findByIdAndDelete(id)
+        console.log('exito')
+        res.redirect('/user/edit-jobs')
+        
+    } catch (error) {
+        console.log(error);
+        console.log('error')
+    }
+
+
+}
+
+
+
 userCtrl.editPic = async (req, res) => {
     const imgUrl = randomNumber();
     const imageTempPath = req.file.path;
@@ -311,52 +460,45 @@ userCtrl.editPic = async (req, res) => {
     const extt = path.extname(req.file.originalname).toLowerCase();
     const targetPath_ = path.resolve(`src/public/uploads/${cvUrl}${extt}`)
 
-
-
     if (ext === '.png' || ext === '.jpeg' ||ext === '.jpg' || ext === '.gif' ){
         await fs.rename(imageTempPath, targetPath);
-        // const newImg = {
-        //     filename: imgUrl + ext
-        // }
-        const newImg = imgUrl+ext
-        console.log(typeof(newImg))
-        console.log(newImg +'ohshit')
 
-        //const userpic = JSON.stringify(newImg);
-        console.log(typeof(userpic))
-        //console.log(userpic)
-        
-        const imageSaved = await User.findByIdAndUpdate(req.user.id,{$set:{filename:newImg}})
-       // console.log(typeof(userpic))
-    
-        // await User.findByIdAndUpdate(req.user.id,{$addToSet:{ filename:newImg}})
-        console.log(typeof(newImg))
-        console.log(newImg +'ohshit')
-        console.log(imageSaved+'ohshit2')
-        console.log(typeof(imageSaved))
+        const newImg = imgUrl+ext
+
+      try {
+        const result = await cloudinary.v2.uploader.upload(`src/public/uploads/${newImg}`);
+        console.log(result)
+        console.log(result.url)
+        const imageSaved = await User.findByIdAndUpdate(req.user.id,{$set:{filename:result.url}})
+
+        await fs.unlink(req.file.path)
+
+      } catch (error) {
+          console.log(error)
+      } 
+      
+       // const imageSaved = await User.findByIdAndUpdate(req.user.id,{$set:{filename:newImg}})
+       // console.log(typeof(imageSaved))
+        // console.log(typeof(newImg))
+        // console.log(newImg +'ohshit')
+        // console.log(imageSaved+'ohshit2')
+        // console.log(typeof(imageSaved))
     } else if(extt === '.pdf') {
-        // await fs.unlink(imageTempPath);
-        // res.status(500).json({error: 'Solo imagenes son admitidas'});
 
             await fs.rename(cvTempPath, targetPath_);
-           
             const newCv = cvUrl+extt
-         
-    
-          
-            
             const cvSaved = await User.findByIdAndUpdate(req.user.id,{$set:{cvfilename:newCv}})
          
             console.log(typeof(newCv))
             console.log(newCv )
             console.log(cvSaved)
             console.log(typeof(cvSaved))
-            console.log('aaaaaaa')
        
     } else {
          await fs.unlink(imageTempPath);
         res.status(500).json({error: 'Solo imagenes son admitidas'});
     }
+    
     const user = await User.findById(req.user.id)
     res.render('./users/perfil-user-edit', {user})   
 }
@@ -391,6 +533,9 @@ userCtrl.descargarCv = async (req,res) => {
 
 
 userCtrl.paymentMembership = async(req, res) => {
+    const user = await User.findById(req.user.id)
+    console.log(user+"sera este el usuario pago? xd")
+    
     const create_payment_json = {
         "intent": "sale",
         "payer": {
@@ -403,7 +548,7 @@ userCtrl.paymentMembership = async(req, res) => {
         "transactions": [{
             "item_list": {
                 "items": [{
-                    "name": "Red Sox Hat",
+                    "name": "Membresia ",
                     "sku": "001",
                     "price": "25.00",
                     "currency": "USD",
@@ -414,9 +559,10 @@ userCtrl.paymentMembership = async(req, res) => {
                 "currency": "USD",
                 "total": "25.00"
             },
-            "description": "Hat for the best team ever"
+            "description": "Subscripcion membresia"
         }]
     };
+    
     
     paypal.payment.create(create_payment_json, function (error, payment) {
       if (error) {
@@ -431,6 +577,81 @@ userCtrl.paymentMembership = async(req, res) => {
     });
 }
 
+
+
+
+userCtrl.renderListaCandidatosPanel = async (req, res) => {
+    if (req.query.buscar_free) {
+        if (req.user) {
+            const tipo_cuenta = req.user.tipo_cuenta;
+            const buscar_free = req.query.buscar_free;
+            const xPage = 6;
+            const page = req.params.page || 1;
+            const applicant = await User.find({ username: { $regex: '.*' + buscar_free + '.*', $options: 'i' }, tipo_cuenta: 'Freelancer' }, function (error, applicant) {
+                if (error) {
+                    console.log('error en el find')
+                }
+            })
+                .skip((xPage * page) - xPage).limit(xPage).exec((err, applicant) => {
+                    User.count({tipo_cuenta: 'Freelancer'}, (err, count) => {
+                        if (err) {
+                            console.log('error en el conteo')
+                        } else {
+                            res.render('administracion', { tipo_cuenta, applicant, current: page, pages: Math.ceil(count / xPage) })
+                        }
+                    })
+                })
+        } else {
+            const buscar_free = req.query.buscar_free;
+            const xPage = 6;
+            const page = req.params.page || 1;
+            const applicant = await User.find({ username: { $regex: '.*' + buscar_free + '.*', $options: 'i' }, tipo_cuenta: 'Freelancer' }, function (error, applicant) {
+                if (error) {
+                    console.log('error en el find')
+                }
+            })
+                .skip((xPage * page) - xPage).limit(xPage).exec((err, applicant) => {
+                    User.count({tipo_cuenta: 'Freelancer'}, (err, count) => {
+                        if (err) {
+                            console.log('error en el conteo')
+                        } else {
+                            res.render('administracion', { applicant, current: page, pages: Math.ceil(count / xPage) })
+                        }
+                    })
+                })
+        }
+    }
+    if (req.user) {
+        const tipo_cuenta = req.user.tipo_cuenta;
+        const xPage = 6;
+        const page = req.params.page || 1;
+        const applicant = await User.find({ tipo_cuenta: 'Freelancer' }).skip((xPage * page) - xPage).limit(xPage).exec((error, applicant) => {
+            User.count({tipo_cuenta: 'Freelancer'}, (error, count) => {
+                if (error) {
+                    console.log('error1')
+                } else {
+                    res.render('administracion', {
+                        tipo_cuenta, applicant, current: page, pages: Math.ceil(count / xPage)
+                    })
+                }
+            })
+        })
+    } else {
+        const xPage = 4;
+        const page = req.params.page || 1;
+        const applicant = await User.find({ tipo_cuenta: 'Freelancer' }).skip((xPage * page) - xPage).limit(xPage).exec((error, applicant) => {
+            User.count({tipo_cuenta: 'Freelancer'}, (error, count) => {
+                if (error) {
+                    console.log('error1')
+                } else {
+                    res.render('administracion', {
+                        applicant, current: page, pages: Math.ceil(count / xPage)
+                    })
+                }
+            })
+        })
+    }
+}
 
 //Exportando Modulo
 module.exports = userCtrl;

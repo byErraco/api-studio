@@ -10,6 +10,7 @@ const UserSchema = new Schema({
     password: {type: String, required: true},
     tipo_cuenta: {type: String, required: true},
     isNewUser:{type: Boolean,default: true},
+    isUser: {type: Boolean,default: true},
     ciudad: {type: String, required: true},
     pais: {type: String, required: true},
     acerca: {type: String},

@@ -1,9 +1,11 @@
-<%- include ('../partials/header'); %>
-  <div class="container-margin">
+
+<%- include ('./partials/header'); %>
+<% if (user.tipo_cuenta == 'Admin'){ %>
+<div class="container-margin">
     <section class="section breadcrumbs-custom">
       <div class="breadcrumbs-custom-main bg-image bg-primary">
         <div class="container">
-          <h3 class="breadcrumbs-custom-title">Buscador de Freelancers</h3>
+          <h3 class="breadcrumbs-custom-title">Panel de administracion</h3>
         </div>
       </div>
       <div class="breadcrumbs-custom-aside">
@@ -17,7 +19,7 @@
     </section>
     <section class="section section-md">
       <div class="container">
-        <form class="form-layout-search form-lg" method="GET" action="/candidatos/1">
+        <form class="form-layout-search form-lg" method="GET" action="/administracion/panel/candidatos/1">
           <div class="form-wrap form-wrap-icon">
             <input class="form-input" id="form-name" type="text" name="buscar_free" data-constraints="@Required">
             <label class="form-label" for="form-name"></label><span class="icon fl-bigmug-line-search74"></span>
@@ -40,7 +42,7 @@
                 <div class="profile-minimal-inner">
                   <div class="profile-minimal-main-outer">
                     <div class="profile-minimal-main"><img class="profile-minimal-image"
-                        src="<%= applicant.filename %>" alt="" width="101" height="96" />
+                        src="/uploads/<%= applicant.filename %>" alt="" width="101" height="96" />
                       <div class="profile-minimal-main-info">
                         <h5 class="profile-minimal-name"><a href="/perfil-user/<%= applicant.id%>">
                             <%= applicant.username%>
@@ -60,6 +62,13 @@
                     <a class="button button-primary" href="#" style="
                             border-radius: 10px 10px 10px 10px;
                             box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);">Contactar</a>
+                            <form action="/administracion/panel/eliminar/<%= applicant.id%>?_method=DELETE" method="POST">
+                        
+                              <input type="hidden" name="_method" value="DELETE">
+                              <button class="button button-primary" style="border-radius: 10px 10px 10px 10px; box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);"id="btSubmit" value="Submit" >
+                              <span class="icon mdi mdi-account"></span>
+                              Eliminar</button>
+                            </form>
                   </div>
                 </div>
               </article>
@@ -126,4 +135,38 @@
         </div>
     </section>
   </div>
-  <%- include('../partials/footer') %>
+
+
+ 
+
+  <% } else { %>
+
+    
+      <section class="section section-md bg-gray-100 text-center" style="min-height: 100vh;">
+        <div class="container">
+          <h3>Oh no!</h3>
+          <ul class="list-linked">
+            
+            
+            <li class="ll-item">
+              <div class="icon ll-item-icon">
+                <svg class="ll-item-icon-inner" version="1.2" baseProfile="tiny" viewbox="-1 -1 102 102">
+                  <circle cx="50" cy="50" r="50" fill="none" vector-effect="non-scaling-stroke"></circle>
+                </svg>
+                <img src="../images/apple-touch-icon.png" alt="" width="100">
+              </div>
+              <div class="ll-item-main">
+                <h5 class=""><a href="/">Entraste a una pagina que no debias! Vuelve al inicio!</a></h5>
+    
+              </div>
+            </li>
+          </ul>
+          <div class="ll-item-main pt-4"><a class="button button-sm button-primary-outline" href="/user/edit-perfil">Volver
+              </a></div>
+        </div>
+      </section>
+
+
+
+    <% }  %>
+<%- include('./partials/footer') %>

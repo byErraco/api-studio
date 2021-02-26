@@ -2,6 +2,7 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 
 const User = require('../models/Users');
+const Admin = require('../models/Admins');
 
 passport.use(new LocalStrategy({
     usernameField: 'email',
@@ -11,6 +12,7 @@ passport.use(new LocalStrategy({
     
         // Match email user
         const user = await User.findOne({email})
+        const admin = await Admin.findOne({email})
         console.log('ya busque el usuario')
         if (!user) {
             console.log('estoy en el primer if')
@@ -23,6 +25,7 @@ passport.use(new LocalStrategy({
             const match = await user.matchPassword(password);
             if (match){
                 console.log('estoy en el segundo if')
+                
                 return done(null, user)
             } else {
                 console.log('estoy el el segundo else')
@@ -31,6 +34,9 @@ passport.use(new LocalStrategy({
             }
         }
     }))
+
+
+
 
 passport.serializeUser((user, done) => {
     done(null, user.id);

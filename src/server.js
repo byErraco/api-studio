@@ -12,6 +12,7 @@ const passport = require('passport')
 const moment = require('moment')
 const multer = require('multer');
 const paypal = require('paypal-rest-sdk');
+const adminRouter = require('./routes/admin.router')
 
 //Inicializacion
 const app = express();
@@ -55,6 +56,7 @@ app.use(multer({
 }).single('usercv'))
 
 
+app.use('/admin',adminRouter)
 
 //Variablles Globales
 app.use((req, res, next) => {
@@ -73,6 +75,7 @@ app.use(require('./routes/blog.routes'));
 app.use(require('./routes/jobs.routes'));
 app.use(require('./routes/user.routes'));
 app.use(require('./routes/applications.routes'));
+// app.use(require('./routes/admin.router'))
 //app.use(require('./routes/emails.routes'));
 
 

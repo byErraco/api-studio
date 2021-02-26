@@ -166,7 +166,7 @@
                       
                               <div class="profile-light-main">
                                 <label class=" perfil">
-                                  <img class="profile-light-image" src="/uploads/<%= user.filename %>" alt="" width="169" height="169">
+                                  <img class="profile-light-image" src="<%= user.filename %>" alt="" width="169" height="169">
                                  
                                   
                                 </label>
@@ -560,7 +560,7 @@
     
             <div class="profile-light-main">
               <label class=" perfil">
-                <img class="profile-light-image" src="/uploads/<%= user.filename %>" alt="" width="169" height="169">
+                <img class="profile-light-image" src="<%= user.filename %>" alt="" width="169" height="169">
                
                 
               </label>
@@ -677,7 +677,12 @@
                                         type="submit" >Guardar
                                         </button>
           </div>
+          
+
         </div>
+        <a class="button button-primary" href="/user/edit-jobs" style="
+            border-radius: 10px 10px 10px 10px;
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);">Ver trabajos anunciados</a>
         
         
         

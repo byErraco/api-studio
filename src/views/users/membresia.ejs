@@ -1,8 +1,9 @@
 <%- include ('../partials/header'); %>
 <% if (user.tipo_cuenta == 'Freelancer'){ %>
-
+  <form action="/user/pay" method="POST">
   <section class="parallax-container section-md bg-primary bg-overlay-1" data-parallax-img="images/"><div class="material-parallax parallax"><img src="../images/membresia.svg" alt="" style="display: block; transform: translate3d(-50%, 145px, 0px) rotate(0.1deg);"></div>
     <div class="parallax-content" >
+      <form action="/user/pay" method="POST"></form>
       <div class="container" >
         <h3 class="text-center">PLANES DE MEMBRESÍAS</h3>
         <!-- Pricing Table Creative Group-->
@@ -27,7 +28,8 @@
               
             </div>
             
-            <a class="button button-primary-outline" href="/user/edit-perfil">¡EMPIEZA AHORA!</a>
+            <input type="submit" value="¡EMPIEZA AHORA!" class="button button-primary button-shadow-1">
+                <a class="button button-primary button-shadow-1"  href="/user/edit-perfil" >Llevame a editar mi perfil</a>
           </article>
          
           <article class="pt pt-creative" >
@@ -50,12 +52,15 @@
                 <li>Comisión - 5% (Min. $ 2.00) </li>
               </ul>
               
-            </div><a class="button button-primary-outline" href="/user/edit-perfil">¡EMPIEZA AHORA!</a>
+            </div>
+            <input type="submit" value="¡EMPIEZA AHORA!" class="button button-primary button-shadow-1">
+                <a class="button button-primary button-shadow-1"  href="/user/edit-perfil" >Llevame a editar mi perfil</a>
           </article>
         </div>
       </div>
     </div>
   </section>
+</form>
 
   <% } else { %>
 
@@ -88,7 +93,7 @@
                   </ul>
                 </div>
                 
-                <input type="submit" value="¡EMPIEZA AHORA!" class="button button-primary button-shadow-1">
+                <input type="submit" value="¡EMPIEZA AHORA!" id="membresia1" class="button button-primary button-shadow-1">
                 <a class="button button-primary button-shadow-1"  href="/user/edit-perfil" >Llevame a editar mi perfil</a>
               
               </article>

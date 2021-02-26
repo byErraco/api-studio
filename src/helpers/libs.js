@@ -1,3 +1,4 @@
+
 const helpers = {};
 
 helpers.randomNumber = ( ) => {
@@ -7,6 +8,14 @@ helpers.randomNumber = ( ) => {
        randomNumber += possible.charAt(Math.floor(Math.random() * possible.length))
     }
     return randomNumber;
+}
+
+helpers.eliminarUser = ( ) => {
+    document.addEventListener('DOMContentLoaded', () => {
+
+    })
+
+    const usersListado = document.querySelector(".panel-user")
 }
 
 module.exports = helpers;
