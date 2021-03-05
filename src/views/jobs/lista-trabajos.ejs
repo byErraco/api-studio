@@ -9,9 +9,9 @@
     <div class="breadcrumbs-custom-aside">
       <div class="container">
         <ul class="breadcrumbs-custom-path">
-          <li><a href="/">Home</a></li>
-          <li><a href="/candidatos/1">For Candidates</a></li>
-          <li class="active">Job Listing</li>
+          <li><a href="/">Inicio</a></li>
+          <li><a href="/candidatos/1">Para candidatos</a></li>
+          <li class="active">Lista de trabajos</li>
         </ul>
       </div>
     </div>
@@ -21,7 +21,7 @@
       <form class="form-layout-search form-lg" action="/lista-trabajos/1" method="GET">
         <div class="form-wrap form-wrap-icon">
           <input class="form-input" id="form-employer" type="text" name="buscar_jobs" data-constraints="@Required">
-          <label class="form-label" for="form-employer">Search Keywords</label><span class="icon fl-bigmug-line-search74"></span>
+          <label class="form-label" for="form-employer">Busca algo!</label><span class="icon fl-bigmug-line-search74"></span>
         </div>
         <div class="form-wrap form-wrap-icon form-wrap-select">
           <!--Select 2-->
@@ -34,7 +34,7 @@
           </select><span class="icon fl-bigmug-line-big104"></span>
         </div>
         <div class="form-wrap form-wrap-button">
-          <button class="button button-lg button-primary" type="submit">Search</button>
+          <button class="button button-lg button-primary" type="submit">Buscar</button>
         </div>
       </form>
       <form action="/lista-trabajos/1" method="POST">
@@ -161,7 +161,7 @@
                   </div>
                 </article>
               </td>
-              <td class="table-job-listing-date"><span>2 days ago</span></td>
+              <td class="table-job-listing-date"><span></span></td>
               <td class="table-job-listing-badge"><span class="badge badge-secondary"> <%= jobs.tipo_trabajo %> </span></td>
             </tr>
           <% }) %>

@@ -158,7 +158,7 @@
                          
 
                           <form action="/edit-perfil" method="POST" >
-                          <section class="hero">
+                          <section class="hero" style="margin-bottom: 10vh;margin-top: 10vh;">
                             <article class="profile-user" action="/user/edit-perfil" method="POST" name="editPerfil">
                               
                             
@@ -197,7 +197,7 @@
                           </form>
 
                           
-                            <div class="hero-content">
+                            <div class="hero-content" style="margin: 10vh">
                               <h2>Información</h2>
                               <div class="container-acercaE">
                                 <div class="col-12" action="/user/edit-perfil" method="POST" name="editPerfil" >
@@ -211,9 +211,9 @@
                                 </div>
                               </div>
                               <h3>Agrega tu experiencia</h3>
-                              <a href="#" id="button" class="button">LABORAL</a>
+                              <a href="#" id="button_l" class="button">LABORAL</a>
                               
-                              <a href="#" id="button2" class="button">ESTUDIO</a>
+                              <a href="#" id="button_e" class="button">ESTUDIO</a>
                             </div>
                          
                             <div class="bg-modal" >
@@ -224,58 +224,35 @@
                                     <label class="btn-file perfil"> <i class="fa fa-camera"></i> Agregar foto de perfil
                                       <input type="file" style="display: none;" value="" name="userpic">
                                     </label>  
-                                  
                                     <button class="button button-block button-primary" id='btn'
                                                             type="submit">Guardar
                                                             </button>
                                     </article>
-                                
-                                  
                                 </form> 
                               </div>                            
                             </div>
 
-                             <div class="bg-modal" >
+
+                            <div class="bg-modal2" >
                               <div class="modal-content">
-                                <div class="close">+</div>
-                                <form action="/user/edit_pic" method="POST" enctype="multipart/form-data" >
-                                  <article class="profile-user">
-                                    <label class="btn-file perfil"> <i class="fa fa-camera"></i> Agregar foto de perfil
-                                      <input type="file" style="display: none;" value="" name="userpic">
-                                    </label>  
-                                  
-                                    <button class="button button-block button-primary" id='btn'
-                                                            type="submit">Guardar
-                                                            </button>
-                                    </article>
-                                
-                                  
-                                </form> 
-                              </div>                            
-                            </div>
-                            <div class="bg-modal" >
-                              <div class="modal-content">
-                                <div class="close">+</div>
+                                <div class="close2">+</div>
                                 <form action="/user/edit_pic" method="POST" enctype="multipart/form-data" >
                                   <article class="profile-user">
                                     <label class="btn-file perfil"> <i class="fa fa-camera"></i> Agregar CV
                                       <input type="file" style="display: none;" value="" name="userpic">
                                     </label>  
-                                  
                                     <button class="button button-block button-primary" id='btn'
                                                             type="submit">Guardar
                                                             </button>
                                     </article>
-                                
-                                  
                                 </form> 
                               </div>                            
                             </div>
                              
                             
-                            <div class="bg-modal" >
+                            <div class="bg-modal3" >
                               <div class="modal-content">
-                                <div class="close">+</div>
+                                <div class="close3">+</div>
                                 <form action="/user/expe_trabajos" method="POST" name="expeTrabajo" onsubmit="return validateForm()">
                                   <label class="laboral"> Periodo
                                     <input type="text" class="input-modal" placeholder="AAAA - AAAA"
@@ -306,7 +283,7 @@
                                 </form> 
                               </div>                            
                             </div>
-                            <div class="bg-modal2" >
+                            <div class="bg-modal4" >
                               <div class="modal-content2">
                                 <div class="close2">+</div>
                                 <form action="/user/expe_estudios" method="POST" name="formestudios" onsubmit="return validateForm2()">
@@ -766,7 +743,7 @@ function validateForm2(){
  if(el){
       el.addEventListener("click", function() {
         document.querySelector('.bg-modal').style.display = "flex";
-        console.log('si')
+        console.log('foto')
       });
        }
  
@@ -775,34 +752,59 @@ function validateForm2(){
     if(cl){
         cl.addEventListener("click", function() {
         document.querySelector('.bg-modal').style.display = "none";
-        
       });
-      console.log('si')
+      
         }
 
-        var el2 = document.getElementById('button2')
+        var el2 = document.getElementById('button_')
   if(el2){
         el2.addEventListener("click", function() {
-        document.querySelector('.bg-modal').style.display = "flex";
-        console.log('sii')
+        document.querySelector('.bg-modal2').style.display = "flex";
+        console.log('CV')
       });
       }
-      var el3 = document.getElementById('button_')
-  if(el3){
-        el3para.addEventListener("click", function() {
-        document.querySelector('.bg-modal').style.display = "flex";
-        console.log('sii')
-      });
-      }
-      var cl2 = document.querySelector('.close2')
-    if(cl2){
-        cl2.addEventListener("click", function() {
-        document.querySelector('.bg-modal2').style.display = "none";
-        
-      });
-      console.log('si')
-        }
 
+    var clcv = document.querySelector('.close2')
+    if(clcv){
+        clcv.addEventListener("click", function() {
+        document.querySelector('.bg-modal2').style.display = "none";
+        console.log('cerrar CV')
+      });
+      
+        }
+        
+       var el3 = document.getElementById('button_l')
+       
+   if(el3){
+         el3.addEventListener("click", function() {
+         document.querySelector('.bg-modal3').style.display = "flex";
+      console.log('exp')
+       });
+       }
+   
+       var cl2 = document.querySelector('.close3')
+     if(cl2){
+         cl2.addEventListener("click", function() {
+         document.querySelector('.bg-modal3').style.display = "none";
+        
+       });
+       
+       }
+       var el4 = document.getElementById('button_e')
+       if(el4){
+         el4.addEventListener("click", function() {
+          console.log('exp')
+         document.querySelector('.bg-modal4').style.display = "flex";
+          console.log('exp')
+       });
+       }
+ var cl3 = document.querySelector('.close3')
+     if(cl3){
+         cl3.addEventListener("click", function() {
+         document.querySelector('.bg-modal3').style.display = "none";
+        
+       });
+      }
    
     
    </script>

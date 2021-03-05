@@ -533,49 +533,97 @@ userCtrl.descargarCv = async (req,res) => {
 
 
 userCtrl.paymentMembership = async(req, res) => {
+    const costo = req.body.two
+    console.log(costo)
+
+
     const user = await User.findById(req.user.id)
-    console.log(user+"sera este el usuario pago? xd")
-    
-    const create_payment_json = {
-        "intent": "sale",
-        "payer": {
-            "payment_method": "paypal"
-        },
-        "redirect_urls": {
-            "return_url": "http://freelance26.herokuapp.com/user/sucess",
-            "cancel_url": "http://freelance26.herokuapp.com/cancel"
-        },
-        "transactions": [{
-            "item_list": {
-                "items": [{
-                    "name": "Membresia ",
-                    "sku": "001",
-                    "price": "25.00",
+    if(user.tipo_cuenta === 'Freelancer') {
+
+        const create_payment_json = {
+            "intent": "sale",
+            "payer": {
+                "payment_method": "paypal"
+            },
+            "redirect_urls": {
+                "return_url": "http://localhost:4000/user/sucess",
+                "cancel_url": "http://localhost:4000/cancel"
+            },
+            "transactions": [{
+                "item_list": {
+                    "items": [{
+                        "name": "Membresia ",
+                        "sku": "001",
+                        "price": "2.00",
+                        "currency": "USD",
+                        "quantity": 1
+                    }]
+                },
+                "amount": {
                     "currency": "USD",
-                    "quantity": 1
-                }]
-            },
-            "amount": {
-                "currency": "USD",
-                "total": "25.00"
-            },
-            "description": "Subscripcion membresia"
-        }]
-    };
-    
-    
-    paypal.payment.create(create_payment_json, function (error, payment) {
-      if (error) {
-          throw error;
-      } else {
-          for(let i = 0;i < payment.links.length;i++){
-            if(payment.links[i].rel === 'approval_url'){
-              res.redirect(payment.links[i].href);
+                    "total": "2.00"
+                },
+                "description": "Subscripcion membresia"
+            }]
+        };
+
+        paypal.payment.create(create_payment_json, function (error, payment) {
+            if (error) {
+                throw error;
+            } else {
+                for(let i = 0;i < payment.links.length;i++){
+                  if(payment.links[i].rel === 'approval_url'){
+                    res.redirect(payment.links[i].href);
+                  }
+                }
             }
-          }
+          });
+      } else {
+        const create_payment_json = {
+            "intent": "sale",
+            "payer": {
+                "payment_method": "paypal"
+            },
+            "redirect_urls": {
+                "return_url": "http://http://freelance26.herokuapp.com/user/sucess",
+                "cancel_url": "http://http://freelance26.herokuapp.com/cancel"
+            },
+            "transactions": [{
+                "item_list": {
+                    "items": [{
+                        "name": "Membresia Empleador ",
+                        "sku": "001",
+                        "price": "5.00",
+                        "currency": "USD",
+                        "quantity": 1
+                    }]
+                },
+                "amount": {
+                    "currency": "USD",
+                    "total": "5.00"
+                },
+                "description": "Subscripcion membresia empleador"
+            }]
+        };
+
+        paypal.payment.create(create_payment_json, function (error, payment) {
+            if (error) {
+                throw error;
+            } else {
+                for(let i = 0;i < payment.links.length;i++){
+                  if(payment.links[i].rel === 'approval_url'){
+                    res.redirect(payment.links[i].href);
+                  }
+                }
+            }
+          });
+
       }
-    });
-}
+      
+        
+    }
+    
+    
 
 
 
