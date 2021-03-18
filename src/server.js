@@ -76,7 +76,7 @@ app.use(require('./routes/jobs.routes'));
 app.use(require('./routes/user.routes'));
 app.use(require('./routes/applications.routes'));
 // app.use(require('./routes/admin.router'))
-//app.use(require('./routes/emails.routes'));
+app.use(require('./routes/emails.routes'));
 
 
 //Static Files

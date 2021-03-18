@@ -2505,6 +2505,11 @@ hr {
 	background-color: orange;
 	border-color: orange;
 }
+.button-primary-2, .button-primary:focus {
+	color: #ffffff;
+	background-color: #72b527;
+	border-color: #72b527;
+}
 
 .button-primary:hover, .button-primary:active {
 	color: #ffffff;
@@ -2688,7 +2693,7 @@ hr {
 .button-sm {
 	font-weight: 500;
 	letter-spacing: .1em;
-	padding: 13px 25px;
+	padding: 13px 10px;
 	font-size: 13px;
 	line-height: 1.5;
 }
@@ -4954,7 +4959,7 @@ html:not(.tablet):not(.mobile) .thumbnail-classic:hover .thumbnail-classic-capti
 
 .breadcrumbs-custom-main {
 	position: relative;
-	padding: 40px 0;
+	padding: 25px 0;
 	background-position: center center;
 	background-size: cover;
 }
@@ -6715,7 +6720,7 @@ p.footer-creative-title {
 	display: inline-block;
 	margin-top: 0;
 	margin-bottom: 16px;
-	margin-left: 16px;
+	margin-left: 40px;
 }
 
 .profile-minimal-main p {
@@ -6885,6 +6890,7 @@ p.profile-minimal-position {
 
 .profile-light-image,
 .profile-light-main {
+	margin: auto;
 	max-width: 170px;
 }
 
@@ -6966,7 +6972,8 @@ p.profile-minimal-position {
 		max-width: 178px;
 	}
 	.profile-light-main {
-		max-width: 210px;
+		max-width: 300px;
+		margin-left: 30px;
 	}
 }
 
@@ -8166,7 +8173,7 @@ html [class*='section-'].section-bottom-0 {
 	section.section-xl:first-of-type,
 	section.section-xxl:first-of-type {
 		padding-top: 40px;
-		margin-top: 5vh;
+		/* margin-top: 5vh; */
 	}
 }
 
@@ -9505,7 +9512,7 @@ html.tablet .ui-to-top {
 }
 
 .rd-navbar-dropdown {
-	display: none;
+	display: contents;
 }
 
 .rd-megamenu-title {
@@ -9556,6 +9563,7 @@ html.tablet .ui-to-top {
 	.rd-navbar-popup {
 		width: 370px;
 	}
+	
 }
 
 .ios.landscape.mobile .rd-navbar-popup {
@@ -9673,7 +9681,7 @@ html.tablet .ui-to-top {
 .rd-navbar-static .rd-navbar-dropdown {
 	position: absolute;
 	top: 100%;
-	left: 0;
+	right:0;
 	width: 200px;
 	padding: 17px 30px 23px;
 	background: #ffffff;
@@ -9981,7 +9989,7 @@ html.tablet .ui-to-top {
 }
 
 .rd-navbar-fixed .rd-menu {
-	display: none;
+	
 	transition: opacity 0.3s, height 0.4s ease;
 	opacity: 0;
 	height: 0;
@@ -13842,7 +13850,7 @@ yx-axis
 
 
 .conregE{
-	/* min-height: 100vh; */
+	 min-height: 100vh; 
 	background-image: url("../images/rebg1.svg");
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -13920,7 +13928,18 @@ position: absolute;
 		min-width: 100%;
 		
 	}
-
+	
+	.conlogin {
+		min-height: 84vh;
+		background-image: url(../images/bg-loginN.svg);
+		background-repeat: no-repeat;
+		background-position: bottom;
+	}
+	.rd-navbar-wrap[style*='height: 0px;'] {
+		margin-top: 60px;
+	}
+	
+	
 }
 
 .contedit{
@@ -13955,6 +13974,7 @@ position: absolute;
 }
 
 .profile-empresa {
+	padding: 1rem;
 	display: flex;
 	flex-wrap: wrap;
 	align-items: center;
@@ -13974,6 +13994,8 @@ position: absolute;
     position: relative;
     display: block;
 }
+
+
 
 .lista-redes{
 	margin-bottom: 10px;
@@ -14060,11 +14082,11 @@ position: absolute;
 	margin: 0px auto;
   }
   
-  .close, .close2, .close3{
+  .close, .close2, .close3, .close4{
 	position: absolute;
-    top: 10px;
+    /* top: 10px; */
     right: 15px;
-    font-size: 49px;
+    font-size: 30px;
     transform: rotate(45deg);
     cursor: pointer;
   }
@@ -14076,7 +14098,7 @@ position: absolute;
   }
 
   .hero {
-	height: 100vh;
+	/* height: 100vh; */
 	width: 100%;
 	text-align: center;
 	display: flex;
@@ -14084,7 +14106,8 @@ position: absolute;
 	align-items: center;
 }
 .hero2 {
-	height: 50vh;
+	margin-top: 20px;
+	height: 55vh;
 	width: 100%;
 	text-align: center;
 	display: flex;
@@ -14098,7 +14121,9 @@ position: absolute;
 	flex-wrap: wrap;
 	justify-content: center;
 	text-align: center;
+	padding: 1rem;
 }
+
 
 #app-messenger, #app-whatsapp{
 	position: fixed;
@@ -14116,6 +14141,8 @@ position: absolute;
 	font-size: 63px;
 }
 #app-whatsapp i{
+	background: white;
+    border-radius: 30px;
 	color: #72b527;
 }
 #app-messenger i{
@@ -14129,3 +14156,70 @@ position: absolute;
 		display: block;
 	}
 }
+
+@media only screen and (min-width: 982px) {
+	.container-empresa{
+		display: grid;
+	}
+	.breadcont{
+		margin-top: 10vh;
+	}
+	
+	/* .container-empresa{
+
+	}
+	.container-empresaS{
+
+	}
+	.container-acercaE{
+
+	} */
+	
+	
+}
+
+.cont-profile{
+	
+    width: 100%;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    top: 0;
+    left: 0;
+    text-align: center;
+    display: flex;
+    
+}
+.perfil{
+	width: 50%;
+}
+@media only screen and (max-device-width: 480px) {
+	.cont-profile {
+		display: inline-block;
+	}
+	.perfil{
+		width: auto;
+	}
+	.container-empresa{
+		margin: 2em 2em 2em 2em;
+		
+		display: block;
+	}
+	.container-empresaS{
+		
+		margin: 2em 2em 2em 2em;
+		position: relative;
+		display: block;
+	}
+
+	.btn-candidatos{
+		display: block;
+	}
+	.profile-light-main {
+		max-width: 300px;
+		margin-left: 30px;
+	}
+
+
+}
+

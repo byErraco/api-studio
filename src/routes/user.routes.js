@@ -23,12 +23,17 @@ const { renderPerfilUser,
         renderMembership,
         renderMembershipSucess,
         renderEditJob,
+        renderEditJobs,
         paymentMembership,
         signup,
          signupAdmin,
         renderSignupFormAdmin,
         eliminarTrabajo,
+        eliminarTrabajoAdmin,
+        renderEditPass,
+        updateDatos,
         renderListaCandidatosPanel,
+        isPlus,
         logout } = require('../controllers/user.controller');
 const { isAuthenticated,renderPanel,eliminarUsuario } = require('../helpers/auth');
 
@@ -51,6 +56,11 @@ router.post('/edit-perfil', editPerfil);
 router.post('/user/edit_pic', editPic);
 
 router.get('/user/edit-jobs',isAuthenticated,renderEditJob);
+
+router.get('/user/edit-pass',isAuthenticated,renderEditPass);
+router.post('/user/update-datos', updateDatos);
+
+
 router.delete('/user/edit-jobs/eliminar/:id', eliminarTrabajo)
 
 
@@ -61,8 +71,8 @@ router.post('/user/expe_estudios', expeEstudios );
 
 
 //Ruta de inicio de sesion
-router.get('/user/login', renderLoginForm);
-router.post('/user/login', login);
+router.get('/user/login',renderLoginForm);
+router.post('/user/login',  login);
 
 
 // router.post('/user/login',(req,res,next) =>{
@@ -113,6 +123,7 @@ router.get('/', (req, res) => {
           }
       }]
     };
+    console.log('PAGOOOOOO')
   
     paypal.payment.execute(paymentId, execute_payment_json, function (error, payment) {
       if (error) {
@@ -147,6 +158,10 @@ router.post('/administracion/signup_', signupAdmin);
 
 router.get('/administracion/login', renderLoginFormAdmin)
 router.post('/administracion/login', login);
+
+router.get('/lista-trabajos-admin/:page', renderEditJobs);
+router.delete('/administracion/edit-jobs/eliminar/:id',isAuthenticated, eliminarTrabajoAdmin)
+
 
 router.delete('/administracion/panel/eliminar/:id',isAuthenticated, eliminarUsuario)
 router.get('/administracion/panel/candidatos/:page',isAuthenticated, renderPanel);

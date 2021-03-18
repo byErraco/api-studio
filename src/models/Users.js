@@ -9,8 +9,10 @@ const UserSchema = new Schema({
     email: {type: String, required: true, unique: true},
     password: {type: String, required: true},
     tipo_cuenta: {type: String, required: true},
-    isNewUser:{type: Boolean,default: true},
+    isNewUser:{type: String,default: 'basico'},
     isUser: {type: Boolean,default: true},
+    plusExpires: {type: Date,default: null},
+    
     ciudad: {type: String, required: true},
     pais: {type: String, required: true},
     acerca: {type: String},

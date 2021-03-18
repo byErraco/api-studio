@@ -14,7 +14,20 @@
     
     
   <% } else { %>
-    
+    <section class="section breadcrumbs-custom" style="    margin-top: 50px;">
+      <div class="breadcrumbs-custom-main bg-image bg-primary">
+        <div class="container">
+          <h3 class="breadcrumbs-custom-title">Anuncios Activos</h3>
+        </div>
+      </div>
+      <div class="breadcrumbs-custom-aside">
+        <div class="container">
+          <ul class="breadcrumbs-custom-path">
+            <li><a href="/">Inicio</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
  
     
        
@@ -22,11 +35,12 @@
     
      
           <br>
+          
           <article class="profile-minimal">
             <div class="profile-minimal-inner">
               <div class="profile-minimal-main-outer">
                 <div class="profile-minimal-main"><img class="profile-minimal-image"
-                    src="/uploads/<%= user.filename %>" alt="" width="101" height="96" />
+                    src="<%= user.filename %>" alt="" width="101" height="96" />
                   <div class="profile-minimal-main-info">
                     <h5 class="profile-minimal-name"><a href="/detalles-trabajo/<%= jobs.id %>">
                       <%= jobs.titulo_trabajo%>

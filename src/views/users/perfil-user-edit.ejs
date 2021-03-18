@@ -157,15 +157,17 @@
                           <% })} %> -->
                          
 
-                          <form action="/edit-perfil" method="POST" >
-                          <section class="hero" style="margin-bottom: 10vh;margin-top: 10vh;">
-                            <article class="profile-user" action="/user/edit-perfil" method="POST" name="editPerfil">
-                              
-                            
-                              
-                      
+                        <form action="/edit-perfil" method="POST" >
+                          <section class="cont-profile" style="margin-top: 12vh;" >
+                            <article  class="perfil"  action="/user/edit-perfil" method="POST" name="editPerfil">
+
                               <div class="profile-light-main">
                                 <label class=" perfil">
+                                  <p class="heading-9">Status de usuario </p>
+                                  <span class="button button-block button-primary-2" id='btn'
+                                                      type="text"><%= user.isNewUser %>
+                                                      </span>
+                                                      <br>
                                   <img class="profile-light-image" src="<%= user.filename %>" alt="" width="169" height="169">
                                  
                                   
@@ -174,7 +176,7 @@
                                 <a href="#" id="button_" class="button">Subir CV</a>
                                 <!-- <a class="button button-lg button-primary-outline" id="button" class="button" href="#">Subir CV</a> -->
                                 <label> Nombre y Apellido
-                                  <input type="text" class="form-control" placeholder="" value="<%= user.cargo %>"
+                                  <input type="text" class="form-control" placeholder="" value="<%= user.username %>"
                                     name="username">
                                 </label>
                                 <label> Cargo
@@ -189,15 +191,16 @@
                                   <input type="text" class="form-control" placeholder="" value="<%= user.salario %>"
                                     name="salario">
                                 </label>
-                                <button class="button button-block button-primary" id='btn'
+                                <button class="button button-block button-primary" id='btn' style="margin-bottom: 10px;"
                                                       type="submit">Guardar
                                                       </button>
                               </div>
+                              
                             </article>
                           </form>
 
-                          
-                            <div class="hero-content" style="margin: 10vh">
+                          <div>
+                            <div class="hero-content" style="display: grid; padding: 1rem;">
                               <h2>Información</h2>
                               <div class="container-acercaE">
                                 <div class="col-12" action="/user/edit-perfil" method="POST" name="editPerfil" >
@@ -214,7 +217,15 @@
                               <a href="#" id="button_l" class="button">LABORAL</a>
                               
                               <a href="#" id="button_e" class="button">ESTUDIO</a>
+                              <a class="button button-primary" href="/user/edit-pass" style="
+                                border-radius: 10px 10px 10px 10px;
+                                box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);">Cambiar contraseña</a>
                             </div>
+                          </div>
+                          
+
+                          
+                            
                          
                             <div class="bg-modal" >
                               <div class="modal-content">
@@ -285,7 +296,7 @@
                             </div>
                             <div class="bg-modal4" >
                               <div class="modal-content2">
-                                <div class="close2">+</div>
+                                <div class="close4">+</div>
                                 <form action="/user/expe_estudios" method="POST" name="formestudios" onsubmit="return validateForm2()">
                                   <label class="laboral"> Periodo
                                     <input type="text" class="input-modal" placeholder="AAAA - AAAA"
@@ -523,7 +534,7 @@
   </div> -->
     
     
-  <% } else { %>
+  <% } if (user.tipo_cuenta == 'Empresa') { %>
     
   <form action="/edit-perfil" method="POST" class="form-edit">
     <section class="hero">
@@ -546,6 +557,10 @@
                 <input type="text" class="form-control" placeholder="" value="<%= user.username %>"
                   name="username">
               </label>
+              <!-- <label> Correo electrónico
+                <input type="text" class="form-control" placeholder="" value="<%= user.email %>"
+                  name="email">
+              </label> -->
               <label> Tipo de industria
                 <input type="text" class="form-control" placeholder="" value="<%= user.tipoempresa %>"
                   name="tipoempresa">
@@ -631,19 +646,19 @@
             <div class="profile-light-main">
           
          
-              <label> #
+              <label> 1.
                 <input type="text" class="form-control" placeholder="" value="<%= user.skill_ %>"
                   name="skill_">
               </label>
-              <label> #
+              <label> 2.
                 <input type="text" class="form-control" placeholder="" value="<%= user.skill_1 %>"
                   name="skill_1">
               </label>
-              <label> #
+              <label> 3.
                 <input type="text" class="form-control" placeholder="" value="<%= user.skill_2 %>"
                   name="skill_2">
               </label>
-              <label> #
+              <label> 4.
                 <input type="text" class="form-control" placeholder="" value="<%= user.skill_3 %>"
                   name="skill_3">
               </label>
@@ -660,6 +675,10 @@
         <a class="button button-primary" href="/user/edit-jobs" style="
             border-radius: 10px 10px 10px 10px;
             box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);">Ver trabajos anunciados</a>
+            <a class="button button-primary" href="/user/edit-pass" style="
+            border-radius: 10px 10px 10px 10px;
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
+            margin-bottom: 20px;">Cambiar contraseña</a>
         
         
         
@@ -684,7 +703,91 @@
       </form> 
     </div>                            
   </div>
-  <% }  %>
+  <% }  else { %>
+
+
+    
+    <form action="/edit-perfil" method="POST" class="form-edit">
+      <section class="hero">
+        <div class="container-editempresa"> 
+         
+            <article  action="/user/edit-perfil" method="POST" name="editPerfil">
+              <!-- <label class="btn-file perfil"> <i class="fa fa-camera"></i> Agregar foto de perfil
+                <input type="file" style="display: none;" value="<%= user.userpic %>" name="userpic">
+              </label> -->
+              
+      
+              <div class="profile-light-main">
+                <label class=" perfil">
+                  <img class="profile-light-image" src="<%= user.filename %>" alt="" width="169" height="169">
+                 
+                  
+                </label>
+                <a href="#" id="button" class="button">Cambiar foto</a>
+                <!-- <label> Nombre y Apellido
+                  <input type="text" class="form-control" placeholder="" value="<%= user.username %>"
+                    name="username">
+                </label> -->
+                <!-- <label> Correo electrónico
+                  <input type="text" class="form-control" placeholder="" value="<%= user.email %>"
+                    name="email">
+                </label> -->
+                <!-- <label> Tipo de industria
+                  <input type="text" class="form-control" placeholder="" value="<%= user.tipoempresa %>"
+                    name="tipoempresa">
+                </label>
+                <label> Direccion
+                  <input type="text" class="form-control" placeholder="" value="<%= user.direccion %>"
+                    name="direccion">
+                </label>
+                <label> Pais origen
+                  <input type="text" class="form-control" placeholder="" value="<%= user.pais %>"
+                    name="pais">
+                </label> -->
+                <button class="button button-block button-primary" id='btn'
+                                      type="submit">Guardar
+                                      </button>
+              <a class="button button-primary" href="/lista-trabajos-admin/1" style="
+              border-radius: 10px 10px 10px 10px;
+              box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);">Ver trabajos anunciados</a>
+              <a class="button button-primary" href="/administracion/panel" style="
+              border-radius: 10px 10px 10px 10px;
+              box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);">Ver panel de usuarios</a>
+              <a class="button button-primary" href="/" style="
+              border-radius: 10px 10px 10px 10px;
+              box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
+              margin-bottom: 20px;">Cambiar contraseña</a>
+              </div>
+              
+            </article>
+       
+          
+          
+          
+          
+          
+        </div>
+      </section>  
+    </form>
+    <div class="bg-modal" >
+      <div class="modal-content">
+        <div class="close">+</div>
+        <form action="/user/edit_pic" method="POST" enctype="multipart/form-data" >
+          <article class="profile-user">
+            <label class="btn-file perfil"> <i class="fa fa-camera"></i> Agregar foto de perfil
+              <input type="file" style="display: none;" value="" name="userpic">
+            </label>  
+          
+            <button class="button button-block button-primary" id='btn'
+                                    type="submit">Guardar
+                                    </button>
+            </article>
+        
+          
+        </form> 
+      </div>                            
+    </div>
+    <% } %>
 
   <%- include('../partials/footer') %>
 
@@ -786,7 +889,7 @@ function validateForm2(){
      if(cl2){
          cl2.addEventListener("click", function() {
          document.querySelector('.bg-modal3').style.display = "none";
-        
+        console.log('closebro')
        });
        
        }
@@ -798,11 +901,11 @@ function validateForm2(){
           console.log('exp')
        });
        }
- var cl3 = document.querySelector('.close3')
+ var cl3 = document.querySelector('.close4')
      if(cl3){
          cl3.addEventListener("click", function() {
-         document.querySelector('.bg-modal3').style.display = "none";
-        
+         document.querySelector('.bg-modal4').style.display = "none";
+         console.log('closebro2')
        });
       }
    

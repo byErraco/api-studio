@@ -1,5 +1,8 @@
 <%- include ('../partials/header'); %>      
-<div class="container-margin">
+
+
+
+<% if (user.tipo_cuenta == 'Admin'){ %><div class="container-margin">
   <section class="section breadcrumbs-custom">
     <div class="breadcrumbs-custom-main bg-image bg-primary">
       <div class="container">
@@ -175,13 +178,22 @@
                   <figure class="company-minimal-figure"><img class="company-minimal-image" src="<%= jobs.perfil_img %>" alt="" width="150" height="150"/>
                   </figure>
                   <div class="company-minimal-main">
-                    <h5 class="company-minimal-title"><a href="/detalles-trabajo/<%= jobs.id %>"><%= jobs.titulo_trabajo %></a></h5>
+                    <h5 class="company-minimal-title"><a href="/detalles-trabajo/<%= jobs.id %>"><%= jobs.titulo_trabajo %> </a></h5>
                     <p> <%= jobs.ubicacion %> </p> 
                   </div>
                 </article>
               </td>
               <td class="table-job-listing-date"><span></span></td>
-              <td class="table-job-listing-badge"><span class="badge badge-secondary"> <%= jobs.tipo_trabajo %> </span></td>
+              <td class="table-job-listing-badge"><span class="badge badge-secondary"> <%= jobs.tipo_trabajo %> </span>
+                <form action="/administracion/edit-jobs/eliminar/<%= jobs.id%>?_method=DELETE" method="POST">
+                          
+                  <input type="hidden" name="_method" value="DELETE">
+                  <button class="button button-primary" style="border-radius: 10px 10px 10px 10px; box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);"id="btSubmit" value="Submit" >
+                  <span class="icon mdi mdi-account"></span>
+                  Eliminar</button>
+                </form>
+              </td>
+              
             </tr>
           <% }) %>
           </table>
@@ -248,4 +260,43 @@
     </div>
   </section>
 </div>
+
+  
+                         
+
+                        
+  
+
+
+
+<% } else { %>
+
+  
+  <section class="section section-md bg-gray-100 text-center" style="min-height: 100vh;">
+    <div class="container">
+      <h3>Hey no tienes permiso para ver esta pagina!</h3>
+      <ul class="list-linked">
+        
+        
+        <li class="ll-item">
+          <div class="icon ll-item-icon">
+            <svg class="ll-item-icon-inner" version="1.2" baseProfile="tiny" viewbox="-1 -1 102 102">
+              <circle cx="50" cy="50" r="50" fill="none" vector-effect="non-scaling-stroke"></circle>
+            </svg>
+            <img src="../images/apple-touch-icon.png" alt="" width="100">
+          </div>
+          <div class="ll-item-main">
+            <h5 class=""><a href="/user/edit-perfil">Ve al inicio!</a></h5>
+
+          </div>
+        </li>
+      </ul>
+      <div class="ll-item-main pt-4"><a class="button button-sm button-primary-outline" href="/user/edit-perfil">O puedes ver tu perfil</a></div>
+    </div>
+  </section>
+</div>
+
+
+
+<% }  %>
 <%- include('../partials/footer') %>

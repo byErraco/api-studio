@@ -8,6 +8,8 @@ const path = require('path');
 const User = require('../models/Users')
 const Admin = require('../models/Admins')
 const Jobs = require('../models/Jobs')
+const Categorias = require('../models/Categorias')
+
 //Importando modulo de autenticacon
 const passport = require('passport');
 
@@ -44,7 +46,14 @@ userCtrl.renderSignupFormE = (req, res) => {
 userCtrl.renderMembership = (req, res) => {
     res.render('users/membresia')
 }
-userCtrl.renderMembershipSucess = (req, res) => {
+userCtrl.renderMembershipSucess = async (req, res) => {
+    const status = 'plus'
+    const status_basic = 'basico'
+    const plusExp = new Date()
+    console.log(plusExp)
+    const status_user = await User.findByIdAndUpdate(req.user.id,{$set:{isNewUser:status,plusExpires:plusExp}})
+    //await User.createIndex(req.user.id,{creationDate:1}, {expireAfterSeconds:2592000, partialFilterExpression: {isNewUser: {$eq: "basico"}}})
+    console.log(status_user)
     res.render('users/sucess')
 }
 userCtrl.renderSignupFormAdmin = (req, res) => {
@@ -110,7 +119,7 @@ userCtrl.signup = async (req, res) => {
     
     console.log('prueba')
 };
-
+//update data
 
 
 
@@ -195,31 +204,81 @@ var sum = 1;
 //       failureFlash: true
 //    }
 //  );
-userCtrl.login = (req,res,next) => {
+userCtrl.login =  (req,res,next) => {
     passport.authenticate("local",(err,user,info)=>{
         if (err) throw err;
-        if (!user) res.send("No existe usuario")
+        if (!user) {
+            req.flash('success_msg', 'Estas credenciales no coinciden.')
+            res.redirect('/user/login')
+        }
         else {
             req.logIn(user, (err) => {
                 
                 if (err) throw err;
-                console.log(user)
+                
                 User.findOne({'email': user.email},(err,user)=>{
+                    console.log(user)
+                    var dateMem = user.plusExpires
+                    var date1 = new Date();
+                    console.log(dateMem)
+                    console.log(date1)
                     
                     
-                    if (user.isNewUser && user.tipo_cuenta == 'Freelancer'){
-                        res.redirect('/user/membresia')
-                        console.log("FUNCIONA")
-                    } else if (user.isNewUser && user.tipo_cuenta == 'Empresa') {
-                       
-                            res.redirect('/user/membresia')
-                            console.log("FUNCIONA")
+                        if (user.isNewUser == "basico" ){
                         
-                       
-                    } else {
-                        res.redirect('/administracion/panel')
-                        console.log('admin')
-                    }
+
+                            if ( user.tipo_cuenta == 'Freelancer' ){
+                                
+                                res.redirect('/user/membresia')
+                                
+                            } else if (user.tipo_cuenta == 'Empresa') {
+                               
+                                res.redirect('/user/membresia')
+                                    
+                            } else {
+                                
+                                res.redirect('/user/edit-perfil')
+                                console.log('admin')
+    
+                            }
+                    }else {
+                        if( user.isNewUser === "plus" ){
+                            let diff = date1.getTime() - dateMem.getTime()
+                            console.log(diff)
+        
+                            let msInDay = 1000 * 3600 * 24;
+                            console.log(msInDay)
+                            
+                            result = diff/msInDay
+                            console.log(result)
+                            
+                            if( result <= 30){
+                                
+                                
+                                
+                                res.redirect('/user/edit-perfil')
+                            }
+                            if(result >= 30) {
+                                const status_basic = 'basico'
+                                const plusExp = null
+                                console.log(plusExp)
+
+                                async function setToBasic() {
+                                    const status_user = await User.findByIdAndUpdate(req.user.id,{$set:{isNewUser:status_basic,plusExpires:plusExp}})
+                                     console.log(status_user)
+                                  }
+                                  setToBasic();
+                            
+                                
+                                res.redirect('/user/membresia')
+                            }
+                            
+                        }else {
+                            
+                        }
+                    }              
+
+                    
                     
 
                 })
@@ -236,9 +295,10 @@ userCtrl.loginAdmin = (req,res,next) => {
             req.logIn(user, (err) => {
                 
                 if (err) throw err;
-                console.log(user)
+                
                 Admin.findOne({'email': user.email},async(err,user)=>{
                     const users = await User.findById(req.params.id)
+                 
                     
                     res.redirect('administracion/panel' ,{ users })
                     
@@ -248,6 +308,10 @@ userCtrl.loginAdmin = (req,res,next) => {
             })
         }
     })(req,res,next)
+}
+
+userCtrl.isPlus = (req,res) => {
+    console.log(req.user)
 }
 
 
@@ -402,13 +466,53 @@ userCtrl.renderEditPerfil = async (req, res) => {
 //Actualizar Perfil de Usuario
 userCtrl.editPerfil = async (req, res) => {
     console.log(req.body)
-    const  {cargo,direccion,salario,acerca,pais,tipoempresa,userfacebook,usertwitter,usergoogle,userlinkedin,skill_,skill_1,skill_2,skill_3} = req.body
+    const  {cargo,direccion,salario,email,acerca,pais,tipoempresa,userfacebook,usertwitter,usergoogle,userlinkedin,skill_,skill_1,skill_2,skill_3} = req.body
 
-    await User.findByIdAndUpdate(req.user.id,{$set:{cargo:cargo,direccion:direccion,salario:salario,acerca:acerca,pais:pais,
+    await User.findByIdAndUpdate(req.user.id,{$set:{cargo:cargo,direccion:direccion,salario:salario,email:email,acerca:acerca,pais:pais,
         tipoempresa:tipoempresa,userfacebook:userfacebook,usertwitter:usertwitter,usergoogle:usergoogle,userlinkedin:userlinkedin,
         skill_:skill_,skill_1:skill_1,skill_2:skill_2,skill_3:skill_3}})
     const user = await User.findById(req.user.id)
     res.render('./users/perfil-user-edit', {user})
+     
+    
+}
+userCtrl.updateDatos = async (req, res) => {
+    let errors = [];
+    
+    console.log(req.body)
+    const  {password, password_confirm} = req.body
+    if (password != password_confirm) {
+        // req.flash('message','las contrasenas no coinciden');
+        // res.redirect('/user/signup');
+         console.log('ERROR CONTRASENA NO ES IGUAL')
+         errors.push({ text: "Las Contraseñas no coinciden!!!." });
+     }
+     if (password.length < 4) {
+         errors.push({ text: "La Contraseña debe tener al menos 4 digitos !!!!!!!!." });
+     }
+     if (errors.length > 0) {
+         //  res.redirect('/user/signup');
+         //const alert = errors.array()
+          console.log(errors);
+          ///console.log(alert)
+          console.log('errores')
+          res.render('./users/cambio-pass', {
+            errors
+         });
+     }
+ 
+     else {
+         // Si el correo ya existe
+         await User.findByIdAndUpdate(req.user.id,{$set:{password:password}})
+         console.log('YES')
+            const user = await User.findById(req.user.id)
+            user.password = await user.encryptPassword(password)
+            await user.save()
+            res.render('./users/perfil-user-edit', {user})
+
+         }
+
+    
      
     
 }
@@ -422,12 +526,118 @@ userCtrl.renderEditJob = async (req, res) => {
     console.log(user._id)
     console.log(jobs)
    
-   
-
-
 
     res.render('./users/edit-jobs', {user,jobs})
 }
+userCtrl.renderEditJobs = async (req, res) => {
+//     const user = req.user;
+//     const jobs = await Jobs.find({tipo_cuenta: "Empresa"}).sort({_id: -1}).limit(3);
+    
+   
+//  console.log('trabajos')
+//     console.log(user._id)
+//     console.log(jobs)
+   
+
+//     res.render('./users/edit-jobs', {user,jobs})
+ if (req.query.buscar_jobs || req.query.buscar_ubi) {
+        if (req.user) {
+            const tipo_cuenta = req.user.tipo_cuenta
+            const buscar_jobs = req.query.buscar_jobs
+            const buscar_ubi = req.query.buscar_ubi
+            const xPage = 6
+            const page = req.params.page || 1
+            const categorias = await Categorias.find();
+            const jobs = await Jobs.find({ titulo_trabajo: { $regex: '.*' + buscar_jobs + '.*', $options: "i" }, ubicacion: { $regex: '.*' + buscar_ubi + '.*', $options: "i" } }, function (error, jobs) {
+                if (error) {
+                    console.log('error en el find')
+                }
+            })
+                .sort({ _id: -1 }).skip((xPage * page) - xPage).limit(xPage).exec((err, jobs) => {
+                    Jobs.count((err, count) => {
+                        if (err) {
+                            console.log('error en el count')
+                        } else {
+                            res.render('./jobs/lista-trabajos-admin', { categorias, tipo_cuenta, jobs, current: page, pages: Math.ceil(count / xPage) })
+                        }
+                    })
+                })
+        } else {
+            const buscar_jobs = req.query.buscar_jobs;
+            const buscar_ubi = req.query.buscar_ubi;
+            const xPage = 6;
+            const page = req.params.page || 1;
+            const categorias = Categorias.find();
+            const jobs = await Jobs
+                .find({ titulo_trabajo: { $regex: '.*' + buscar_jobs + '.*', $options: "i" }, ubicacion: { $regex: '.*' + buscar_ubi + '.*', $options: "i" } }, function (error, jobs) {
+                    if (error) {
+                        console.log('error en el find')
+                    }
+                })
+                .sort({ _id: -1 }).skip((xPage * page) - xPage).limit(xPage).exec((err, jobs) => {
+                    Jobs.count((err, count) => {
+                        if (err) {
+                        } else {
+                            res.render('./jobs/lista-trabajos-admin', {
+                                categorias,
+                                jobs,
+                                current: page,
+                                pages: Math.ceil(count / xPage)
+                            })
+                        }
+                    })
+                })
+        }
+    }
+    if (req.user) {
+        const tipo_cuenta = req.user.tipo_cuenta;
+        const xPage = 6;
+        const page = req.params.page || 1;
+        const categorias = await Categorias.find();
+        const jobs = await Jobs.find().sort({ _id: -1 }).skip((xPage * page) - xPage).limit(xPage).exec((err, jobs) => {
+            Jobs.count((err, count) => {
+                if (err) {
+                    console.log('error1')
+                } else {
+                    res.render('./jobs/lista-trabajos-admin', {
+                        categorias,
+                        tipo_cuenta,
+                        jobs,
+                        current: page,
+                        pages: Math.ceil(count / xPage)
+                    })
+                }
+            })
+        })
+    } else {
+        const xPage = 6;
+        const page = req.params.page || 1;
+        const categorias = await Categorias.find();
+        const jobs = await Jobs.find().sort({ _id: -1 }).skip((xPage * page) - xPage).limit(xPage).exec((err, jobs) => {
+            Jobs.count((err, count) => {
+                if (err) {
+                    console.log('error')
+                } else {
+                    console.log(jobs)
+                    res.render('./jobs/lista-trabajos-admin', {
+                        categorias,
+                        jobs,
+                        current: page,
+                        pages: Math.ceil(count / xPage)
+                    })
+                }
+            })
+        })
+    }
+
+
+}
+userCtrl.renderEditPass = async (req, res) => {
+   
+
+     res.render('./users/cambio-pass')
+}
+
 
 userCtrl.eliminarTrabajo = async (req,res)=> {
     const {id} =req.params;
@@ -446,6 +656,24 @@ userCtrl.eliminarTrabajo = async (req,res)=> {
 
 
 }
+userCtrl.eliminarTrabajoAdmin = async (req,res)=> {
+    const {id} =req.params;
+    console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
+    console.log(id);
+
+    try {
+        const userDelete = await Jobs.findByIdAndDelete(id)
+        console.log('exito')
+        res.redirect('/user/edit-jobs')
+        
+    } catch (error) {
+        console.log(error);
+        console.log('error')
+    }
+
+
+}
+
 
 
 
@@ -487,12 +715,15 @@ userCtrl.editPic = async (req, res) => {
 
             await fs.rename(cvTempPath, targetPath_);
             const newCv = cvUrl+extt
-            const cvSaved = await User.findByIdAndUpdate(req.user.id,{$set:{cvfilename:newCv}})
+
+            try {
+                const result = await cloudinary.v2.uploader.upload(`src/public/uploads/${newCv}`);
+                const cvSaved = await User.findByIdAndUpdate(req.user.id,{$set:{cvfilename:result.url}})
+            } catch (error) {
+                console.log(error)
+            }
          
-            console.log(typeof(newCv))
-            console.log(newCv )
-            console.log(cvSaved)
-            console.log(typeof(cvSaved))
+            
        
     } else {
          await fs.unlink(imageTempPath);
@@ -533,8 +764,7 @@ userCtrl.descargarCv = async (req,res) => {
 
 
 userCtrl.paymentMembership = async(req, res) => {
-    const costo = req.body.two
-    console.log(costo)
+  
 
 
     const user = await User.findById(req.user.id)
@@ -574,7 +804,9 @@ userCtrl.paymentMembership = async(req, res) => {
                 for(let i = 0;i < payment.links.length;i++){
                   if(payment.links[i].rel === 'approval_url'){
                     res.redirect(payment.links[i].href);
+                    console.log('EXITO1')
                   }
+                  console.log('EXITO11')
                 }
             }
           });
@@ -585,8 +817,8 @@ userCtrl.paymentMembership = async(req, res) => {
                 "payment_method": "paypal"
             },
             "redirect_urls": {
-                "return_url": "http://http://freelance26.herokuapp.com/user/sucess",
-                "cancel_url": "http://http://freelance26.herokuapp.com/cancel"
+                "return_url": "http://localhost:4000/user/sucess",
+                "cancel_url": "http://localhost:4000/cancel"
             },
             "transactions": [{
                 "item_list": {
@@ -613,7 +845,9 @@ userCtrl.paymentMembership = async(req, res) => {
                 for(let i = 0;i < payment.links.length;i++){
                   if(payment.links[i].rel === 'approval_url'){
                     res.redirect(payment.links[i].href);
+                    console.log('OOK')
                   }
+                  console.log('OO1K')
                 }
             }
           });
