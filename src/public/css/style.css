@@ -9327,7 +9327,8 @@ html:not(.lt-ie10) .not-animated {
 
 .ui-to-top.active {
 	transform: translate3d(0, 0, 0);
-	bottom: 170px;
+	bottom: 95px;
+	right: 25px;
 }
 
 html.mobile .ui-to-top,
@@ -13885,7 +13886,7 @@ font: 500 13px/20px "Ubuntu", -apple-system, BlinkMacSystemFont, "Segoe UI", Rob
 }
 
 .reg-sticky{
-	top: -9.5rem;
+	top: -10.5rem;
     position: absolute;
     display: block;
     min-width: 100%;
@@ -14134,7 +14135,8 @@ position: absolute;
 	display: none;
 }
 #app-whatsapp{
-	bottom: 95px;
+	bottom: 20px;
+    right: 95px;
 	display: block;
 }
 #app-messenger i, #app-whatsapp i{

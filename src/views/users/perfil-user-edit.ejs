@@ -173,7 +173,7 @@
                                   
                                 </label>
                                 <a href="#" id="button" class="button">Cambiar foto</a>
-                                <a href="#" id="button_" class="button">Subir CV</a>
+                                <!-- <a href="#" id="button_" class="button">Subir CV</a> -->
                                 <!-- <a class="button button-lg button-primary-outline" id="button" class="button" href="#">Subir CV</a> -->
                                 <label> Nombre y Apellido
                                   <input type="text" class="form-control" placeholder="" value="<%= user.username %>"
@@ -191,16 +191,66 @@
                                   <input type="text" class="form-control" placeholder="" value="<%= user.salario %>"
                                     name="salario">
                                 </label>
+                                <br>
+                                <br>
+                                <p class="heading-9" style="color: red;">Redes Sociales</p>
+                                <br>
+                                <div class="social-icon bor-btm padding-25">
+                                  <ul >
+                      
+                                    <li>
+                                      <div class="input-group  lista-redes">
+                                        <div class="input-group-prepend">
+                                          <span class="input-group-text" id="basic-addon1"><i class="fa fa-facebook"></i></span>
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="Username" aria-label="Username"
+                                          aria-describedby="basic-addon1" value="<%= user.userfacebook %>" name="userfacebook">
+                                      </div>
+                                    </li>
+                                    <li>
+                                      <div class="input-group lista-redes">
+                                        <div class="input-group-prepend">
+                                          <span class="input-group-text" id="basic-addon1"><i class="fa fa-twitter"></i></span>
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="Username" aria-label="Username"
+                                          aria-describedby="basic-addon1" value="<%= user.usertwitter %>" name="usertwitter">
+                                      </div>
+                                    </li>
+                                    <li>
+                                      <div class="input-group lista-redes">
+                                        <div class="input-group-prepend">
+                                          <span class="input-group-text" id="basic-addon1"><i class="fa fa-google-plus"></i></span>
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="Username" aria-label="Username"
+                                          aria-describedby="basic-addon1" value="<%= user.usergoogle %>" name="usergoogle">
+                                      </div>
+                                    </li>
+                                    <li>
+                                      <div class="input-group lista-redes">
+                                        <div class="input-group-prepend">
+                                          <span class="input-group-text" id="basic-addon1"><i class="fa fa-linkedin"></i></span>
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="Username" aria-label="Username"
+                                          aria-describedby="basic-addon1" value="<%= user.userlinkedin %>" name="userlinkedin">
+                                      </div>
+                                    </li>
+                      
+                                  </ul>
+                                 
+                                </div>
                                 <button class="button button-block button-primary" id='btn' style="margin-bottom: 10px;"
                                                       type="submit">Guardar
                                                       </button>
                               </div>
                               
+                              
                             </article>
+                            
                           </form>
 
                           <div>
                             <div class="hero-content" style="display: grid; padding: 1rem;">
+                              
                               <h2>Información</h2>
                               <div class="container-acercaE">
                                 <div class="col-12" action="/user/edit-perfil" method="POST" name="editPerfil" >
@@ -576,7 +626,15 @@
               <button class="button button-block button-primary" id='btn'
                                     type="submit">Guardar
                                     </button>
+                                    <a class="button button-primary" href="/user/edit-jobs" style="
+            border-radius: 10px 10px 10px 10px;
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5); margin-bottom: 20px;">Ver trabajos anunciados</a>
+            <a class="button button-primary" href="/user/edit-pass" style="
+            border-radius: 10px 10px 10px 10px;
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
+            margin-bottom: 20px;">Cambiar contraseña</a>
             </div>
+            
           </article>
         </div>
         <div class="container-empresaS">
@@ -629,9 +687,12 @@
                                       </button>
             </div>
             
+            
           </article>
         </div>
+        
         <div class="container-acercaE">
+          
           <div class="col-12" action="/user/edit-perfil" method="POST" name="editPerfil" >
             <p class="heading-9">Acerca de <%= user.username %> </p>
             <br>
@@ -672,13 +733,7 @@
           
 
         </div>
-        <a class="button button-primary" href="/user/edit-jobs" style="
-            border-radius: 10px 10px 10px 10px;
-            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);">Ver trabajos anunciados</a>
-            <a class="button button-primary" href="/user/edit-pass" style="
-            border-radius: 10px 10px 10px 10px;
-            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
-            margin-bottom: 20px;">Cambiar contraseña</a>
+        
         
         
         
@@ -703,7 +758,7 @@
       </form> 
     </div>                            
   </div>
-  <% }  else { %>
+  <% }  else if(user.tipo_cuenta == 'Admin') { %>
 
 
     
@@ -712,10 +767,7 @@
         <div class="container-editempresa"> 
          
             <article  action="/user/edit-perfil" method="POST" name="editPerfil">
-              <!-- <label class="btn-file perfil"> <i class="fa fa-camera"></i> Agregar foto de perfil
-                <input type="file" style="display: none;" value="<%= user.userpic %>" name="userpic">
-              </label> -->
-              
+        
       
               <div class="profile-light-main">
                 <label class=" perfil">
@@ -724,26 +776,7 @@
                   
                 </label>
                 <a href="#" id="button" class="button">Cambiar foto</a>
-                <!-- <label> Nombre y Apellido
-                  <input type="text" class="form-control" placeholder="" value="<%= user.username %>"
-                    name="username">
-                </label> -->
-                <!-- <label> Correo electrónico
-                  <input type="text" class="form-control" placeholder="" value="<%= user.email %>"
-                    name="email">
-                </label> -->
-                <!-- <label> Tipo de industria
-                  <input type="text" class="form-control" placeholder="" value="<%= user.tipoempresa %>"
-                    name="tipoempresa">
-                </label>
-                <label> Direccion
-                  <input type="text" class="form-control" placeholder="" value="<%= user.direccion %>"
-                    name="direccion">
-                </label>
-                <label> Pais origen
-                  <input type="text" class="form-control" placeholder="" value="<%= user.pais %>"
-                    name="pais">
-                </label> -->
+            
                 <button class="button button-block button-primary" id='btn'
                                       type="submit">Guardar
                                       </button>
@@ -760,11 +793,6 @@
               </div>
               
             </article>
-       
-          
-          
-          
-          
           
         </div>
       </section>  

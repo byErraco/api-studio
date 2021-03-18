@@ -466,9 +466,9 @@ userCtrl.renderEditPerfil = async (req, res) => {
 //Actualizar Perfil de Usuario
 userCtrl.editPerfil = async (req, res) => {
     console.log(req.body)
-    const  {cargo,direccion,salario,email,acerca,pais,tipoempresa,userfacebook,usertwitter,usergoogle,userlinkedin,skill_,skill_1,skill_2,skill_3} = req.body
+    const  {cargo,direccion,salario,acerca,pais,tipoempresa,userfacebook,usertwitter,usergoogle,userlinkedin,skill_,skill_1,skill_2,skill_3} = req.body
 
-    await User.findByIdAndUpdate(req.user.id,{$set:{cargo:cargo,direccion:direccion,salario:salario,email:email,acerca:acerca,pais:pais,
+    await User.findByIdAndUpdate(req.user.id,{$set:{cargo:cargo,direccion:direccion,salario:salario,acerca:acerca,pais:pais,
         tipoempresa:tipoempresa,userfacebook:userfacebook,usertwitter:usertwitter,usergoogle:usergoogle,userlinkedin:userlinkedin,
         skill_:skill_,skill_1:skill_1,skill_2:skill_2,skill_3:skill_3}})
     const user = await User.findById(req.user.id)
@@ -664,7 +664,7 @@ userCtrl.eliminarTrabajoAdmin = async (req,res)=> {
     try {
         const userDelete = await Jobs.findByIdAndDelete(id)
         console.log('exito')
-        res.redirect('/user/edit-jobs')
+        res.redirect('/lista-trabajos-admin/1')
         
     } catch (error) {
         console.log(error);
@@ -776,8 +776,8 @@ userCtrl.paymentMembership = async(req, res) => {
                 "payment_method": "paypal"
             },
             "redirect_urls": {
-                "return_url": "http://localhost:4000/user/sucess",
-                "cancel_url": "http://localhost:4000/cancel"
+                "return_url": "http://freelance26.herokuapp.com/user/sucess",
+                "cancel_url": "http://freelance26.herokuapp.com/cancel"
             },
             "transactions": [{
                 "item_list": {
@@ -817,8 +817,8 @@ userCtrl.paymentMembership = async(req, res) => {
                 "payment_method": "paypal"
             },
             "redirect_urls": {
-                "return_url": "http://localhost:4000/user/sucess",
-                "cancel_url": "http://localhost:4000/cancel"
+                "return_url": "http://freelance26.herokuapp.com/user/sucess",
+                "cancel_url": "http://freelance26.herokuapp.com/cancel"
             },
             "transactions": [{
                 "item_list": {

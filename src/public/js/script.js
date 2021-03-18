@@ -1184,7 +1184,7 @@
               form.addClass('form-in-process');
 
               if (output.hasClass("snackbars")) {
-                output.html('<p><span class="icon text-middle fa fa-circle-o-notch fa-spin icon-xxs"></span><span>Sending</span></p>');
+                output.html('<p><span class="icon text-middle fa fa-circle-o-notch fa-spin icon-xxs"></span><span>Enviando...</span></p>');
                 output.addClass("active");
               }
             } else {

@@ -12,7 +12,8 @@
         <div class="container">
           <ul class="breadcrumbs-custom-path">
             <li><a href="/">Inicio</a></li>
-            <li class="active">Freelancer</li>
+            <li><a href="/lista-trabajos-admin/1">Ver anuncios</a></li>
+            <li class="active">Candidatos</li>
           </ul>
         </div>
       </div>
@@ -59,7 +60,7 @@
                             border-radius: 10px 10px 10px 10px;
                             box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);">Ver Perfil</a>
 
-                        
+                            <form action="/administracion/panel/eliminar/<%= applicant.id%>?_method=DELETE" method="POST">
                               <input type="hidden" name="_method" value="DELETE">
                               <button class="button button-primary" style="border-radius: 10px 10px 10px 10px; box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);"id="btSubmit" value="Submit" >
                               <span class="icon mdi mdi-account"></span>
