@@ -177,6 +177,13 @@
                 <article class="company-minimal">
                   <figure class="company-minimal-figure"><img class="company-minimal-image" src="<%= jobs.perfil_img %>" alt="" width="150" height="150"/>
                   </figure>
+                  <form action="/administracion/edit-jobs/eliminar/<%= jobs.id%>?_method=DELETE" method="POST">
+                          
+                    <input type="hidden" name="_method" value="DELETE">
+                    <button class="button button-primary" style="border-radius: 10px 10px 10px 10px; box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);"id="btSubmit" value="Submit" >
+                    <span class="icon mdi mdi-account"></span>
+                    Eliminar</button>
+                  </form>
                   <div class="company-minimal-main">
                     <h5 class="company-minimal-title"><a href="/detalles-trabajo/<%= jobs.id %>"><%= jobs.titulo_trabajo %> </a></h5>
                     <p> <%= jobs.ubicacion %> </p> 
@@ -185,13 +192,7 @@
               </td>
               <td class="table-job-listing-date"><span></span></td>
               <td class="table-job-listing-badge"><span class="badge badge-secondary"> <%= jobs.tipo_trabajo %> </span>
-                <form action="/administracion/edit-jobs/eliminar/<%= jobs.id%>?_method=DELETE" method="POST">
-                          
-                  <input type="hidden" name="_method" value="DELETE">
-                  <button class="button button-primary" style="border-radius: 10px 10px 10px 10px; box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);"id="btSubmit" value="Submit" >
-                  <span class="icon mdi mdi-account"></span>
-                  Eliminar</button>
-                </form>
+                
               </td>
               
             </tr>
