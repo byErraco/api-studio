@@ -177,6 +177,11 @@
                 <article class="company-minimal">
                   <figure class="company-minimal-figure"><img class="company-minimal-image" src="<%= jobs.perfil_img %>" alt="" width="150" height="150"/>
                   </figure>
+                  
+                  <div class="company-minimal-main">
+                    <h5 class="company-minimal-title"><a href="/detalles-trabajo/<%= jobs.id %>"><%= jobs.titulo_trabajo %> </a></h5>
+                    <p> <%= jobs.ubicacion %> </p> 
+                  </div>
                   <form action="/administracion/edit-jobs/eliminar/<%= jobs.id%>?_method=DELETE" method="POST">
                           
                     <input type="hidden" name="_method" value="DELETE">
@@ -184,10 +189,6 @@
                     <span class="icon mdi mdi-account"></span>
                     Eliminar</button>
                   </form>
-                  <div class="company-minimal-main">
-                    <h5 class="company-minimal-title"><a href="/detalles-trabajo/<%= jobs.id %>"><%= jobs.titulo_trabajo %> </a></h5>
-                    <p> <%= jobs.ubicacion %> </p> 
-                  </div>
                 </article>
               </td>
               <td class="table-job-listing-date"><span></span></td>
