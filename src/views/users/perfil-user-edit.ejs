@@ -587,8 +587,35 @@
   <% } if (user.tipo_cuenta == 'Empresa') { %>
     
   <form action="/edit-perfil" method="POST" class="form-edit">
+    
     <section class="hero">
+      
       <div class="container-editempresa"> 
+    
+            <a class="button button-primary" href="/user/edit-jobs" style="
+            border-radius: 10px 10px 10px 10px;
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
+            margin-top: 30px;
+            margin-bottom: 20px;">Ver trabajos anunciados</a>
+            <a class="button button-primary" href="/user/edit-pass" style="
+            border-radius: 10px 10px 10px 10px;
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
+            margin-bottom: 20px;">Cambiar contraseña</a>
+            <a class="button button-primary" href="/anunciar-trabajo" style="
+            border-radius: 10px 10px 10px 10px;
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
+            margin-bottom: 20px;">Publicar un trabajo</a>
+            <!-- <button class="button button-block button-primary" id='btn'
+            type="submit">Guardar
+            </button> -->
+            <button class="button  button-primary" id='btn'
+            type="submit"
+            style="
+            border-radius: 10px 10px 10px 10px;
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
+            margin-top: 30px;
+            margin-bottom: 20px;">Guardar
+            </button>
         <div class="container-empresa">
           <article class="profile-empresa" action="/user/edit-perfil" method="POST" name="editPerfil">
             <!-- <label class="btn-file perfil"> <i class="fa fa-camera"></i> Agregar foto de perfil
@@ -623,16 +650,8 @@
                 <input type="text" class="form-control" placeholder="" value="<%= user.pais %>"
                   name="pais">
               </label>
-              <button class="button button-block button-primary" id='btn'
-                                    type="submit">Guardar
-                                    </button>
-                                    <a class="button button-primary" href="/user/edit-jobs" style="
-            border-radius: 10px 10px 10px 10px;
-            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5); margin-bottom: 20px;">Ver trabajos anunciados</a>
-            <a class="button button-primary" href="/user/edit-pass" style="
-            border-radius: 10px 10px 10px 10px;
-            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
-            margin-bottom: 20px;">Cambiar contraseña</a>
+              
+            
             </div>
             
           </article>
@@ -682,57 +701,58 @@
                 </li>
   
               </ul>
-              <button class="button button-block button-primary profile-light-main" id='btn'
+              <!-- <button class="button button-block button-primary profile-light-main" id='btn'
                                       type="submit">Guardar
-                                      </button>
+                                      </button> -->
+            </div>
+            <div class="container-acercaE">
+          
+              <div class="col-12" action="/user/edit-perfil" method="POST" name="editPerfil" >
+                <p class="heading-9">Acerca de <%= user.username %> </p>
+                <br>
+                
+                <!-- placeholder="Escribe tu descripción aquí" -->
+                <textarea class="form-control"  placeholder="Escribe tu descripción aquí" name="acerca"  > <%= user.acerca %> </textarea>
+    
+                <br>
+                <p class="heading-9">¿Por qué trabajar para <%= user.username %> ? </p>
+                <br>
+    
+                <div class="profile-light-main">
+              
+             
+                  <label> 1.
+                    <input type="text" class="form-control" placeholder="" value="<%= user.skill_ %>"
+                      name="skill_">
+                  </label>
+                  <label> 2.
+                    <input type="text" class="form-control" placeholder="" value="<%= user.skill_1 %>"
+                      name="skill_1">
+                  </label>
+                  <label> 3.
+                    <input type="text" class="form-control" placeholder="" value="<%= user.skill_2 %>"
+                      name="skill_2">
+                  </label>
+                  <label> 4.
+                    <input type="text" class="form-control" placeholder="" value="<%= user.skill_3 %>"
+                      name="skill_3">
+                  </label>
+                  
+                </div>
+    
+                <!-- <button class="button button-block button-primary profile-light-main" id='btn'
+                                            type="submit" >Guardar
+                                            </button> -->
+              </div>
+              
+    
             </div>
             
             
           </article>
         </div>
         
-        <div class="container-acercaE">
-          
-          <div class="col-12" action="/user/edit-perfil" method="POST" name="editPerfil" >
-            <p class="heading-9">Acerca de <%= user.username %> </p>
-            <br>
-            
-            <!-- placeholder="Escribe tu descripción aquí" -->
-            <textarea class="form-control"  placeholder="Escribe tu descripción aquí" name="acerca"  > <%= user.acerca %> </textarea>
-
-            <br>
-            <p class="heading-9">¿Por qué trabajar para <%= user.username %> ? </p>
-            <br>
-
-            <div class="profile-light-main">
-          
-         
-              <label> 1.
-                <input type="text" class="form-control" placeholder="" value="<%= user.skill_ %>"
-                  name="skill_">
-              </label>
-              <label> 2.
-                <input type="text" class="form-control" placeholder="" value="<%= user.skill_1 %>"
-                  name="skill_1">
-              </label>
-              <label> 3.
-                <input type="text" class="form-control" placeholder="" value="<%= user.skill_2 %>"
-                  name="skill_2">
-              </label>
-              <label> 4.
-                <input type="text" class="form-control" placeholder="" value="<%= user.skill_3 %>"
-                  name="skill_3">
-              </label>
-              
-            </div>
-
-            <button class="button button-block button-primary profile-light-main" id='btn'
-                                        type="submit" >Guardar
-                                        </button>
-          </div>
-          
-
-        </div>
+        
         
         
         
