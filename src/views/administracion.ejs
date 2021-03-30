@@ -59,6 +59,10 @@
                     <a class="button button-primary" href="/perfil-user/<%= applicant.id%>" style="
                             border-radius: 10px 10px 10px 10px;
                             box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);">Ver Perfil</a>
+                            <a class="button button-primary" href="/administracion/panel/<%= applicant.id%>" style="
+                              border-radius: 10px 10px 10px 10px;
+                              box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
+                              padding: 14px;">Contraseña</a>
 
                             <form action="/administracion/panel/eliminar/<%= applicant.id%>?_method=DELETE" method="POST">
                               <input type="hidden" name="_method" value="DELETE">

@@ -14,7 +14,7 @@ const UserSchema = new Schema({
     plusExpires: {type: Date,default: null},
     
     ciudad: {type: String, required: true},
-    pais: {type: String, required: true},
+    pais: {type: String, },
     acerca: {type: String},
     skill_: {type: String},
     skill_1: {type: String},

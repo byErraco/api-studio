@@ -31,7 +31,10 @@ const { renderPerfilUser,
         eliminarTrabajo,
         eliminarTrabajoAdmin,
         renderEditPass,
+        renderEditPassUsers,
         updateDatos,
+        updateDatosUser,
+        
         renderListaCandidatosPanel,
         isPlus,
         logout } = require('../controllers/user.controller');
@@ -59,6 +62,7 @@ router.get('/user/edit-jobs',isAuthenticated,renderEditJob);
 
 router.get('/user/edit-pass',isAuthenticated,renderEditPass);
 router.post('/user/update-datos', updateDatos);
+
 
 
 router.delete('/user/edit-jobs/eliminar/:id', eliminarTrabajo)
@@ -153,6 +157,10 @@ router.post('/user/signup-enterprise', signup);
 router.get('/user/logout', logout);
 
 router.get('/administracion/panel', isAuthenticated,renderPanel)
+router.get('/administracion/panel/:id', isAuthenticated,renderEditPassUsers)
+router.post('/administracion/panel/update',isAuthenticated, updateDatosUser)
+
+
 router.get('/administracion/signup_', renderSignupFormAdmin)
 router.post('/administracion/signup_', signupAdmin);
 
@@ -164,6 +172,10 @@ router.delete('/administracion/edit-jobs/eliminar/:id',isAuthenticated, eliminar
 
 
 router.delete('/administracion/panel/eliminar/:id',isAuthenticated, eliminarUsuario)
+
+router.get('/user/update-datos', updateDatos);
+
+
 router.get('/administracion/panel/candidatos/:page',isAuthenticated, renderPanel);
 
 

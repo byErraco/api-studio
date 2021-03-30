@@ -194,7 +194,7 @@ userCtrl.renderLoginForm =  (req, res) => {
 userCtrl.renderLoginFormAdmin =  (req, res) => {
     res.render('signin-admin')
 }
-var sum = 1;
+
 //Inicio de Sesion 
 
 //    userCtrl.login = passport.authenticate('local', {
@@ -244,13 +244,13 @@ userCtrl.login =  (req,res,next) => {
                     }else {
                         if( user.isNewUser === "plus" ){
                             let diff = date1.getTime() - dateMem.getTime()
-                            console.log(diff)
+                            
         
                             let msInDay = 1000 * 3600 * 24;
-                            console.log(msInDay)
+                            
                             
                             result = diff/msInDay
-                            console.log(result)
+                            
                             
                             if( result <= 30){
                                 
@@ -261,19 +261,16 @@ userCtrl.login =  (req,res,next) => {
                             if(result >= 30) {
                                 const status_basic = 'basico'
                                 const plusExp = null
-                                console.log(plusExp)
-
+                              
                                 async function setToBasic() {
                                     const status_user = await User.findByIdAndUpdate(req.user.id,{$set:{isNewUser:status_basic,plusExpires:plusExp}})
-                                     console.log(status_user)
+                                    
                                   }
                                   setToBasic();
                             
                                 
                                 res.redirect('/user/membresia')
                             }
-                            
-                        }else {
                             
                         }
                     }              
@@ -500,22 +497,64 @@ userCtrl.updateDatos = async (req, res) => {
             errors
          });
      }
- 
      else {
          // Si el correo ya existe
          await User.findByIdAndUpdate(req.user.id,{$set:{password:password}})
-         console.log('YES')
+         
             const user = await User.findById(req.user.id)
             user.password = await user.encryptPassword(password)
             await user.save()
             res.render('./users/perfil-user-edit', {user})
+         }
+}
 
+userCtrl.updateDatosUser = async (req, res) => {
+    let errors = [];
+ 
+    
+    console.log(req.body)
+    const  {password, password_confirm,userid,test,username } = req.body
+    console.log(userid)
+    console.log(username)
+    
+    if (password != password_confirm) {
+        // req.flash('message','las contrasenas no coinciden');
+        // res.redirect('/user/signup');
+         console.log('ERROR CONTRASENA NO ES IGUAL')
+         errors.push({ text: "Las Contraseñas no coinciden!!!." });
+     }
+     if (password.length < 4) {
+         errors.push({ text: "La Contraseña debe tener al menos 4 digitos !!!!!!!!." });
+     }
+     if (errors.length > 0) {
+         //  res.redirect('/user/signup');
+         //const alert = errors.array()
+          console.log(errors);
+          ///console.log(alert)
+          console.log('errores')
+          
+          res.render('./users/sucess-password', {
+            errors
+         });
+     }
+     else {
+         // Si el correo ya existe
+        try {
+            await User.findByIdAndUpdate(userid,{$set:{password:password}})
+            console.log('YES')
+               const user = await User.findById(userid)
+               user.password = await user.encryptPassword(password)
+               await user.save()
+               res.render('./users/sucess-password', {user})
+        } catch (error) {
+            console.log(error)
+        }
          }
 
     
-     
-    
+
 }
+
 
 userCtrl.renderEditJob = async (req, res) => {
     const user = req.user;
@@ -634,9 +673,15 @@ userCtrl.renderEditJobs = async (req, res) => {
 }
 userCtrl.renderEditPass = async (req, res) => {
    
-
+    console.log(req.params)
      res.render('./users/cambio-pass')
 }
+userCtrl.renderEditPassUsers = async (req, res) => {
+   
+    const userid = req.params.id
+     res.render('./users/cambio-pass-admin', {userid})
+}
+
 
 
 userCtrl.eliminarTrabajo = async (req,res)=> {
@@ -776,8 +821,8 @@ userCtrl.paymentMembership = async(req, res) => {
                 "payment_method": "paypal"
             },
             "redirect_urls": {
-                "return_url": "http://freelance26.herokuapp.com/user/sucess",
-                "cancel_url": "http://freelance26.herokuapp.com/cancel"
+                "return_url": "http://localhost:4000/user/sucess",
+                "cancel_url": "http://localhost:4000/cancel"
             },
             "transactions": [{
                 "item_list": {
