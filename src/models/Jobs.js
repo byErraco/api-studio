@@ -6,7 +6,7 @@ const JobsSchema = new Schema({
     email: {type: String, required: true},
     tipo_trabajo: {type: String, required: true},
     ubicacion: {type: String, required: true},
-    salario: {type: Number, required: true},
+    salario: {type: String, required: true},
     cat_trabajo: {type: String, required: true},
     etiqueta: { type: String },
     url: {type: String},
