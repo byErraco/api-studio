@@ -256,8 +256,8 @@ const filtro_cat = req.body.categoria ||
     'Soporte Administrativo',
     'Consultoría y Contabilidad',
     'Marketing Online',
+    'Otros',
     'Cursos',
-    'Otros'
   ]
 if (req.user) {
     const tipo_cuenta = req.user.tipo_cuenta;
