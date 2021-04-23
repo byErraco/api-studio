@@ -14,7 +14,7 @@
                   <ul class="profile-light-list">
                     <li><span class="icon icon-sm mdi mdi-map-marker"></span><span> <%= user.pais %> </span></li>
                     <li><span class="icon icon-sm mdi mdi-cash"></span><span>$<%= user.salario %> , p.a minimo</span></li>
-                    <li><span class="icon icon-sm mdi mdi-cash"></span><span><%= user.email %></span></li>
+                    <!-- <li><span class="icon icon-sm mdi mdi-cash"></span><span><%= user.email %></span></li> -->
                   </ul>
                 </div>
               </article>
@@ -130,12 +130,8 @@
               <div class="row row-30 row-lg-50">
                 <div class="col-md-6 col-lg-12">
                   <!-- RD Mailform-->
-                  <form class="rd-mailform form-corporate form-spacing-small form-corporate_sm" data-form-output="form-output-global"  onsubmit="return submitUserForm();" data-form-type="contact" method="post" action="/send-mail-user">
+                  <!-- <form class="rd-mailform form-corporate form-spacing-small form-corporate_sm" data-form-output="form-output-global"   data-form-type="contact" method="POST" action="/send-mail-user" onsubmit="return submitUserForm();">
                     <h4>Contactar</h4>
-                    
-                    
-                      
-                    
                     <div class="form-wrap">
                       <label class="form-label" for="contact-name">Nombre y Apellido</label>
                       <input class="form-input" id="contact-name" type="text" name="name" data-constraints="@Required">
@@ -152,15 +148,15 @@
                       <label class="form-label" for="contact-message">Asunto</label>
                       <textarea class="form-input" id="contact-message" name="message" data-constraints="@Required"></textarea>
                     </div>
-                    <label class="form-label" for="contact-email_user" hidden><%= user.email %></label>
+                     <label class="form-label" for="contact-email_user" hidden><%= user.email %></label> 
                     <input class="form-input" id="contact-email_user" type="text" name="email_user" data-constraints="@Required" value="<%= user.email %>" hidden>
                     <div class="g-recaptcha" data-sitekey="6Lfw-IwaAAAAAJIZCeMlNOiuKov01K1fYnAZMX4x" data-callback="verifyCaptcha"></div>
-                    <div id="g-recaptcha-error"></div>
+                    <div id="g-recaptcha-error"></div> 
                     <div class="form-wrap">
                       <button class="button button-block button-primary" type="submit" value="Submit" name="submit">Enviar mensaje</button>
                     </div>
-                   
-                  </form>
+                  </form> -->
+                  
                 </div>
               </div>
             </div>

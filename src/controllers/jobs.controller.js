@@ -252,12 +252,11 @@ const filtro_cat = req.body.categoria ||
     'Diseño Gráfico',
     'Traducciones',
     'Edición de Imágenes',
-    'Desarrollador Web',
-    'Desarrollador Movil',
-    'Desarrollador de Software',
+    'Desarrollor web, móvil y software',
     'Soporte Administrativo',
     'Consultoría y Contabilidad',
     'Marketing Online',
+    'Cursos',
     'Otros'
   ]
 if (req.user) {

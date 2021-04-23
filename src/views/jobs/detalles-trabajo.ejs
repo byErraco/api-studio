@@ -227,37 +227,39 @@
                     <label class="form-label" for="contact-name">
                       <%= user.username%>
                     </label>
+                    
                     <input class="form-input" id="contact-name" type="text" name="name" value="<%= user.username%>"
                       readonly='readonly' disabled='disable' data-constraints="@Required">
                     <input type="hidden" name="name_applicant" value="<%= user.username%>">
                   </div>
                   <div class="form-wrap">
-                    <label class="form-label" for="contact-email">
+                    <!-- <label class="form-label" for="contact-email">
                       <%= user.email%>
                     </label>
                     <input class="form-input" id="contact-email" type="email" name="email" value="<%= user.email%>"
                       readonly='readonly' disabled='disable' data-constraints="@Required">
-                    <input type="hidden" name="email_applicant" value="<%= user.email%>" </div>
+                    <input type="hidden" name="email_applicant" value="<%= user.email%>" </div> -->
                     <div class="form-wrap">
-                      <label class="form-label" for="contact-phone">Phone</label>
+                      <!-- <label class="form-label" for="contact-phone">Teléfono</label>
                       <input class="form-input" id="contact-phone" type="text" name="phone_applicant"
-                        data-constraints="@PhoneNumber">
+                        data-constraints="@PhoneNumber" hi> -->
                     </div>
                     <div class="form-wrap">
-                      <label class="form-label" for="contact-message">Message</label>
+                      <label class="form-label" for="contact-message">Mensaje</label>
                       <textarea class="form-input" id="contact-message" name="message"
                         data-constraints="@Required"></textarea>
+                        <input class="form-input" id="contact-email_user" type="text" name="email_user" data-constraints="@Required" value="<%= userCreador.email %>" hidden>
                     </div>
                     <div class="form-wrap">
                       <input type="hidden" name='id_applicant' value="<%= user.id%>">
                       <% if (detailsJobs) { %>
-                        <input type="hidden" , name="id_jobs" value="<%= detailsJobs.id %>">
+                        <input type="hidden"  name="id_jobs" value="<%= detailsJobs.id %>">
                         <% } %>
-                          <button class="button button-block button-primary" type="submit">Send Message</button>
+                          <button class="button button-block button-primary" type="submit">Enviar mensaje</button>
                     </div>
                 </form>
             </div>
-            <article class="message-bubble">
+            <!-- <article class="message-bubble">
               <div class="message-bubble-inner">
                 <div class="icon mdi mdi-map-marker icon-sm text-primary"></div>
                 <div class="message-bubble-main">
@@ -265,7 +267,7 @@
                   <p>Email:&nbsp;<a href="mailto:#">info@demolink.org</a></p>
                 </div>
               </div>
-            </article>
+            </article> -->
             <% } else { %>
               <article class="message-bubble">
                 <div class="message-bubble-inner">
