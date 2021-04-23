@@ -821,8 +821,8 @@ userCtrl.paymentMembership = async(req, res) => {
                 "payment_method": "paypal"
             },
             "redirect_urls": {
-                "return_url": "http://localhost:4000/user/sucess",
-                "cancel_url": "http://localhost:4000/cancel"
+                "return_url": "http://freelance26.herokuapp.com/user/sucess",
+                "cancel_url": "http://freelance26.herokuapp.com/cancel"
             },
             "transactions": [{
                 "item_list": {
