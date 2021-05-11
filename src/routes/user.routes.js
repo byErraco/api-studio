@@ -34,11 +34,13 @@ const { renderPerfilUser,
         renderEditPassUsers,
         updateDatos,
         updateDatosUser,
+        renderChat,
         
         renderListaCandidatosPanel,
         isPlus,
         logout } = require('../controllers/user.controller');
-const { isAuthenticated,renderPanel,eliminarUsuario } = require('../helpers/auth');
+const { isAuthenticated,renderPanel,eliminarUsuario, renderPanelPagos, eliminarUsuarioPago, renderPanelReportesPagos } = require('../helpers/auth');
+const { getchatPage } = require('../controllers/privatechat.controller');
 
 //Ruta de lista de freelancers
 router.get('/candidatos/:page', renderListaCandidatos);
@@ -47,6 +49,8 @@ router.get('/candidatos/:page', renderListaCandidatos);
 //Ruta de perfil de freelancer
 router.get('/perfil-user/:id', renderPerfilUser);
 router.get('/perfil-user/:id', descargarCv);
+router.get('/user/chat/:id&:iduser',isAuthenticated,getchatPage);
+
 // router.get('/perfil-user/:id', function (req,res) {
 //     res.download(__dirname+'/uploads/'+req.params.id)
 // });
@@ -114,6 +118,7 @@ router.get('/user/membresia', isAuthenticated,renderMembership);
 router.post('/user/pay',isAuthenticated,paymentMembership);
 router.get('/user/sucess', isAuthenticated,renderMembershipSucess);
 // router.get('/user/sucess',paymentMembership);
+
 router.get('/', (req, res) => {
     const payerId = req.query.PayerID;
     const paymentId = req.query.paymentId;
@@ -135,11 +140,11 @@ router.get('/', (req, res) => {
           throw error;
           
       } else {
-          console.log(JSON.stringify(payment));
-          console.log('pagoooooooo')
+         
+          console.log('pago')
 
       }
-      console.log('exitooooooooo')
+      console.log('exito')
   });
   });
 
@@ -157,7 +162,13 @@ router.post('/user/signup-enterprise', signup);
 router.get('/user/logout', logout);
 
 router.get('/administracion/panel', isAuthenticated,renderPanel)
+router.get('/administracion/pagos', isAuthenticated,renderPanelPagos)
+router.get('/administracion/reportes', isAuthenticated,renderPanelReportesPagos)
+
+router.delete('/administracion/eliminar/:id',isAuthenticated, eliminarUsuarioPago)
+
 router.get('/administracion/panel/:id', isAuthenticated,renderEditPassUsers)
+
 router.post('/administracion/panel/update',isAuthenticated, updateDatosUser)
 
 

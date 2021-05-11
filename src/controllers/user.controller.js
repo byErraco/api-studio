@@ -36,6 +36,8 @@ userCtrl.renderChooseSignupOption = (req, res) => {
     res.render('users/choose-signup-option')
 }
 
+
+
 //Vista de formulario de Signup 
 userCtrl.renderSignupForm = (req, res) => {
     res.render('users/signup')
@@ -47,14 +49,16 @@ userCtrl.renderMembership = (req, res) => {
     res.render('users/membresia')
 }
 userCtrl.renderMembershipSucess = async (req, res) => {
+    console.log(req.query);
+    console.log(req.params);
+    const datos = req.query;
     const status = 'plus'
     const status_basic = 'basico'
     const plusExp = new Date()
-    console.log(plusExp)
     const status_user = await User.findByIdAndUpdate(req.user.id,{$set:{isNewUser:status,plusExpires:plusExp}})
+    console.log(status_user);
     //await User.createIndex(req.user.id,{creationDate:1}, {expireAfterSeconds:2592000, partialFilterExpression: {isNewUser: {$eq: "basico"}}})
-    console.log(status_user)
-    res.render('users/sucess')
+    res.render('users/sucess', {status_user,datos})
 }
 userCtrl.renderSignupFormAdmin = (req, res) => {
     res.render('signup-admin')
@@ -189,7 +193,11 @@ userCtrl.signupAdmin = async (req, res) => {
 
 //Vista de formulario de Login
 userCtrl.renderLoginForm =  (req, res) => {
+    console.log('aaaaaa');
     res.render('users/signin')
+}
+userCtrl.renderChat = (req, res) => {
+    res.render('users/privatechat')
 }
 userCtrl.renderLoginFormAdmin =  (req, res) => {
     res.render('signin-admin')
@@ -245,14 +253,14 @@ userCtrl.login =  (req,res,next) => {
                         if( user.isNewUser === "plus" ){
                             let diff = date1.getTime() - dateMem.getTime()
                             
-        
+                            
                             let msInDay = 1000 * 3600 * 24;
                             
                             
                             result = diff/msInDay
                             
                             
-                            if( result <= 30){
+                            if( result <= 365){
                                 
                                 
                                 
@@ -368,6 +376,9 @@ userCtrl.logout = (req, res) => {
 userCtrl.renderListaCandidatos = async (req, res) => {
     if (req.query.buscar_free) {
         if (req.user) {
+            const userlog = req.user;
+            console.log(userlog);
+            console.log('usuario');
             const tipo_cuenta = req.user.tipo_cuenta;
             const buscar_free = req.query.buscar_free;
             const xPage = 6;
@@ -382,11 +393,12 @@ userCtrl.renderListaCandidatos = async (req, res) => {
                         if (err) {
                             console.log('error en el conteo')
                         } else {
-                            res.render('./users/candidatos', { tipo_cuenta, applicant, current: page, pages: Math.ceil(count / xPage) })
+                            res.render('./users/candidatos', { userlog,tipo_cuenta, applicant, current: page, pages: Math.ceil(count / xPage) })
                         }
                     })
                 })
         } else {
+            const userlog = req.user;
             const buscar_free = req.query.buscar_free;
             const xPage = 6;
             const page = req.params.page || 1;
@@ -400,13 +412,16 @@ userCtrl.renderListaCandidatos = async (req, res) => {
                         if (err) {
                             console.log('error en el conteo')
                         } else {
-                            res.render('./users/candidatos', { applicant, current: page, pages: Math.ceil(count / xPage) })
+                            res.render('./users/candidatos', { applicant,userlog, current: page, pages: Math.ceil(count / xPage) })
                         }
                     })
                 })
         }
     }
     if (req.user) {
+        const userlog = req.user;
+        console.log(userlog);
+        console.log('usuario2');
         const tipo_cuenta = req.user.tipo_cuenta;
         const xPage = 6;
         const page = req.params.page || 1;
@@ -416,12 +431,15 @@ userCtrl.renderListaCandidatos = async (req, res) => {
                     console.log('error1')
                 } else {
                     res.render('./users/candidatos', {
-                        tipo_cuenta, applicant, current: page, pages: Math.ceil(count / xPage)
+                        tipo_cuenta,userlog, applicant, current: page, pages: Math.ceil(count / xPage)
                     })
                 }
             })
         })
     } else {
+        const userlog = req.user;
+        console.log(userlog);
+        console.log('no usuario');
         const xPage = 4;
         const page = req.params.page || 1;
         const applicant = await User.find({ tipo_cuenta: 'Freelancer' }).skip((xPage * page) - xPage).limit(xPage).exec((error, applicant) => {
@@ -430,7 +448,7 @@ userCtrl.renderListaCandidatos = async (req, res) => {
                     console.log('error1')
                 } else {
                     res.render('./users/candidatos', {
-                        applicant, current: page, pages: Math.ceil(count / xPage)
+                        userlog,applicant, current: page, pages: Math.ceil(count / xPage)
                     })
                 }
             })
@@ -443,12 +461,16 @@ userCtrl.renderPerfilUser = async (req, res) => {
     if (req.user) {
         if (req.user.tipo_cuenta === 'Empresa') {
             const empresa = req.user.tipo_cuenta;
+            const username = req.user.username;
+            const idempresa = req.user.id;
             const user = await User.findById(req.params.id)
-            res.render('./users/perfil-user', { empresa, user })
+            console.log('yes');
+            res.render('./users/perfil-user', { empresa, user,idempresa,username })
         }
     }
     const user = await User.findById(req.params.id)
-    res.render('./users/perfil-user', { user })
+ 
+    res.render('./users/perfil-user-public', { user })
 };
 
 //Vista de Formulario de editar perfil
@@ -829,14 +851,14 @@ userCtrl.paymentMembership = async(req, res) => {
                     "items": [{
                         "name": "Membresia ",
                         "sku": "001",
-                        "price": "2.00",
+                        "price": "12.00",
                         "currency": "USD",
                         "quantity": 1
                     }]
                 },
                 "amount": {
                     "currency": "USD",
-                    "total": "2.00"
+                    "total": "12.00"
                 },
                 "description": "Subscripcion membresia"
             }]

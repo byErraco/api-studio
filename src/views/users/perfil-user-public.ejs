@@ -36,11 +36,7 @@
                   
                   <a class="button button-lg button-primary-outline" href="<%= user.cvfilename %>">Descargar CV</a> -->
 
-                  <%if (empresa) { %>
-                    <a class="button button-primary btn-candidatos" href="/user/chat/<%= user.id%>&<%=idempresa%>" style="
-                      border-radius: 10px 10px 10px 10px;
-                      box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);">Sala de chat</a>
-                  <% } %>
+                 
                   
                 </div>
               </div>
@@ -138,26 +134,32 @@
               <div class="row row-30 row-lg-50">
                 <div class="col-md-6 col-lg-12">
                   <!-- RD Mailform-->
-                   <form class="rd-mailform form-corporate form-spacing-small form-corporate_sm" data-form-output="form-output-global"   data-form-type="contact" method="POST" action="/send-mail-user" onsubmit="return submitUserForm();">
+                  <!-- <form class="rd-mailform form-corporate form-spacing-small form-corporate_sm" data-form-output="form-output-global"   data-form-type="contact" method="POST" action="/send-mail-user" onsubmit="return submitUserForm();">
                     <h4>Contactar</h4>
                     <div class="form-wrap">
-                      <input class="form-input" type="text" name="username" type="hidden"  value="<%= username %>">
+                      <label class="form-label" for="contact-name">Nombre y Apellido</label>
+                      <input class="form-input" id="contact-name" type="text" name="name" data-constraints="@Required">
                     </div>
                     <div class="form-wrap">
-                      <input class="form-input"  type="text" name="email_user" type="hidden"  value="<%= user.email %>">
+                      <label class="form-label" for="contact-email">E-mail</label>
+                      <input class="form-input" id="contact-email" type="email" name="email" data-constraints="@Required @Email">
+                    </div>
+                    <div class="form-wrap">
+                      <label class="form-label" for="contact-phone">Teléfono</label>
+                      <input class="form-input" id="contact-phone" type="text" name="phone" data-constraints="@PhoneNumber">
                     </div>
                     <div class="form-wrap">
                       <label class="form-label" for="contact-message">Asunto</label>
                       <textarea class="form-input" id="contact-message" name="message" data-constraints="@Required"></textarea>
                     </div>
- 
-                    <!-- <input class="form-input" id="contact-email_user" type="text" name="email_user" data-constraints="@Required" value="<%= user.email %>" hidden> -->
-                   <div class="g-recaptcha" data-sitekey="6Lfw-IwaAAAAAJIZCeMlNOiuKov01K1fYnAZMX4x" data-callback="verifyCaptcha"></div>
+                     <label class="form-label" for="contact-email_user" hidden><%= user.email %></label> 
+                    <input class="form-input" id="contact-email_user" type="text" name="email_user" data-constraints="@Required" value="<%= user.email %>" hidden>
+                    <div class="g-recaptcha" data-sitekey="6Lfw-IwaAAAAAJIZCeMlNOiuKov01K1fYnAZMX4x" data-callback="verifyCaptcha"></div>
                     <div id="g-recaptcha-error"></div> 
                     <div class="form-wrap">
                       <button class="button button-block button-primary" type="submit" value="Submit" name="submit">Enviar mensaje</button>
                     </div>
-                  </form> 
+                  </form> -->
                   
                 </div>
               </div>

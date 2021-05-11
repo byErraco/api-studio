@@ -25,6 +25,7 @@ router.post('/send-mail', async (req,res) => {
         <p>${message}</p>
     `;
     console.log(contentHTML)
+    console.log("Contacto");
     const transporter = nodemailer.createTransport({
         host: 'mail.studio73pty.com',
         port: 587,
@@ -41,11 +42,12 @@ router.post('/send-mail', async (req,res) => {
     try {
         const info = await transporter.sendMail({
             from: "'Studio73pty Server' <test_web@studio73pty.com>",
-            to: email,
+            to: "info@freelance26.com",
             subject:'Webiste contact form',
             //text:'hello world'
             html: contentHTML
         })
+     
         console.log('message sent', info.messageId)
         res.render('contacto', {msg: 'Email enviado'})
     } catch (error) {
@@ -58,17 +60,15 @@ router.post('/send-mail', async (req,res) => {
 router.post('/send-mail-user/', async (req,res) => {
     
 
-    const { name, email, phone, message, email_user } = req.body;
+    const { username, email, message, email_user } = req.body;
+    console.log(username)
     console.log(email_user)
-    console.log(email)
 
 
     contentHTML = `
         <h1>Información de usuario</h1>
         <ul>
-            <li>Nombre de usuario: ${name}</li>
-            <li>Correo electrónico: ${email}</li>
-            <li>Número de contacto: ${phone}</li>
+            <li>Nombre de usuario: ${username}</li>
         </ul>
         <p>${message}</p>
     `;
@@ -85,11 +85,11 @@ router.post('/send-mail-user/', async (req,res) => {
             rejectUnauthorized: false
         }
     })
-
     try {
         const info = await transporter.sendMail({
-            from: `'Studio73pty Server' <${email}>`,
-            to: email_user,
+            from: "'Studio73pty Server' <test_web@studio73pty.com>",
+            to: `${email_user}`,
+            
             subject:'Alguien quiere contactar contigo!',
             //text:'hello world'
             html: contentHTML

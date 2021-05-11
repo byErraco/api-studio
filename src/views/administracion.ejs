@@ -42,20 +42,46 @@
               <article class="profile-minimal">
                 <div class="profile-minimal-inner">
                   <div class="profile-minimal-main-outer">
-                    <div class="profile-minimal-main"><img class="profile-minimal-image"
+                    <div class="profile-minimal-main">
+                      <%if (applicant.username) { %>
+                        <img class="profile-minimal-image"
                         src="<%= applicant.filename %>" alt="" width="101" height="96" />
+                        <% } %>
+
+                      <%if (applicant.payed_user) { %>
+                        <img class="profile-minimal-image"
+                        src="https://i.imgur.com/mEtjVNd.png" alt="" width="101" height="96" />
+                        <% } %>
+                      
                       <div class="profile-minimal-main-info">
-                        <h5 class="profile-minimal-name"><a href="/perfil-user/<%= applicant.id%>">
-                            <%= applicant.username%>
+                        <h5 class="profile-minimal-name">
                             
-                          </a></h5>
-                        <p><%= applicant.salario%> $</p>
+                            <%if (applicant.username) { %>
+                              <%= applicant.username%> 
+                              <% } %>
+                              <%if (applicant.payed_user) { %>
+                                <a href="/perfil-user/<%= applicant.id_applicant%>"> Usuario a espera de pago: <%= applicant.payed_user%></a>
+                                <% } %>
+                                
+                            
+                          </h5>
+                          <%if (applicant.payed_user) { %>
+                            <a href="/detalles-trabajo/<%= applicant.id_jobs%>"> Ir al anuncio</a>
+                            <% } %>
+                        <p><%= applicant.salario%> <%= applicant.monto_pago%> $</p>
+                        
+                        <%if (applicant.payed_user) { %>
+                          <p>Correo freelancer : <%= applicant.email_applicant%> </p>
+                          <p>Correo empleador : <%= applicant.email_employe%> </p>
+                        <% } %>
+                 
+                        
                         <p class="profile-minimal-position"><%= applicant.cargo%></p>
                       </div>
                     </div>
                   </div>
                   <div class="profile-minimal-meta">
-  
+                    <%if (applicant.username) { %>
                     <a class="button button-primary" href="/perfil-user/<%= applicant.id%>" style="
                             border-radius: 10px 10px 10px 10px;
                             box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);">Ver Perfil</a>
@@ -70,6 +96,16 @@
                               <span class="icon mdi mdi-account"></span>
                               Eliminar</button>
                             </form>
+                            <% } %>
+
+                            <%if (applicant.payed_user) { %>
+                              <form action="/administracion/eliminar/<%= applicant.id%>?_method=DELETE" method="POST">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <button class="button button-primary" style="border-radius: 10px 10px 10px 10px; box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);"id="btSubmit" value="Submit" >
+                                <span class="icon mdi mdi-account"></span>
+                                Eliminar</button>
+                              </form>
+                            <% } %>
                   </div>
                 </div>
               </article>

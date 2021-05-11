@@ -13,15 +13,28 @@ const moment = require('moment')
 const multer = require('multer');
 const paypal = require('paypal-rest-sdk');
 const adminRouter = require('./routes/admin.router')
+const socketio = require('socket.io')
+const http = require('http')
 
 //Inicializacion
 const app = express();
+const server = http.createServer(app);
+const io = socketio(server);
+
+
 require('./config/passport')
 
 //Configuracion
 app.set("port", process.env.PORT || 4000);
+
+
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", ".ejs");
+
+server.listen(app.get('port'), () => {
+  console.log('Server on port', app.get('port'));
+  console.log('Environment:', process.env.NODE_ENV);
+})
 
 
 
@@ -35,6 +48,37 @@ paypal.configure({
 
 
 //Middlewares
+
+io.on('connection', (socket) => {
+  console.log('a user connected');
+
+  socket.emit('message','Welcome to chatlance')
+
+
+  //aviso cuando  usuario se conecta
+
+  socket.broadcast.emit();
+  socket.on('join',(params,callback)=>{
+    socket.join(params);
+    callback();
+  })
+
+
+  socket.on('chatMessage', (msg,callback) => {
+    // io.emit('message')
+    console.log(msg);
+    console.log('Recibido, enviando a cliente');
+    io.to(msg.room).emit('newMessage',{
+      text: msg.text,
+      room: msg.room,
+      from: msg.sender
+    });
+    callback();
+  })
+
+
+});
+
 app.use(morgan('dev'));
 app.use(express.urlencoded({extended: false}));
 app.use(methodOverride('_method'));
@@ -56,7 +100,6 @@ app.use(multer({
 }).single('usercv'))
 
 
-app.use('/admin',adminRouter)
 
 //Variablles Globales
 app.use((req, res, next) => {
@@ -89,6 +132,7 @@ app.use(express.static(path.join(__dirname, 'public')));
   res.status(404).render('/contacto');
   next();
 });*/
+
 
 
 module.exports = app;

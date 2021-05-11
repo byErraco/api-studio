@@ -159,17 +159,46 @@
                           <div class="company-minimal-main">
                             <h5 class="company-minimal-name"><a href="/perfil-user/<%= applications.id_applicant %>">
                                 <%= applications.name_applicant %>
-                              </a></h5>
-                            <p>Email: <%= applications.email_applicant %>
-                            </p> || Phone:<p>
-                              <%= applications.phone_applicant %>
-                            </p>
+                              </a>
+                            </h5>
+                            <p>
+                              <div hidden>Email: <%= applications.email_applicant %></div>
+                              
                             
                             <hr>
                             <p>
                               <%= applications.message %>
                             </p>
+                            <form class=" form-corporate form-spacing-small form-corporate_sm"
+                            data-form-output="form-output-global" data-form-type="contact" method="POST"
+                            action="/appli/pay">
+                            <h4>Trabajo listo? Págale al freelance</h4>
+                            <div class="form-wrap">
+                              <!-- <label class="form-label" for="contact-name">
+                                <%= user.username%>
+                              </label> -->
+                              <!-- <input class="form-input" type="hidden" name="id_applicant" value="<%= applications.id_applicant%>"
+                                readonly='readonly' disabled='disable' data-constraints="@Required"> -->
+                                <!-- <input class="form-input"  type="text" name="salario" value="<%= detailsJobs.salario %> $"
+                                readonly='readonly' disabled='disable' data-constraints="@Required"> -->
+                              <!-- <input class="form-input"  type="hidden" name="email_applicant" value="<%= applications.email_applicant%>"
+                                readonly='readonly' disabled='disable' data-constraints="@Required"> -->
+                              <input type="hidden" name="id_applicant" value="<%= applications.id_applicant%>">
+                              <input type="hidden" name="salario" value="<%= detailsJobs.salario %>">
+                              <input type="hidden" name="email_applicant" value="<%= applications.email_applicant %>">
+                              <input type="hidden" name="name_applicant" value="<%= applications.name_applicant %>">
+                              <input type="hidden"  name="id_jobs" value="<%= detailsJobs.id %>">
+                              <input type="hidden"  name="email" value="<%= detailsJobs.email %>">
+                              
+                            </div>
+     
+                              <div class="form-wrap">
+                                <p>Una vez verificado el pago, se le reenviara al freelancer</p>
+                                <button class="button button-block button-primary" type="submit">Pagar</button>
+                              </div>
+                          </form>
                           </div>
+                          
                         </article>
                       </td>
                     </tr>
@@ -231,6 +260,7 @@
                     <input class="form-input" id="contact-name" type="text" name="name" value="<%= user.username%>"
                       readonly='readonly' disabled='disable' data-constraints="@Required">
                     <input type="hidden" name="name_applicant" value="<%= user.username%>">
+                    <input type="hidden" name="email_applicant" value="<%= user.email%>">
                   </div>
                   <div class="form-wrap">
                     <!-- <label class="form-label" for="contact-email">

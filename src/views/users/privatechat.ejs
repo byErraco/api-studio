@@ -1,0 +1,130 @@
+<%- include ('../partials/header'); %>
+<section class="section section-sm sala-chat conreg">
+    <% if (user) { %>
+
+    <div class="col-lg-4">
+        <div class="row row-30 row-lg-50">
+            <div class="col-md-6 col-lg-12">
+                    <section class="cont-profile">
+                        <article  class="perfil">
+                            <div class="profile-light-main">
+                            <label class=" perfil">
+                                <img class="profile-light-image" src="<%= user.filename %>" alt="" width="169" height="169">
+                            </label>
+                            <a href="#" class="button">Nombre: <%= user.username %></a>
+                            </div>
+   
+                            <!-- <h4>Grupo de chat de:  </h4>
+                            <div class="form-wrap">
+                                <input class="form-input" id="contact-name" type="text" name="name" style="    margin-left: 25px;" value="<%= userc.username%>"
+                                readonly='readonly' disabled='disable' data-constraints="@Required">
+
+                                
+                            </div> -->
+                        </article>
+
+                        <div>
+                            <div class="hero-content" style="display: grid; padding-left: 10rem;">
+                              
+                              
+                              <div class="container-acercaE" style="width: 100vw;">
+                                
+                                <div class="" style="width: 100%;" >
+                                  
+                                    <div class="col-sm-5 col-md-6 message_section">
+                                        <h3>Sala de Chat de <%= userc.username%> </h3>
+                               
+                                
+                                        <div class="row">
+                                            <!-- <div class="new_message_head">
+                                                <div class="pull-left">
+                                                <button id="receiver_name"></button>
+                                                </div>
+                                                <div class="pull-right">
+                                                </div>
+                                            </div> -->
+                                    
+                                            <div class="chat_area">
+                                                <ul id="messages" class="list-unstyled">
+                                                     <!-- <div class="mensaje">
+                                                        <li class="left">
+                                                            <div class="chat-body1">
+                                                                <span class="chat-name">Username</span>
+                                                                <br>
+                                                             Body del mensaje
+                                                            </div>
+                                                         </li> 
+                                                     </div>  -->
+
+                                                    <!-- <script id="message-template" type="text/template">
+                                                     <li class="left">
+                                                       <div class="chat-body1">
+                                                           <span class="chat-name">{{sender}}</span>
+                                                           <br>
+                                                        {{text}}
+                                                       </div>
+                                                    </li> 
+                                                    </script> -->
+                                                    
+                                                        <!-- <li class="left">
+                                                    
+                                                           <div class="chat-body1">
+                                                               <span class="chat-name"></span>
+                                                               <br>
+                                                               
+                                                           </div>
+                                                        </li> -->
+                                               
+                                                </ul>
+                                                
+                                   
+                                                
+                                            </div>
+                                    
+                                            <div class="message_write">
+                                              <form id="message_form" method="post">
+                                                    <input type="hidden" id="userName" value="<%= userc._id %>">
+                                                    <input type="hidden" id="sender" value="<%= user.username %>">
+                                                    
+                                    
+                                                  <textarea class="form-control" name="message" id="msg" placeholder="Type a message"></textarea>
+                                                  <div class="clearfix"></div>
+                                                  <div class="chat_bottom">
+                                                      <button id="send-message" class="pull-right btn btn-primary" style="background: #4aa1f3; border: #4aa1f3; ">
+                                                          Send
+                                                      </button>
+                                                  </div>
+                                              </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                              
+                                </div>
+                              </div>
+                 
+                            </div>
+                    </section>
+                </div>
+             </div>
+        </div>
+        
+        
+                
+                
+  
+      <% } %>
+    </section>
+     
+      
+  
+<%- include('../partials/footer') %>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/chatio.js"></script>
+<script src="/js/global.js"></script>
+<script src="/js/deparam.js"></script>
+<script src="/js/messagelink.js"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.js"></script>
+
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->

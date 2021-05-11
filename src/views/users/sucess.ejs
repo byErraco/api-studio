@@ -25,6 +25,78 @@
           </ul>
           <div class="ll-item-main pt-4"><a class="button button-sm button-primary-outline" href="/user/edit-perfil">Empezar
               ahora</a></div>
+              
+                
+                <%if (datos) { %>
+ 
+              <form id="post-a-job-form" method="post" action="/appli/report">
+                <h4>Reporta tu pago</h4>
+                <h6>Estos son los datos</h6>
+                <div class="form-wrap">
+                  
+                              
+
+                    <div class="form-wrap">
+                      <label class="form-label-outside" for="general-information-job-title">
+                        Id del pago
+                      </label>
+                      <div class="form-wrap-inner">
+                        <input class="form-input" type="text"
+                        name="id_payment"  value="<%= datos.paymentId%>"> 
+                      </div>
+                    </div>
+                    <div class="form-wrap">
+                      <label class="form-label-outside" for="general-information-job-title">
+                        Token del pago
+                      </label>
+                      <div class="form-wrap-inner">
+                        <input class="form-input"  type="text"
+                          name="token" value="<%= datos.token%>">
+                        
+                      </div>
+                    </div>
+                    <div class="form-wrap">
+                      <label class="form-label-outside" for="general-information-job-title">
+                        Id del usuario paypal
+                      </label>
+                      <div class="form-wrap-inner">
+                        <input class="form-input"  type="text"
+                          name="id_payer" value="<%= datos.PayerID%>">
+                        
+                      </div>
+                    </div>
+                    <div class="form-wrap">
+                      <label class="form-label-outside" for="general-information-job-title">
+                        Monto
+                      </label>
+                      <div class="form-wrap-inner">
+                        <input class="form-input"  type="text"
+                          name="monto">
+                        <label class="form-label" for="general-information-job-title">Ingresa el monto pagado</label>
+                      </div>
+                    </div>
+                    <input class="form-input" type="text"
+                    name="email"  value="<%= status_user.email%>">
+                    <input class="form-input" type="text"
+                    name="id" value="<%= status_user.id%>">
+                    <input class="form-input" type="text"
+                    name="tipo_cuenta" value="<%= status_user.tipo_cuenta%>">
+                    
+                  </div>
+
+                  <div class="form-wrap">
+                    <p>Una vez verificado el pago, se le reenviara al freelancer</p>
+                    <button class="button button-block button-primary" type="submit">Enviar</button>
+                  </div>
+            </form>
+                
+                  
+                  <% } %>
+               
+               
+             
+                
+   
         </div>
       </section>
     </div>
