@@ -40,9 +40,13 @@ server.listen(app.get('port'), () => {
 
 //paypal
 paypal.configure({
-  'mode': 'sandbox', //sandbox or live
-  'client_id': 'AYfUggD1uvncpIpc6W-qhx82rwSDD-qDqxKTv90GcIWuaPTprWfUuUWUeKWjoMRDa3a91yMwv415V_ZL',
-  'client_secret': 'ELMx0UJZHNmBxJkBqO02A_o9RsGFKExocMD8EEjdiP2yw6S5sgKTJdQGOvgpvcZ3SsPWqG6r1zxz1dGr'
+  'mode': 'live', //sandbox or live
+  // 'client_id': 'AYfUggD1uvncpIpc6W-qhx82rwSDD-qDqxKTv90GcIWuaPTprWfUuUWUeKWjoMRDa3a91yMwv415V_ZL',
+  'client_id': 'AcCSVl5y31JUuQPfn8GQAikszz0b2DzjBUYgvE_MxE-E7-D6Hedn1OcInsvYz-PUKnMvVRrdCr9C0ss6L',
+
+  // 'client_secret': 'ELMx0UJZHNmBxJkBqO02A_o9RsGFKExocMD8EEjdiP2yw6S5sgKTJdQGOvgpvcZ3SsPWqG6r1zxz1dGr'
+  'client_secret': 'EEOe5vEXddxi76djWPLs4-bD5llkq8HFYI8VFoHImG_KrfTjfwO6DuVzY6lFoPefGh1ltWCezua9QPHc'
+
 })
 
 
