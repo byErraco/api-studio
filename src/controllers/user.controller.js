@@ -851,14 +851,14 @@ userCtrl.paymentMembership = async(req, res) => {
                     "items": [{
                         "name": "Membresia ",
                         "sku": "001",
-                        "price": "12.00",
+                        "price": "24.00",
                         "currency": "USD",
                         "quantity": 1
                     }]
                 },
                 "amount": {
                     "currency": "USD",
-                    "total": "12.00"
+                    "total": "24.00"
                 },
                 "description": "Subscripcion membresia"
             }]
@@ -892,14 +892,14 @@ userCtrl.paymentMembership = async(req, res) => {
                     "items": [{
                         "name": "Membresia Empleador ",
                         "sku": "001",
-                        "price": "5.00",
+                        "price": "24.00",
                         "currency": "USD",
                         "quantity": 1
                     }]
                 },
                 "amount": {
                     "currency": "USD",
-                    "total": "5.00"
+                    "total": "24.00"
                 },
                 "description": "Subscripcion membresia empleador"
             }]

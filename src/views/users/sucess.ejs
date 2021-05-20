@@ -26,7 +26,7 @@
           <div class="ll-item-main pt-4"><a class="button button-sm button-primary-outline" href="/user/edit-perfil">Empezar
               ahora</a></div>
               
-                
+              <%if (status_user.tipo_cuenta === 'empresa') { %>
                 <%if (datos) { %>
  
               <form id="post-a-job-form" method="post" action="/appli/report">
@@ -91,6 +91,7 @@
             </form>
                 
                   
+                  <% } %>
                   <% } %>
                
                
