@@ -1,6 +1,7 @@
 //Creacion de controlador
 const applicationsCtrl = {}
 const paypal = require('paypal-rest-sdk')
+const request = require('request');
 
 //Importancion de modulos
 const Applications = require('../models/Applications');
@@ -10,6 +11,19 @@ const PaymentReport = require('../models/PaymentReport');
 const Jobs = require('../models/Jobs');
 const User = require('../models/Users');
 const nodemailer = require('nodemailer')
+
+
+//live
+const CLIENT = 'AfWRb0MCwvso9SNBs7wpHWeLllTnkZx7nfcEKM-H3tnBemfvGHW3MHx2x4rGMhHWmYyIROCh5AJSRgIi';
+const SECRET = 'EK1JvRf3Marhb8EoKzO1KBtwR28MW2wDeivn-oUbFdHWyqsSEsPnTZCfbooE58OkI_1KGK1K7HYwWFOz';
+const PAYPAL_API = 'https://api-m.sandbox.paypal.com'; // Live https://api-m.paypal.com
+
+//sandbox
+// const CLIENT = 'AWZ8rEH_KwtPMqF94psimgpNBi03FPVvVQxIaTvjsp_9i2p7SiVfo6U_HdvPKuF4IsYf6CPCsY6Ik-8v';
+// const SECRET = 'EOcXbGIOoaFg8RIswxGQigR03VRfafN7oIWKsbPjgNz-rrwVwlF3PyrqE180kuNQ17vaxc3llfBaqxtO';
+// const PAYPAL_API = 'https://api-m.paypal.com'; // Live https://api-m.paypal.com
+
+const auth = { user: CLIENT, pass: SECRET }
 
 //Vista de creacion de aplicacion
 applicationsCtrl.newApplicantions = async (req, res) => {
@@ -125,19 +139,12 @@ applicationsCtrl.newPay = async (req, res) => {
             for(let i = 0;i < payment.links.length;i++){
               if(payment.links[i].rel === 'approval_url'){
                 res.redirect(payment.links[i].href);
-                
               }
               console.log('EXITO11')
             }
             newPayment.save();
-
         }
       });
-  
-      
-
-    
-    
 };
 
 
@@ -154,6 +161,74 @@ applicationsCtrl.newReport = async (req, res) => {
         req.flash('success_msg', 'Anuncio Publicado Correctamente')
         res.redirect('/')
 };
+
+
+applicationsCtrl.createPayment = (req, res) => {
+    const { id_applicant,salario, email_applicant, name_applicant,id_jobs,email } = req.body;
+
+    const newPayment = new Payment({id_jobs,id_applicant,email_applicant,monto_pago:salario,email_employe:email,payed_user:name_applicant});
+
+    var price = parseFloat(salario);
+    var tempTotal= (price).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+    console.log('test');
+    console.log(tempTotal);
+
+    const body = {
+        intent: 'CAPTURE',
+        purchase_units: [{
+            amount: {
+                currency_code: 'USD', //https://developer.paypal.com/docs/api/reference/currency-codes/
+                value: price
+            }
+        }],
+        application_context: {
+            brand_name: `Freelance26.com`,
+            landing_page: 'NO_PREFERENCE', // Default, para mas informacion https://developer.paypal.com/docs/api/orders/v2/#definition-order_application_context
+            user_action: 'PAY_NOW', // Accion para que en paypal muestre el monto del pago
+            return_url: `https://freelance26.herokuapp.com/user/pago`, // Url despues de realizar el pago
+            cancel_url: `https://freelance26.herokuapp.com/` // Url despues de realizar el pago
+        }
+    }
+    //https://api-m.sandbox.paypal.com/v2/checkout/orders [POST]
+
+    request.post(`${PAYPAL_API}/v2/checkout/orders`, {
+        auth,
+        body,
+        json: true
+    }, (err, response) => {
+
+        for(let i = 0;i < response.body.links.length;i++){
+            if(response.body.links[i].rel === 'approve'){
+             res.redirect(response.body.links[i].href);
+             
+              console.log('EXITO1')
+           }
+        }
+        newPayment.save();
+  
+    })
+}
+
+
+
+applicationsCtrl.execute = async (req, res) => {
+
+    const token = req.query.token; //<-----------
+     const datos = req.query;
+
+    request.post(`${PAYPAL_API}/v2/checkout/orders/${token}/capture`, {
+        auth,
+        body: {},
+        json: true
+    }, (err, response) => {
+        //  res.json({ data: response.body })
+        //  res.render('users/sucess', {status_user,datos});
+         res.redirect('/user/pago');
+            
+      
+
+    })
+}
 
 
 module.exports = applicationsCtrl;

@@ -1,7 +1,7 @@
 const {Schema, model} = require('mongoose');
 
 const PaymentSchema = new Schema({
-    id_payment: {type: String, required: true},
+    // id_payment: {type: String, required: true},
     token: {type: String, required: true},
     id_payer: {type: String},
     monto: {type: String},

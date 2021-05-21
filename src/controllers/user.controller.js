@@ -3,6 +3,7 @@ const userCtrl = {};
 const {randomNumber} = require('../helpers/libs');
 
 const path = require('path');
+const request = require('request');
 
 //Importando modelo de Usuarios
 const User = require('../models/Users')
@@ -20,6 +21,20 @@ const  fs  = require('fs-extra');
 const paypal = require('paypal-rest-sdk');
 const Users = require('../models/Users');
 const cloudinary = require('cloudinary')
+
+//live
+    const CLIENT = 'AfWRb0MCwvso9SNBs7wpHWeLllTnkZx7nfcEKM-H3tnBemfvGHW3MHx2x4rGMhHWmYyIROCh5AJSRgIi';
+
+    const SECRET = 'EK1JvRf3Marhb8EoKzO1KBtwR28MW2wDeivn-oUbFdHWyqsSEsPnTZCfbooE58OkI_1KGK1K7HYwWFOz';
+
+    const PAYPAL_API = 'https://api-m.sandbox.paypal.com'; // Live https://api-m.paypal.com
+
+//sandbox
+// const CLIENT = 'AWZ8rEH_KwtPMqF94psimgpNBi03FPVvVQxIaTvjsp_9i2p7SiVfo6U_HdvPKuF4IsYf6CPCsY6Ik-8v';
+// const SECRET = 'EOcXbGIOoaFg8RIswxGQigR03VRfafN7oIWKsbPjgNz-rrwVwlF3PyrqE180kuNQ17vaxc3llfBaqxtO';
+// const PAYPAL_API = 'https://api-m.paypal.com'; // Live https://api-m.paypal.com
+
+const auth = { user: CLIENT, pass: SECRET }
 
 cloudinary.config({
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -48,17 +63,29 @@ userCtrl.renderSignupFormE = (req, res) => {
 userCtrl.renderMembership = (req, res) => {
     res.render('users/membresia')
 }
-userCtrl.renderMembershipSucess = async (req, res) => {
+userCtrl.renderPaymentSucess = async (req, res) => {
     console.log(req.query);
-    console.log(req.params);
+    const user = await User.findById(req.user.id)
+    console.log(user);
     const datos = req.query;
     const status = 'plus'
     const status_basic = 'basico'
     const plusExp = new Date()
     const status_user = await User.findByIdAndUpdate(req.user.id,{$set:{isNewUser:status,plusExpires:plusExp}})
-    console.log(status_user);
-    //await User.createIndex(req.user.id,{creationDate:1}, {expireAfterSeconds:2592000, partialFilterExpression: {isNewUser: {$eq: "basico"}}})
+    console.log(datos);
     res.render('users/sucess', {status_user,datos})
+}
+userCtrl.renderMembershipSucess = async (req, res) => {
+
+    const user = await User.findById(req.user.id)
+    console.log(user);
+    const datos = req.query;
+    const status = 'plus'
+    const status_basic = 'basico'
+    const plusExp = new Date()
+    const status_user = await User.findByIdAndUpdate(req.user.id,{$set:{isNewUser:status,plusExpires:plusExp}})
+
+    res.render('users/sucess-membresia', {status_user,datos})
 }
 userCtrl.renderSignupFormAdmin = (req, res) => {
     res.render('signup-admin')
@@ -830,104 +857,100 @@ userCtrl.descargarCv = async (req,res) => {
 }
 
 
-userCtrl.paymentMembership = async(req, res) => {
-  
+// userCtrl.paymentMembership = async(req, res) => {
+//     const user = await User.findById(req.user.id)
+//     if(user.tipo_cuenta === 'Freelancer') {
+
+//         const create_payment_json = {
+//             "intent": "sale",
+//             "payer": {
+//                 "payment_method": "paypal"
+//             },
+//             "redirect_urls": {
+//                 "return_url": "http://localhost:4000/user/sucess",
+//                 "cancel_url": "http://localhost:4000/user/cancel"
+//             },
+//             "transactions": [{
+//                 "item_list": {
+//                     "items": [{
+//                         "name": "Membresia ",
+//                         "sku": "001",
+//                         "price": "24.00",
+//                         "currency": "USD",
+//                         "quantity": 1
+//                     }]
+//                 },
+//                 "amount": {
+//                     "currency": "USD",
+//                     "total": "24.00"
+//                 },
+//                 "description": "Subscripcion membresia"
+//             }]
+//         };
+//         paypal.payment.create(create_payment_json, function (error, payment) {
+//             if (error) {
+//                 throw error;
+//             } else {
+//                 for(let i = 0;i < payment.links.length;i++){
+//                   if(payment.links[i].rel === 'approval_url'){
+//                     res.redirect(payment.links[i].href);
+//                     console.log('EXITO1')
+//                   }
+//                   console.log('EXITO11')
+//                 }
+//             }
+//           });
+//       } else {
+//         const create_payment_json = {
+//             "intent": "sale",
+//             "payer": {
+//                 "payment_method": "paypal"
+//             },
+//             "redirect_urls": {
+//                 "return_url": "http://freelance26.herokuapp.com/user/sucess",
+//                 "cancel_url": "http://freelance26.herokuapp.com/cancel"
+//             },
+//             "transactions": [{
+//                 "item_list": {
+//                     "items": [{
+//                         "name": "Membresia Empleador ",
+//                         "sku": "001",
+//                         "price": "24.00",
+//                         "currency": "USD",
+//                         "quantity": 1
+//                     }]
+//                 },
+//                 "amount": {
+//                     "currency": "USD",
+//                     "total": "24.00"
+//                 },
+//                 "description": "Subscripcion membresia empleador"
+//             }]
+//         };
+//         paypal.payment.create(create_payment_json, function (error, payment) {
+//             if (error) {
+//                 throw error;
+//             } else {
+//                 for(let i = 0;i < payment.links.length;i++){
+//                   if(payment.links[i].rel === 'approval_url'){
+//                     res.redirect(payment.links[i].href);
+//                     console.log('OOK')
+//                   }
+//                   console.log('OO1K')
+//                 }
+//             }
+//           });
+
+//       }     
+//     }
+
+// userCtrl.paymentMembership = async(req, res) => {
+//     const user = await User.findById(req.user.id)
+   
+//     }
 
 
-    const user = await User.findById(req.user.id)
-    if(user.tipo_cuenta === 'Freelancer') {
-
-        const create_payment_json = {
-            "intent": "sale",
-            "payer": {
-                "payment_method": "paypal"
-            },
-            "redirect_urls": {
-                "return_url": "http://freelance26.herokuapp.com/user/sucess",
-                "cancel_url": "http://freelance26.herokuapp.com/cancel"
-            },
-            "transactions": [{
-                "item_list": {
-                    "items": [{
-                        "name": "Membresia ",
-                        "sku": "001",
-                        "price": "24.00",
-                        "currency": "USD",
-                        "quantity": 1
-                    }]
-                },
-                "amount": {
-                    "currency": "USD",
-                    "total": "24.00"
-                },
-                "description": "Subscripcion membresia"
-            }]
-        };
-
-        paypal.payment.create(create_payment_json, function (error, payment) {
-            if (error) {
-                throw error;
-            } else {
-                for(let i = 0;i < payment.links.length;i++){
-                  if(payment.links[i].rel === 'approval_url'){
-                    res.redirect(payment.links[i].href);
-                    console.log('EXITO1')
-                  }
-                  console.log('EXITO11')
-                }
-            }
-          });
-      } else {
-        const create_payment_json = {
-            "intent": "sale",
-            "payer": {
-                "payment_method": "paypal"
-            },
-            "redirect_urls": {
-                "return_url": "http://freelance26.herokuapp.com/user/sucess",
-                "cancel_url": "http://freelance26.herokuapp.com/cancel"
-            },
-            "transactions": [{
-                "item_list": {
-                    "items": [{
-                        "name": "Membresia Empleador ",
-                        "sku": "001",
-                        "price": "24.00",
-                        "currency": "USD",
-                        "quantity": 1
-                    }]
-                },
-                "amount": {
-                    "currency": "USD",
-                    "total": "24.00"
-                },
-                "description": "Subscripcion membresia empleador"
-            }]
-        };
-
-        paypal.payment.create(create_payment_json, function (error, payment) {
-            if (error) {
-                throw error;
-            } else {
-                for(let i = 0;i < payment.links.length;i++){
-                  if(payment.links[i].rel === 'approval_url'){
-                    res.redirect(payment.links[i].href);
-                    console.log('OOK')
-                  }
-                  console.log('OO1K')
-                }
-            }
-          });
-
-      }
-      
-        
-    }
     
-    
-
-
-
 
 userCtrl.renderListaCandidatosPanel = async (req, res) => {
     if (req.query.buscar_free) {
@@ -1001,6 +1024,81 @@ userCtrl.renderListaCandidatosPanel = async (req, res) => {
         })
     }
 }
+
+
+
+userCtrl.createPayment = (req, res) => {
+
+    const body = {
+        intent: 'CAPTURE',
+        purchase_units: [{
+            amount: {
+                currency_code: 'USD', //https://developer.paypal.com/docs/api/reference/currency-codes/
+                value: '24'
+            }
+        }],
+        application_context: {
+            brand_name: `Freelance26.com`,
+            landing_page: 'NO_PREFERENCE', // Default, para mas informacion https://developer.paypal.com/docs/api/orders/v2/#definition-order_application_context
+            user_action: 'PAY_NOW', // Accion para que en paypal muestre el monto del pago
+            return_url: `https://freelance26.herokuapp.com/user/sucess`, // Url despues de realizar el pago
+            cancel_url: `https://freelance26.herokuapp.com/` // Url despues de realizar el pago
+        }
+    }
+    //https://api-m.sandbox.paypal.com/v2/checkout/orders [POST]
+
+    request.post(`${PAYPAL_API}/v2/checkout/orders`, {
+        auth,
+        body,
+        json: true
+    }, (err, response) => {
+        // res.json({ data: response.body })
+
+        for(let i = 0;i < response.body.links.length;i++){
+            if(response.body.links[i].rel === 'approve'){
+             res.redirect(response.body.links[i].href);
+             
+              console.log('EXITO1')
+           }
+        }
+        // res.json({ data: response.body })
+    })
+}
+
+// for(let i = 0;i < data.links.length;i++){
+    //                   if(data.links[i].rel === 'approve'){
+    //                     res.redirect(data.links[i].href);
+    //                     console.log('EXITO1')
+    //                   }
+
+
+
+userCtrl.execute = async (req, res) => {
+    console.log('ejecutar');
+    const token = req.query.token; //<-----------
+    const datos = req.query;
+    const status = 'plus'
+    const status_basic = 'basico'
+    const plusExp = new Date()
+    const status_user = await User.findByIdAndUpdate(req.user.id,{$set:{isNewUser:status,plusExpires:plusExp}})
+    console.log('guardado');
+   
+
+    request.post(`${PAYPAL_API}/v2/checkout/orders/${token}/capture`, {
+        auth,
+        body: {},
+        json: true
+    }, (err, response) => {
+        //  res.json({ data: response.body })
+         res.render('users/sucess-membresia', {status_user,datos});
+            
+      
+
+    })
+}
+
+
+
 
 //Exportando Modulo
 module.exports = userCtrl;

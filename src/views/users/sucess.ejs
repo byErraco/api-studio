@@ -25,17 +25,16 @@
           </ul>
           <div class="ll-item-main pt-4"><a class="button button-sm button-primary-outline" href="/user/edit-perfil">Empezar
               ahora</a></div>
-              
-              <%if (status_user.tipo_cuenta === 'empresa') { %>
+     
                 <%if (datos) { %>
- 
+             <br>
               <form id="post-a-job-form" method="post" action="/appli/report">
                 <h4>Reporta tu pago</h4>
                 <h6>Estos son los datos</h6>
                 <div class="form-wrap">
                   
                               
-
+<!-- 
                     <div class="form-wrap">
                       <label class="form-label-outside" for="general-information-job-title">
                         Id del pago
@@ -44,7 +43,7 @@
                         <input class="form-input" type="text"
                         name="id_payment"  value="<%= datos.paymentId%>"> 
                       </div>
-                    </div>
+                    </div> -->
                     <div class="form-wrap">
                       <label class="form-label-outside" for="general-information-job-title">
                         Token del pago
@@ -92,7 +91,7 @@
                 
                   
                   <% } %>
-                  <% } %>
+         
                
                
              

@@ -35,10 +35,12 @@ const { renderPerfilUser,
         updateDatos,
         updateDatosUser,
         renderChat,
-        
+        createPayment,
+        renderPaymentSucess,
         renderListaCandidatosPanel,
         isPlus,
-        logout } = require('../controllers/user.controller');
+        logout, 
+        execute} = require('../controllers/user.controller');
 const { isAuthenticated,renderPanel,eliminarUsuario, renderPanelPagos, eliminarUsuarioPago, renderPanelReportesPagos } = require('../helpers/auth');
 const { getchatPage } = require('../controllers/privatechat.controller');
 
@@ -115,38 +117,44 @@ router.post('/user/login',  login);
 //Ruta de elección de registro de usuario
 router.get('/user/choose-signup-option', renderChooseSignupOption);
 router.get('/user/membresia', isAuthenticated,renderMembership);
-router.post('/user/pay',isAuthenticated,paymentMembership);
-router.get('/user/sucess', isAuthenticated,renderMembershipSucess);
+// router.post('/user/pay',isAuthenticated,paymentMembership);
+
+router.post('/user/pay',createPayment);
+router.get('/user/sucess',execute);
+router.get('/user/pago-membresia',isAuthenticated,renderMembershipSucess);
+
+router.get('/user/pago',isAuthenticated,renderPaymentSucess);
+
+
+// router.get('/user/sucess', isAuthenticated,renderMembershipSucess);
 // router.get('/user/sucess',paymentMembership);
 
-router.get('/', (req, res) => {
-    const payerId = req.query.PayerID;
-    const paymentId = req.query.paymentId;
+// router.get('/', (req, res) => {
+//     const payerId = req.query.PayerID;
+//     const paymentId = req.query.paymentId;
   
-    const execute_payment_json = {
-      "payer_id": payerId,
-      "transactions": [{
-          "amount": {
-              "currency": "USD",
-              "total": "25.00"
-          }
-      }]
-    };
-
-  
-    paypal.payment.execute(paymentId, execute_payment_json, function (error, payment) {
-      if (error) {
-          console.log(error.response);
-          throw error;
+//     const execute_payment_json = {
+//       "payer_id": payerId,
+//       "transactions": [{
+//           "amount": {
+//               "currency": "USD",
+//               "total": "25.00"
+//           }
+//       }]
+//     };
+//     paypal.payment.execute(paymentId, execute_payment_json, function (error, payment) {
+//       if (error) {
+//           console.log(error.response);
+//           throw error;
           
-      } else {
+//       } else {
          
-          console.log('pago')
+//           console.log('pago')
 
-      }
-      console.log('exito')
-  });
-  });
+//       }
+//       console.log('exito')
+//   });
+//   });
 
 
 //Ruta de creacion de usuario

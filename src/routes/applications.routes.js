@@ -7,12 +7,15 @@ const router = express.Router();
 const { isAuthenticated } = require('../helpers/auth')
 
 //Controlador
-const { newApplicantions, newPay,newReport } = require('../controllers/applications.controller');
+const { newApplicantions, newPay,newReport,createPayment,execute } = require('../controllers/applications.controller');
 
 //Ruta de creacion de aplicacion a anuncio
 router.post('/appli/newApplicantions', isAuthenticated, newApplicantions)
-router.post('/appli/pay', isAuthenticated, newPay)
+// router.post('/appli/pay', isAuthenticated, newPay)
 router.post('/appli/report', isAuthenticated, newReport)
+
+router.post('/appli/pay', isAuthenticated,createPayment);
+router.get('/appli/sucess', isAuthenticated,execute);
 
 
 router.get('/payment', (req, res) => {
@@ -37,10 +40,9 @@ router.get('/payment', (req, res) => {
           throw error;
           
       } else {
-          console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
-
+       
       }
-      console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa2')
+
   });
 });
 
