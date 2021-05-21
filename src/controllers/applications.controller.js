@@ -16,12 +16,14 @@ const nodemailer = require('nodemailer')
 //live
 const CLIENT = 'AfWRb0MCwvso9SNBs7wpHWeLllTnkZx7nfcEKM-H3tnBemfvGHW3MHx2x4rGMhHWmYyIROCh5AJSRgIi';
 const SECRET = 'EK1JvRf3Marhb8EoKzO1KBtwR28MW2wDeivn-oUbFdHWyqsSEsPnTZCfbooE58OkI_1KGK1K7HYwWFOz';
-const PAYPAL_API = 'https://api-m.sandbox.paypal.com'; // Live https://api-m.paypal.com
+const PAYPAL_API = 'https://api-m.paypal.com'; // Live https://api-m.paypal.com
+    
+
 
 //sandbox
 // const CLIENT = 'AWZ8rEH_KwtPMqF94psimgpNBi03FPVvVQxIaTvjsp_9i2p7SiVfo6U_HdvPKuF4IsYf6CPCsY6Ik-8v';
 // const SECRET = 'EOcXbGIOoaFg8RIswxGQigR03VRfafN7oIWKsbPjgNz-rrwVwlF3PyrqE180kuNQ17vaxc3llfBaqxtO';
-// const PAYPAL_API = 'https://api-m.paypal.com'; // Live https://api-m.paypal.com
+// const PAYPAL_API = 'https://api-m.sandbox.paypal.com'; // Live https://api-m.paypal.com
 
 const auth = { user: CLIENT, pass: SECRET }
 
