@@ -17,8 +17,8 @@ var socket = io()
 
 socket.on('connect',()=> {
     var chatRoom = chatUser.value
-    console.log(chatRoom);
-    console.log('Connectado en cliente!');
+    // console.log(chatRoom);
+    // console.log('Connectado en cliente!');
     socket.emit('join', chatRoom, () => {
         console.log('an user has joined this chat');
     })
@@ -26,7 +26,7 @@ socket.on('connect',()=> {
 })
 
 socket.on('newMessage', message => {
-    console.log('recibido en cliente');
+    // console.log('recibido en cliente');
     //var template = document.getElementById('message-template').innerText;
     // console.log(template);
     // console.log(message);
@@ -39,7 +39,7 @@ socket.on('newMessage', message => {
     chatMensajes.scrollTop = chatMensajes.scrollHeight;
 
     
-    console.log(message+'enviado');
+    // console.log(message+'enviado');
 })
 
 //message submit
@@ -48,8 +48,8 @@ chatForm.addEventListener('submit', (e) => {
     e.preventDefault();
     var chatRoom = chatUser.value
     var username = sender.value
-    console.log(username);
-    console.log(chatRoom);
+    // console.log(username);
+    // console.log(chatRoom);
     
     
     var msg = e.target.elements.msg.value;
