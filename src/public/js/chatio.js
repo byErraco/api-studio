@@ -53,7 +53,7 @@ chatForm.addEventListener('submit', (e) => {
     
     
     var msg = e.target.elements.msg.value;
-    console.log(msg);
+    // console.log(msg);
      socket.emit('chatMessage',{
          text:msg,
          room:chatRoom,
