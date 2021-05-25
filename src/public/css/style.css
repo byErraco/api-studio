@@ -14008,6 +14008,14 @@ position: absolute;
     display: block;
     float: left;
 }
+
+.container-chat {
+	margin: 2em 2em 2em 2em;
+    position: relative;
+    display: block;
+    float: left;
+	width:100vh;
+}
 .contedite{
 	display: inline-flex;
 }
