@@ -37,6 +37,18 @@ server.listen(app.get('port'), () => {
 })
 
 
+app.enable('trust proxy')
+
+
+app.use(function(request, response, next) {
+
+  if (process.env.NODE_ENV != 'development' && !request.secure) {
+     return response.redirect("https://" + request.headers.host + request.url);
+  }
+
+  next();
+})
+
 
 //paypal
 paypal.configure({
@@ -140,3 +152,5 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 module.exports = app;
+
+
