@@ -9,10 +9,9 @@ const morgan = require('morgan')
 const flash = require('connect-flash')
 const session = require('express-session')
 const passport = require('passport')
-const moment = require('moment')
+
 const multer = require('multer');
-const paypal = require('paypal-rest-sdk');
-const adminRouter = require('./routes/admin.router')
+
 const socketio = require('socket.io')
 const http = require('http')
 
@@ -20,9 +19,6 @@ const http = require('http')
 const app = express();
 const server = http.createServer(app);
 const io = socketio(server);
-
-
-require('./config/passport')
 
 //Configuracion
 app.set("port", process.env.PORT || 4000);
@@ -50,50 +46,6 @@ app.use(function(request, response, next) {
 })
 
 
-//paypal
-paypal.configure({
-  'mode': 'live', //sandbox or live
-  // 'client_id': 'AYfUggD1uvncpIpc6W-qhx82rwSDD-qDqxKTv90GcIWuaPTprWfUuUWUeKWjoMRDa3a91yMwv415V_ZL',
-  'client_id': 'AcCSVl5y31JUuQPfn8GQAikszz0b2DzjBUYgvE_MxE-E7-D6Hedn1OcInsvYz-PUKnMvVRrdCr9C0ss6L',
-
-  // 'client_secret': 'ELMx0UJZHNmBxJkBqO02A_o9RsGFKExocMD8EEjdiP2yw6S5sgKTJdQGOvgpvcZ3SsPWqG6r1zxz1dGr'
-  'client_secret': 'EEOe5vEXddxi76djWPLs4-bD5llkq8HFYI8VFoHImG_KrfTjfwO6DuVzY6lFoPefGh1ltWCezua9QPHc'
-
-})
-
-
-
-//Middlewares
-
-io.on('connection', (socket) => {
-  console.log('a user connected');
-
-  socket.emit('message','Welcome to chatlance')
-
-
-  //aviso cuando  usuario se conecta
-
-  socket.broadcast.emit();
-  socket.on('join',(params,callback)=>{
-    socket.join(params);
-    callback();
-  })
-
-
-  socket.on('chatMessage', (msg,callback) => {
-    // io.emit('message')
-    console.log(msg);
-    console.log('Recibido, enviando a cliente');
-    io.to(msg.room).emit('newMessage',{
-      text: msg.text,
-      room: msg.room,
-      from: msg.sender
-    });
-    callback();
-  })
-
-
-});
 
 app.use(morgan('dev'));
 app.use(express.urlencoded({extended: false}));
@@ -129,12 +81,6 @@ app.use((req, res, next) => {
 
 
 //Routes
-app.use(require('./routes/index.routes'));
-app.use(require('./routes/blog.routes'));
-app.use(require('./routes/jobs.routes'));
-app.use(require('./routes/user.routes'));
-app.use(require('./routes/applications.routes'));
-// app.use(require('./routes/admin.router'))
 app.use(require('./routes/emails.routes'));
 
 

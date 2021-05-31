@@ -3,7 +3,6 @@ if (process.env.NODE_ENV !== 'production') {
   }
 
 const server = require('./server');
-require('./database');
 
 
 // server.listen(server.get('port'), () => {

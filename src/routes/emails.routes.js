@@ -2,13 +2,10 @@
 const express = require('express');
 const router = express.Router();
 const nodemailer = require('nodemailer')
-const User = require('../models/Users')
+
 
 //Controlador de Email
 const { enviarEmaildeContacto } = require('../controllers/emails.controller');
-
-//Controlador de Contacto
-const { crearMensajeDeContacto } = require('../controllers/index.controller')
 
 //Ruta de creacion de aplicacion a anuncio
 //router.post('/formulario-contacto', enviarEmaildeContacto, crearMensajeDeContacto)
@@ -42,7 +39,7 @@ router.post('/send-mail', async (req,res) => {
     try {
         const info = await transporter.sendMail({
             from: "'Studio73pty Server' <test_web@studio73pty.com>",
-            to: "info@freelance26.com",
+            to: "jdiaz.97ma@gmail.com",
             subject:'Webiste contact form',
             //text:'hello world'
             html: contentHTML
