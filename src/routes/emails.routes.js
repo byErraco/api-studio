@@ -39,7 +39,7 @@ router.post('/send-mail', async (req,res) => {
     try {
         const info = await transporter.sendMail({
             from: "'Studio73pty Server' <test_web@studio73pty.com>",
-            to: "info@studio73pty.com",
+            to: "studio73pty@gmail.com",
             subject:'Formulario de contacto',
     
             html: contentHTML
