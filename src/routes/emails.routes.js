@@ -13,7 +13,7 @@ router.post('/send-mail', async (req,res) => {
     const { name, email, phone, message } = req.body;
 
     contentHTML = `
-        <h1>User Information</h1>
+        <h1>Informacion del usuario</h1>
         <ul>
             <li>Nombre de usuario: ${name}</li>
             <li>Correo electrónico: ${email}</li>
@@ -39,9 +39,9 @@ router.post('/send-mail', async (req,res) => {
     try {
         const info = await transporter.sendMail({
             from: "'Studio73pty Server' <test_web@studio73pty.com>",
-            to: "jdiaz.97ma@gmail.com",
-            subject:'Webiste contact form',
-            //text:'hello world'
+            to: "info@studio73pty.com",
+            subject:'Formulario de contacto',
+    
             html: contentHTML
         })
      
