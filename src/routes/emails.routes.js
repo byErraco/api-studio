@@ -13,7 +13,7 @@ router.post('/send-mail', async (req,res) => {
     const { name, email, phone, message } = req.body;
 
     contentHTML = `
-        <h1>Informacion del usuario</h1>
+        <h1>Información del usuario</h1>
         <ul>
             <li>Nombre de usuario: ${name}</li>
             <li>Correo electrónico: ${email}</li>
@@ -24,22 +24,33 @@ router.post('/send-mail', async (req,res) => {
     console.log(contentHTML)
     console.log("Contacto");
     const transporter = nodemailer.createTransport({
-        host: 'mail.studio73pty.com',
-        port: 587,
-        secure: false,
+        // host: 'mail.studio73pty.com',
+        // port: 587,
+        // secure: false,
+        // auth: {
+        //     user: 'test_web@studio73pty.com',
+        //     pass: '123456qwerty'
+        // },
+        // tls:{
+        //     rejectUnauthorized: false
+        // }
+        host: 'smtp.gmail.com',
+        port: 465,
+        secure: true,
         auth: {
-            user: 'test_web@studio73pty.com',
-            pass: '123456qwerty'
+            user: 'studio73pty.noreply@gmail.com',
+            pass: 'pfiakggdypqridiq'
         },
         tls:{
             rejectUnauthorized: false
         }
+
     })
 
     try {
         const info = await transporter.sendMail({
-            from: "'Studio73pty Server' <test_web@studio73pty.com>",
-            to: "studio73pty@gmail.com",
+            from: "'Studio73pty' <test_web@studio73pty.com>",
+            to: "info@studio73pty.com",
             subject:'Formulario de contacto',
     
             html: contentHTML
