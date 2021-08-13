@@ -106,16 +106,17 @@ router.post('/send-mail-user/', async (req,res) => {
 
 
 router.post('/send-mail-alquiworld', async (req,res) => {
-    const { name, email, phone, message } = req.body;
+    console.log(req.body);
+    const { name, email, number, asunto } = req.body;
 
     contentHTML = `
         <h1>Información del usuario</h1>
         <ul>
             <li>Nombre de usuario: ${name}</li>
             <li>Correo electrónico: ${email}</li>
-            <li>Número de contacto: ${phone}</li>
+            <li>Número de contacto: ${number}</li>
         </ul>
-        <p>${message}</p>
+        <p>${asunto}</p>
     `;
     console.log(contentHTML)
     console.log("Contacto");
@@ -136,7 +137,7 @@ router.post('/send-mail-alquiworld', async (req,res) => {
     try {
         const info = await transporter.sendMail({
             from: "'Alquiworld' <alquiworld-api@no-reply.com>",
-            to: "info@alquiworld.com",
+            to: "jdiaz.97ma@gmail.com",
             subject:'Formulario de contacto',
     
             html: contentHTML
