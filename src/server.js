@@ -8,9 +8,15 @@ const morgan = require('morgan')
 
 const http = require('http')
 
+const cors = require('cors');
+
 //Inicializacion
 const app = express();
 const server = http.createServer(app);
+
+app.use(cors());
+app.options('*', cors());
+
 
 //Configuracion
 app.set("port", process.env.PORT || 3000);
