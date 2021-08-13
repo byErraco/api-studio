@@ -24,16 +24,6 @@ router.post('/send-mail', async (req,res) => {
     console.log(contentHTML)
     console.log("Contacto");
     const transporter = nodemailer.createTransport({
-        // host: 'mail.studio73pty.com',
-        // port: 587,
-        // secure: false,
-        // auth: {
-        //     user: 'test_web@studio73pty.com',
-        //     pass: '123456qwerty'
-        // },
-        // tls:{
-        //     rejectUnauthorized: false
-        // }
         host: 'smtp.gmail.com',
         port: 465,
         secure: true,
@@ -109,6 +99,62 @@ router.post('/send-mail-user/', async (req,res) => {
         console.log(error)
     }
     
+    
+    
+})
+
+
+
+router.post('/send-mail-alquiworld', async (req,res) => {
+    const { name, email, phone, message } = req.body;
+
+    contentHTML = `
+        <h1>Información del usuario</h1>
+        <ul>
+            <li>Nombre de usuario: ${name}</li>
+            <li>Correo electrónico: ${email}</li>
+            <li>Número de contacto: ${phone}</li>
+        </ul>
+        <p>${message}</p>
+    `;
+    console.log(contentHTML)
+    console.log("Contacto");
+    const transporter = nodemailer.createTransport({
+        host: 'smtp.gmail.com',
+        port: 465,
+        secure: true,
+        auth: {
+            user: 'studio73pty.noreply@gmail.com',
+            pass: 'pfiakggdypqridiq'
+        },
+        tls:{
+            rejectUnauthorized: false
+        }
+
+    })
+
+    try {
+        const info = await transporter.sendMail({
+            from: "'Alquiworld' <alquiworld-api@no-reply.com>",
+            to: "info@alquiworld.com",
+            subject:'Formulario de contacto',
+    
+            html: contentHTML
+        })
+     
+        if(info){
+            res.status(200).json({
+                status: 'success',
+                message: 'El correo ha sido enviado!',
+              });
+        }
+        
+    } catch (error) {
+        res.status(200).json({
+            status: 'error',
+            message: 'Hubo un error intenta de nuevo!',
+          });
+    }
     
     
 })
