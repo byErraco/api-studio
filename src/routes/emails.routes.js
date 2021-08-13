@@ -106,6 +106,7 @@ router.post('/send-mail-user/', async (req,res) => {
 
 
 router.post('/send-mail-alquiworld', async (req,res) => {
+
     console.log(req.body);
     const { name, email, number, asunto } = req.body;
 
@@ -119,7 +120,6 @@ router.post('/send-mail-alquiworld', async (req,res) => {
         <p>${asunto}</p>
     `;
     console.log(contentHTML)
-    console.log("Contacto");
     const transporter = nodemailer.createTransport({
         host: 'smtp.gmail.com',
         port: 465,
@@ -137,7 +137,7 @@ router.post('/send-mail-alquiworld', async (req,res) => {
     try {
         const info = await transporter.sendMail({
             from: "'Alquiworld' <alquiworld-api@no-reply.com>",
-            to: "jdiaz.97ma@gmail.com",
+            to: "info@alquiworld.com",
             subject:'Formulario de contacto',
     
             html: contentHTML

@@ -2,6 +2,7 @@ const express = require('express');
 // const Handlebars = require('handlebars');
 // const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access')
 // const exphbs = require('express-handlebars');
+const bodyParser = require("body-parser");
 const path = require('path');
 
 const morgan = require('morgan')
@@ -16,7 +17,8 @@ const server = http.createServer(app);
 
 app.use(cors());
 app.options('*', cors());
-
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 //Configuracion
 app.set("port", process.env.PORT || 3000);
