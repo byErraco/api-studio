@@ -115,8 +115,8 @@ router.post('/send-mail-alquiworld', async (req,res) => {
     const message = {
         to: 'info@alquiworld.com',
         from: 'alquiworld-no-reply@hotmail.com',
-        subject: 'Hello from sendgrid',
-        text: 'hello frm sendgrid dog',
+        subject: 'Formulario de Contacto Alquiworld.com',
+        text: 'Has recibido al siguiente información',
         html: `
                 <h1>Información del usuario</h1>
         <ul>
