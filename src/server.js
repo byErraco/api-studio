@@ -1,7 +1,4 @@
 const express = require('express');
-// const Handlebars = require('handlebars');
-// const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access')
-// const exphbs = require('express-handlebars');
 const bodyParser = require("body-parser");
 const path = require('path');
 
@@ -14,6 +11,10 @@ const cors = require('cors');
 //Inicializacion
 const app = express();
 const server = http.createServer(app);
+
+app.set('view engine', 'pug');
+
+app.set('views', path.join(__dirname, 'views'));
 
 app.use(cors());
 app.options('*', cors());
@@ -29,6 +30,8 @@ server.listen(app.get('port'), () => {
 })
 
 
+//Static Files
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(morgan('dev'));
 app.use(express.urlencoded({extended: false}));
@@ -39,8 +42,7 @@ app.use(express.urlencoded({extended: false}));
 app.use(require('./routes/emails.routes'));
 
 
-//Static Files
-app.use(express.static(path.join(__dirname, 'public')));
+
 
 
 

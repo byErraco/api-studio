@@ -9,7 +9,7 @@ const API_KEY= 'SG.DCi6TxmkSiy4KeVAMbmsKg.499BL_ro6ZRwWRm95Sorf_2cqPDukrrSxCmaeT
 
 
 //Controlador de Email
-const { enviarEmaildeContacto } = require('../controllers/emails.controller');
+const { enviarBrief,uploadServiceImages } = require('../controllers/emails.controller');
 
 //Ruta de creacion de aplicacion a anuncio
 //router.post('/formulario-contacto', enviarEmaildeContacto, crearMensajeDeContacto)
@@ -60,6 +60,11 @@ router.post('/send-mail', async (req,res) => {
     
     
 })
+
+
+
+router.post('/send-brief',uploadServiceImages, enviarBrief );
+
 
 router.post('/send-mail-user/', async (req,res) => {
     
@@ -136,6 +141,8 @@ router.post('/send-mail-alquiworld', async (req,res) => {
     .catch(error => console.log(error.message));
 
 })
+
+
 
 
 // router.post('/send-mail-alquiworld', async (req,res) => {

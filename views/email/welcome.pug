@@ -1,0 +1,42 @@
+extends baseEmail
+
+block content
+  p Has recibido un email con información de un cliente  🎉🙏,
+  p Descripcion: #{descripcionNegocio}
+  p Dirección: #{direccionNegocio}
+  p Télefono: #{telefonoNegocio}
+  p Facebook: #{redFacebook}
+  p Instagram: #{redInstagram}
+  p Youtube: #{redYoutube}
+  p Twitter #{redTwitter}
+  p Otra: #{redOtra}
+  p Enlace Dominio Comprado: #{enlaceWeb}
+  p Nombre de usuario Dominio Comprado: #{nombreDeUsuarioWeb}
+  p Contraseña Dominio Comprado: #{contraseñaWeb}
+  p Nombre Dominio a Registrar: #{nombredominioPropuesto}
+  p Enlace Hosting Cliente: #{enlaceHostingWeb}
+  p Correo Hosting Cliente: #{userCorreoHostingWeb}
+  p Contraseña Hosting Cliente: #{passwordHostingWeb}
+  p Enlace web anterior del Cliente: #{webAnteriorEnlace}
+  p Que le gusta o disguta de la web anterior del Cliente: #{webAnteriorLikeDislike}
+  p Correo Web Auto-Administrable Cliente: #{enlaceWebAutoadministrable}
+  p Usuario Web Auto-Administrable Cliente: #{usuarioWebAutoadministrable}
+  p Contreña Web Auto-Administrable Cliente: #{contraseñaWebautoadministrable}
+  p Web similar referencia: #{enlaceWebSimilar}
+  p Que gusta de la referencia: #{enlaceWebSimilarLike}
+  p Color 1: #{color_one}
+  p Color 2: #{color_two}
+  p Color 3: #{color_three}
+  p Ideas del cliente para la web: #{ideasWeb}
+  table.btn.btn-primary(role='presentation', border='0', cellpadding='0', cellspacing='0')
+    tbody
+      tr
+        td(align='left')
+          table(role='presentation', border='0', cellpadding='0', cellspacing='0')
+            tbody
+              tr
+                td
+                  a(href='https://studio73pty.com')
+                    img(src='https://studio73pty.com/images/logo-inverse-128x61.png' alt='Logo')
+  p Si necesita ayuda para resolver alguna duda, no dude en ponerse en contacto con nosotros!
+  p - Equipo de Studio73.
