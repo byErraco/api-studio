@@ -6,8 +6,6 @@ const pug = require('pug');
 const htmlToText = require('html-to-text');
 const fs = require('fs');
 
-const cloudinary = require('../../utils/cloudinary');
-
 const emailCtrl = {}
 
 
