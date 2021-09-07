@@ -89,8 +89,8 @@ emailCtrl.enviarBrief = async (req, res) => {
     try {
         const info = await transporter.sendMail({
             from: "'Studio73pty' <test_web@studio73pty.com>",
-            to: "pamcumares@gmail.com",
-            // to: 'jdiaz.97ma@gmail.com',
+            // to: "info@studio73pty.com",
+            to: 'proyectosweb@studio73pty.com',
 
             subject:'Formulario de contacto',
             html: html,
