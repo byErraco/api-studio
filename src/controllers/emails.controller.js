@@ -56,7 +56,8 @@ emailCtrl.enviarBrief = async (req, res) => {
     redInstagram, redYoutube, redTwitter, redOtra, enlaceWeb, nombreDeUsuarioWeb,contraseñaWeb,
     nombredominioPropuesto,enlaceHostingWeb, userCorreoHostingWeb, passwordHostingWeb, webAnteriorEnlace,
     webAnteriorLikeDislike, enlaceWebAutoadministrable, usuarioWebAutoadministrable, contraseñaWebautoadministrable,enlaceWebSimilar,
-    enlaceWebSimilarLike, color_one,color_two,color_three, ideasWeb
+    enlaceWebSimilarLike, color_one,color_two,color_three, ideasWeb, checkLandingSite, checkStandardSite, checkEcommerce,
+    checkHomePage,checkServicesPage,checkAboutPage,checkContactPage,checkGalleryPage,checkBlogPage,checkProductPage
     } = req.body;
     const html = pug.renderFile(`${__dirname}/../../views/email/welcome.pug`, {
 
@@ -66,7 +67,8 @@ emailCtrl.enviarBrief = async (req, res) => {
     redInstagram, redYoutube, redTwitter, redOtra, enlaceWeb, nombreDeUsuarioWeb,contraseñaWeb,
     nombredominioPropuesto,enlaceHostingWeb, userCorreoHostingWeb, passwordHostingWeb, webAnteriorEnlace,
     webAnteriorLikeDislike, enlaceWebAutoadministrable, usuarioWebAutoadministrable, contraseñaWebautoadministrable,enlaceWebSimilar,
-    enlaceWebSimilarLike, color_one,color_two,color_three, ideasWeb
+    enlaceWebSimilarLike, color_one,color_two,color_three, ideasWeb,checkLandingSite, checkStandardSite, checkEcommerce,
+    checkHomePage,checkServicesPage,checkAboutPage,checkContactPage,checkGalleryPage,checkBlogPage,checkProductPage
     });
 
     const transporter = nodemailer.createTransport({
