@@ -118,7 +118,8 @@ router.post('/send-mail-alquiworld', async (req,res) => {
     const { name, email, number, asunto } = req.body;
     sgMail.setApiKey(API_KEY);
     const message = {
-        to: 'info@alquiworld.com',
+//         to: 'info@alquiworld.com',
+        to: 'jdiaz.97ma@gmail.com',
         from: 'alquiworld-no-reply@hotmail.com',
         subject: 'Formulario de Contacto Alquiworld.com',
         text: 'Has recibido al siguiente información',
