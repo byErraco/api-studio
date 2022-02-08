@@ -6,7 +6,10 @@ const nodemailer = require('nodemailer')
 const sgMail  = require('@sendgrid/mail')
 
 // const API_KEY= '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'
-const API_KEY= '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'
+//const API_KEY= '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'
+
+const API_KEY= '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'
+
 
 //Controlador de Email
 const { enviarBrief,uploadServiceImages } = require('../controllers/emails.controller');
@@ -120,7 +123,8 @@ router.post('/send-mail-alquiworld', async (req,res) => {
     const message = {
         to: 'info@alquiworld.com',
 //         to: 'jdiaz.97ma@gmail.com',
-        from: 'alquiworld-sendgrid@hotmail.com',
+        //from: 'alquiworld-sendgrid@hotmail.com',
+                from: 'alquiworld-sendgrid-dos@hotmail.com',
         subject: 'Formulario de Contacto Alquiworld.com',
         text: 'Has recibido al siguiente información',
         html: `
