@@ -125,7 +125,7 @@ router.post('/send-mail-alquiworld', async (req,res) => {
         to: 'info@alquiworld.com',
 //         to: 'jdiaz.97ma@gmail.com',
         //from: 'alquiworld-sendgrid@hotmail.com',
-                from: 'alquiworld-sendgrid-dos@hotmail.com',
+                from: 'alquiworld-sendgrid-2022@hotmail.com',
         subject: 'Formulario de Contacto Alquiworld.com',
         text: 'Has recibido al siguiente información',
         html: `
