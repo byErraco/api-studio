@@ -7,8 +7,9 @@ const sgMail  = require('@sendgrid/mail')
 
 // const API_KEY= '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'
 //const API_KEY= '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'
+const API_KEY = process.env.SGKEY;
 
-const API_KEY= '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'
+//const API_KEY= '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'
 
 
 //Controlador de Email
