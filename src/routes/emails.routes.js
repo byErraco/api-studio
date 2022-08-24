@@ -100,7 +100,8 @@ router.post('/arsi-mail', async (req,res) => {
             html: contentHTML
         })
         console.log('message sent', info.messageId)
-        res.redirect('http://alquiworld.com/contacto.html')
+        res.status(200).json({'status':'success'})
+        // res.redirect('http://alquiworld.com/contacto.html')
     } catch (error) {
         console.log(error)
         res.status(400)
