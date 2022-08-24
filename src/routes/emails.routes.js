@@ -45,23 +45,66 @@ router.post('/send-mail', async (req,res) => {
         }
 
     })
-
     try {
         const info = await transporter.sendMail({
             from: "'Studio73pty' <test_web@studio73pty.com>",
             to: "info@studio73pty.com",
             subject:'Formulario de contacto',
-    
             html: contentHTML
         })
-     
         console.log('message sent', info.messageId)
         res.redirect('https://studio73pty.studio73pty.com/sucess.html')
-        
     } catch (error) {
         console.log(error)
     }
     
+})
+
+router.post('/arsi-mail', async (req,res) => {
+    
+    const { name,lastname, email, phone, year,model,brand, amount, observation } = req.body;
+
+    contentHTML = `
+        <h1>Información del usuario</h1>
+        <ul>
+            <li>Nombre de usuario: ${name} ${lastname}</li>
+            <li>Correo electrónico: ${email}</li>
+            <li>Número de contacto: ${phone}</li>
+            <li>Año: ${year}</li>
+            <li>Modelo: ${model}</li>
+            <li>Marca: ${brand}</li>
+            <li>Monto Solicitado: ${amount}</li>
+            <li>Observaciones de solicitud: ${observation}</li>
+        </ul>
+        <p>${message}</p>
+    `;
+    console.log(contentHTML)
+    console.log("Contacto");
+    const transporter = nodemailer.createTransport({
+        host: 'smtp.gmail.com',
+        port: 465,
+        secure: true,
+        auth: {
+            user: 'studio73pty.noreply@gmail.com',
+            pass: 'pfiakggdypqridiq'
+        },
+        tls:{
+            rejectUnauthorized: false
+        }
+
+    })
+    try {
+        const info = await transporter.sendMail({
+            from: "'Studio73pty' <test_web@studio73pty.com>",
+            to: "info@studio73pty.com",
+            subject:'Formulario de contacto',
+            html: contentHTML
+        })
+        console.log('message sent', info.messageId)
+        res.redirect('https://studio73pty.studio73pty.com/sucess.html')
+    } catch (error) {
+        console.log(error)
+    }
     
 })
 
