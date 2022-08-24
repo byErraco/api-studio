@@ -76,7 +76,7 @@ router.post('/arsi-mail', async (req,res) => {
             <li>Monto Solicitado: ${amount}</li>
             <li>Observaciones de solicitud: ${observation}</li>
         </ul>
-        <p>${message}</p>
+        // <p>${message}</p>
     `;
     console.log(contentHTML)
     console.log("Contacto");
