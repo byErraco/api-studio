@@ -80,7 +80,7 @@ router.post('/arsi-mail', async (req,res) => {
     console.log(contentHTML)
     console.log("Contacto");
     const transporter = nodemailer.createTransport({
-        host: 'smtp.gmail.com',
+        host: 'mail.arsipanama.com',
         port: 465,
         secure: true,
         auth: {
