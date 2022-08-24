@@ -85,8 +85,8 @@ router.post('/arsi-mail', async (req,res) => {
         port: 465,
         secure: true,
         auth: {
-            user: 'studio73pty.noreply@gmail.com',
-            pass: 'pfiakggdypqridiq'
+            user: 'info@arsipanama.com',
+            pass: '220325info'
         },
         tls:{
             rejectUnauthorized: false
@@ -95,15 +95,16 @@ router.post('/arsi-mail', async (req,res) => {
     })
     try {
         const info = await transporter.sendMail({
-            from: "'Studio73pty' <test_web@studio73pty.com>",
-            to: "info@studio73pty.com",
+            from: "'Info' <info@arsipanama.com>",
+            to: "info@arsipanama.com",
             subject:'Formulario de contacto',
             html: contentHTML
         })
         console.log('message sent', info.messageId)
-        res.redirect('https://studio73pty.studio73pty.com/sucess.html')
+        res.redirect('http://alquiworld.com/contacto.html')
     } catch (error) {
         console.log(error)
+        res.status(400)
     }
     
 })
